@@ -52,12 +52,13 @@ let selection = null;
 try { selection = JSON.parse(fs.readFileSync(SELECTION, 'utf8')); } catch { selection = null; }
 if (selection) console.log(`读到配图选择：${SELECTION}（${Object.keys(selection.items ?? {}).length} 篇）`);
 
-// 手工指定配图（桌面「暂定」文件夹），优先级最高
-let manual = { dir: '', items: {} };
+// 手工指定配图（桌面「暂定」文件夹），优先级最高；主目录取不到就依次回退
+let manual = { dirs: [], items: {} };
 try {
   const m = JSON.parse(fs.readFileSync(MANUAL, 'utf8'));
-  manual = { dir: m.dir, items: m.items ?? {} };
-  console.log(`读到手工配图：${MANUAL}（${Object.keys(manual.items).length} 篇，来自 ${manual.dir}）`);
+  manual = { dirs: [m.dir, ...(m.fallbacks ?? [])].filter(Boolean), items: m.items ?? {} };
+  console.log(`读到手工配图：${MANUAL}（${Object.keys(manual.items).length} 篇）`);
+  for (const d of manual.dirs) console.log(`  目录${fs.existsSync(d) ? '✓' : '✗'} ${d}`);
 } catch { /* 没有就跳过 */ }
 if (selection || Object.keys(manual.items).length) console.log('');
 
@@ -235,8 +236,8 @@ for (const e of entries) {
   const picks = []; // { src, manual }
   if (man?.files?.length) {
     for (const rel of man.files) {
-      const abs = path.join(manual.dir, rel);
-      if (fs.existsSync(abs)) picks.push({ src: abs, manual: true });
+      const abs = manual.dirs.map((d) => path.join(d, rel)).find((p) => fs.existsSync(p));
+      if (abs) picks.push({ src: abs, manual: true });
     }
   }
   if (!picks.length) {
