@@ -3,7 +3,6 @@ import type {
     ProfileConfig,
     LicenseConfig,
 } from "./types/config"
-import type { FriendLink } from "./types/friend"
 import type { I18nConfig } from "./types/i18n"
 
 export const siteConfig: SiteConfig = {
@@ -64,7 +63,7 @@ export const siteConfig: SiteConfig = {
 }
 
 export const profileConfig: ProfileConfig = {
-    avatar: "assets/avatar.png", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
+    avatar: "/avatar.jpg", // 以 / 开头 = 相对 /public 目录；换头像直接替换 public/avatar.jpg
     name: "NTFOX", // Used in the footer of the blog
     description: "NTFOX 的博客：记录技术、折腾与生活。", // Used in SEO
     indexPage: "", // 留空则页脚名字链回站点首页；也可以填成你的主站地址
@@ -75,6 +74,13 @@ export const licenseConfig: LicenseConfig = {
 	enable: true, // Whether to enable license information
 	name: "CC BY-NC-SA 4.0", // License name
 	url: "https://creativecommons.org/licenses/by-nc-sa/4.0/", // License URL
+};
+
+// 联系方式：页脚会读这里渲染图标，改这一处即可。
+// 「关于」页的正文是 Markdown（src/content/spec/about/），那边的联系方式要单独改。
+export const contactConfig = {
+    email: "1955237273@qq.com",
+    wechat: "m17791554332",
 };
 
 export const i18nConfig: I18nConfig = {
@@ -115,13 +121,3 @@ export const i18nConfig: I18nConfig = {
         }
     }
 };
-
-export const friendLinkConfig: FriendLink[] = [
-    // 友链：按下面格式继续往里加即可
-    {
-        name: 'Astro',
-        avatar: 'https://avatars.githubusercontent.com/u/44914786',
-        url: 'https://astro.build',
-        description: 'Build fast websites, faster.'
-    }
-]

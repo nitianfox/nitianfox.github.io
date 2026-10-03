@@ -17,7 +17,8 @@ The site is built with [Astro](https://astro.build/) on a theme adapted from [Mo
 
 ## Find me
 
+- Email: [1955237273@qq.com](mailto:1955237273@qq.com)
+- WeChat: `m17791554332`
 - RSS: [/rss.xml](/rss.xml)
-- Friends: see the [friends page](/en/friends)
 
-> Put your own email or social profile here.
+Search the WeChat ID above to add me, or just send an email — usually answered the same day.

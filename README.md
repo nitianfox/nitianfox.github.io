@@ -3,6 +3,8 @@
 基于 [Astro](https://astro.build/) 的静态博客，主题改造自 [Momo](https://github.com/Motues/Momo)（MIT 协议）。
 黑白为主、蓝色点缀的极简设计，自带深色模式、本地搜索、RSS、文章归档、中英双语。
 
+> **想改站点的各种内容，直接看 [`自定义指南.md`](./自定义指南.md)** —— 里面按「想改什么 → 改哪个文件」列全了。
+
 ## 本地开发
 
 环境要求：Node.js **>= 22** + [pnpm](https://pnpm.io/zh/)。
@@ -16,28 +18,29 @@ pnpm cms       # 可视化后台 http://localhost:5188
 pnpm momo new 文章路径   # 新建一篇文章
 ```
 
-> 本机直连 npm 官方源只有几 KB/s，装依赖时走国内镜像：
-> `pnpm install --registry=https://registry.npmmirror.com`
+> 装依赖走国内镜像（项目里已有 `.npmrc`），删掉 `.npmrc` 就回到 npm 官方源。
 
 ## 目录速查
 
 | 路径 | 作用 |
 | --- | --- |
-| `src/config.ts` | **配置总入口**：站名、域名、主题开关、头像、友链、多语言文案 |
+| `自定义指南.md` | **改造指南**：每一项配置改哪个文件 |
+| `src/config.ts` | 配置总入口：站名、域名、主题开关、头像、联系方式、多语言文案 |
 | `src/content/blog/` | 文章，一篇一个文件夹（`zh-cn.md` / `en.md`） |
-| `src/content/spec/` | 「关于」「友链」页面的正文 |
-| `src/assets/avatar.png` | 头像 |
+| `src/content/spec/about/` | 「关于」页面的正文 |
+| `public/avatar.jpg` | 头像 |
 | `public/favicon/favicon.ico` | 站点图标 |
 | `public/cover.jpg` | 首页整屏封面（`theme.photoCover.enable` 打开后才生效） |
 | `dist/` | 构建产物，整个目录丢给任意静态托管即可 |
 
-头像、favicon、封面目前都是本地生成的占位图，直接替换同名文件就能换掉。
+## 联系方式
+
+在 `src/config.ts` 的 `contactConfig` 里（页脚图标读这里）；「关于」页正文里的联系方式在
+`src/content/spec/about/zh-cn.md`，两处要一起改。
 
 ## 上线前待办
 
 - [ ] `src/config.ts` 的 `rootSiteUrl` 改成真实域名（SEO、sitemap、RSS 都用它）
-- [ ] 换成自己的头像和 favicon
-- [ ] 友链页 `src/content/spec/friends/zh-cn.md` 里的邮箱换成自己的
 - [ ] 需要评论：部署 [Momo-Backend](https://github.com/Motues/Momo-Backend)，再打开 `comments` 开关并填 `backendUrl`
 - [ ] 需要统计：在 `src/config.ts` 的 `analytics` 里填自己的 umami 地址
 
