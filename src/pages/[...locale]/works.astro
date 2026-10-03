@@ -9,6 +9,7 @@ import i18nit from '@i18n/translation'
 import { i18n } from "astro:config/client";
 import { getRelativeLocaleUrl } from '@utils/urlUtils'
 import portfolio from '@/data/portfolio.json'
+import boards from '@/data/boards.json'
 
 export async function getStaticPaths() {
 	return i18n?.locales.map(locale => ({ params: { locale: locale == i18n?.defaultLocale ? undefined : (locale as string) } }));
@@ -38,9 +39,35 @@ const total = portfolio.total;
                 </a>
             ))}
             <span class="hidden sm:block w-px h-5 bg-[var(--button-border-color)] mx-1"></span>
+            <a href="#boards" class="inline-flex items-center gap-2 px-3 py-1.5 text-sm rounded-md border border-[var(--link-color)] text-[var(--link-color)] transition duration-200 hover:bg-[var(--button-hover-color)]">
+                展板 <span>{boards.total}</span>
+            </a>
             <button type="button" data-sort-btn="time" class="sort-btn">按时间</button>
             <button type="button" data-sort-btn="weight" class="sort-btn">按权重</button>
         </div>
+
+        <!-- 展板总览：把各项目的最终展板集中一屏（数据由 script/portfolio/gen-boards.mjs 生成） -->
+        <section class="mb-14">
+            <h2 id="boards" class="text-2xl font-bold text-[var(--text-color)] border-b border-[var(--button-border-color)] pb-2 mb-2 scroll-mt-24">
+                展板总览
+                <span class="ml-2 text-base font-normal text-[var(--text-color-70)]">{boards.total}</span>
+            </h2>
+            <p class="text-sm text-[var(--text-color-70)] mb-6">各项目的最终展板，点进去看对应作品。</p>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                {boards.items.map((b) => (
+                    <a
+                        href={getRelativeLocaleUrl(currentLang, `/blog/${b.workSlug}/`)}
+                        class="group block rounded-lg overflow-hidden border border-[var(--button-border-color)] bg-white hover:border-[var(--link-color)] transition-colors duration-300"
+                        title={b.name}
+                    >
+                        <ImageModule src={b.file} alt={b.name} class="w-full aspect-[3/4] object-contain" />
+                        <div class="px-2 py-1.5 text-xs text-[var(--text-color-70)] border-t border-[var(--button-border-color)] truncate group-hover:text-[var(--link-color)]">
+                            {b.workTitle}
+                        </div>
+                    </a>
+                ))}
+            </div>
+        </section>
 
         {portfolio.categories.map((cat) => (
             <section class="mb-14">

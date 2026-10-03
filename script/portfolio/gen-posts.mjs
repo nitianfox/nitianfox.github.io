@@ -50,6 +50,12 @@ const renames = merges.renames ?? {};
 const groupOf = new Map(groups.map((g) => [g.id, g]));
 const absorbed = new Set(groups.flatMap((g) => g.absorb));
 
+// 额外条目（例如把「单渲染作品集」按时间拆出来的一份份），图片清单直接写在配置里
+let extraEntries = [];
+try {
+  extraEntries = JSON.parse(fs.readFileSync(path.join(HERE, 'extra-entries.json'), 'utf8')).entries ?? [];
+} catch { extraEntries = []; }
+
 let selection = null;
 try { selection = JSON.parse(fs.readFileSync(SELECTION, 'utf8')); } catch { selection = null; }
 if (selection) console.log(`读到配图选择：${SELECTION}（${Object.keys(selection.items ?? {}).length} 篇）`);
@@ -151,7 +157,7 @@ function composition(files) {
 // ---------- 跨项目串图剔除 ----------
 // 同一张图（按内容哈希）如果也出现在「别的条目」里，就不许进这篇——康帕斯那篇混进雪花球/DNA 图就是这么来的。
 // 例外：精选合集（下面 PRIMARY）与手工指定配图的条目不受限。
-const PRIMARY = new Set(['03-27', '03-28', '04-39', '04-40']);
+const PRIMARY = new Set(['03-27', '03-28', '04-39', '04-40', ...extraEntries.filter((e) => e.primary).map((e) => e.id)]);
 const entryIdOf = (id) => {
   for (const g of groups) if (g.absorb.includes(id)) return g.id;
   return id;
@@ -251,6 +257,29 @@ fs.mkdirSync(BLOG, { recursive: true });
 fs.mkdirSync(PUBLIC_WORKS, { recursive: true });
 fs.mkdirSync(path.dirname(DATA_OUT), { recursive: true });
 
+// 追加「额外条目」（按时间拆分出来的那种）：自己带图片清单，不走 works.json
+for (const e of extraEntries) {
+  const imgs = (e.images ?? []).map((t) => ({ thumb: t, name: path.basename(t).replace(/\.jpg$/i, ''), rel: t }));
+  const main = {
+    id: e.id,
+    title: e.title,
+    desc: e.desc ?? '',
+    subtitle: e.subtitle ?? (e.desc ?? '').slice(0, 60),
+    year: String(e.date ?? '').slice(0, 4),
+    tools: e.tools ?? [],
+    tags: e.tags ?? [],
+    images: imgs,
+    videos: [],
+    files: [],
+    counts: { files: e.files ?? imgs.length, bytes: Math.round((e.sizeMB ?? 0) * 1048576), images: imgs.length, videos: 0 },
+    __dateOverride: e.date,
+    __spanOverride: e.span,
+    __explicitImages: e.images ?? [],
+    __parent: e.parent ?? '',
+  };
+  entries.push({ main, weight: e.weight ?? 3, title: e.title, category: e.category ?? '产品渲染', group: null, parts: [main] });
+}
+
 const byCategory = new Map();
 const report = [];
 
@@ -258,12 +287,12 @@ for (const e of entries) {
   const { main, weight, title, category, group, parts } = e;
   const plan = PLAN[weight] ?? PLAN[3];
 
-  // 时间：所有部分一起取
+  // 时间：所有部分一起取（额外条目在配置里写死）
   const times = parts.flatMap(sourceTimes);
   const minMs = times.length ? Math.min(...times) : null;
   const maxMs = times.length ? Math.max(...times) : null;
-  const doneDate = maxMs ? iso(maxMs) : `${main.year || '2026'}-01-01`.slice(0, 10);
-  const span = minMs && maxMs ? `${iso(minMs)} ～ ${iso(maxMs)}` : (main.year || '—');
+  const doneDate = main.__dateOverride ?? (maxMs ? iso(maxMs) : `${main.year || '2026'}-01-01`.slice(0, 10));
+  const span = main.__spanOverride ?? (minMs && maxMs ? `${iso(minMs)} ～ ${iso(maxMs)}` : (main.year || '—'));
 
   const postDir = path.join(BLOG, main.id);
   const mdPath = path.join(postDir, 'zh-cn.md');
@@ -281,7 +310,10 @@ for (const e of entries) {
   // 候选图先剔掉「也出现在别的条目里」的串图（精选合集与手工配图不受限）
   const cands = candidatesOf(parts).filter((c) => !isForeign(c.thumb, main.id));
   const picks = []; // { src, manual }
-  if (man?.files?.length) {
+  if (main.__explicitImages?.length) {
+    // 额外条目：图片清单写死在配置里，全部用上、不按权重裁剪
+    for (const t of main.__explicitImages) picks.push({ src: path.join(SRC, t), manual: false });
+  } else if (man?.files?.length) {
     for (const rel of man.files) {
       const abs = manual.dirs.map((d) => path.join(d, rel)).find((p) => fs.existsSync(p));
       if (abs) picks.push({ src: abs, manual: true });

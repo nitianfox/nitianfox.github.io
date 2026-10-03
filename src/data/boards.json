@@ -1,0 +1,84 @@
+{
+  "generated": "2026-10-03 09:21:42",
+  "total": 11,
+  "note": "全站展板汇总（按图片内容去重；素材站下载的参考板已排除）",
+  "items": [
+    {
+      "file": "/boards/01.jpg",
+      "name": "展板.png",
+      "workId": "02-12",
+      "workTitle": "适老化浴缸设计《C-CUP》",
+      "workSlug": "works/02-12"
+    },
+    {
+      "file": "/boards/02.jpg",
+      "name": "连杆吊灯.png",
+      "workId": "03-27",
+      "workTitle": "项目展板合集",
+      "workSlug": "works/03-27"
+    },
+    {
+      "file": "/boards/03.jpg",
+      "name": "螺丝刀.png",
+      "workId": "03-27",
+      "workTitle": "项目展板合集",
+      "workSlug": "works/03-27"
+    },
+    {
+      "file": "/boards/04.jpg",
+      "name": "碎纸机.png",
+      "workId": "03-27",
+      "workTitle": "项目展板合集",
+      "workSlug": "works/03-27"
+    },
+    {
+      "file": "/boards/05.jpg",
+      "name": "头盔.jpg",
+      "workId": "03-27",
+      "workTitle": "项目展板合集",
+      "workSlug": "works/03-27"
+    },
+    {
+      "file": "/boards/06.jpg",
+      "name": "香薰.png",
+      "workId": "03-27",
+      "workTitle": "项目展板合集",
+      "workSlug": "works/03-27"
+    },
+    {
+      "file": "/boards/07.jpg",
+      "name": "浴缸.png",
+      "workId": "03-27",
+      "workTitle": "项目展板合集",
+      "workSlug": "works/03-27"
+    },
+    {
+      "file": "/boards/08.jpg",
+      "name": "展板.png",
+      "workId": "03-27",
+      "workTitle": "项目展板合集",
+      "workSlug": "works/03-27"
+    },
+    {
+      "file": "/boards/09.jpg",
+      "name": "吕冉.png",
+      "workId": "03-29",
+      "workTitle": "展板 · 震后救援侦察无人机",
+      "workSlug": "works/03-29"
+    },
+    {
+      "file": "/boards/10.jpg",
+      "name": "李嘉程.png",
+      "workId": "03-30",
+      "workTitle": "展板 · 智能骑行穿戴头盔《Vision Rider》",
+      "workSlug": "works/03-30"
+    },
+    {
+      "file": "/boards/11.jpg",
+      "name": "马丽.png",
+      "workId": "03-31",
+      "workTitle": "展板 · 公路隧道消防巡检机器人",
+      "workSlug": "works/03-31"
+    }
+  ]
+}
