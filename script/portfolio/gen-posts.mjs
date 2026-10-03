@@ -48,6 +48,7 @@ const weights = JSON.parse(fs.readFileSync(WEIGHTS, 'utf8')).works;
 const merges = JSON.parse(fs.readFileSync(MERGES, 'utf8'));
 const groups = merges.groups ?? [];
 const renames = merges.renames ?? {};
+const subtitles = merges.subtitles ?? {};
 const dateOverrides = merges.dates ?? {};
 const groupOf = new Map(groups.map((g) => [g.id, g]));
 const absorbed = new Set(groups.flatMap((g) => g.absorb));
@@ -526,7 +527,7 @@ ${body.join('\n')}
     id: main.id,
     slug: `works/${main.id}`,
     title,
-    subtitle: main.subtitle ?? '',
+    subtitle: subtitles[main.id] ?? main.subtitle ?? '',
     year: main.year ?? '',
     doneDate,
     span,

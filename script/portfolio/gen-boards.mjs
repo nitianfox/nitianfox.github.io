@@ -94,7 +94,7 @@ for (const r of rows) {
   const target = byId.get(targetId);
   items.push({
     file: `/boards/${file}`,
-    name: r.name,
+    name: target ? `${target.title} 展板` : r.name,
     workId: targetId,
     workTitle: target ? target.title : r.workTitle,
     workSlug: `works/${targetId}`,
