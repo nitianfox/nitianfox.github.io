@@ -31,8 +31,8 @@ pinTop: 0
 
 ## 动图
 
-![喷涂线开场 0–6s](/clips/ptx-01.gif)
-![喷粉工位 105–111s](/clips/ptx-02.gif)
+<video src="/clips/ptx-01.mp4" autoplay loop muted playsinline style="width:100%;border-radius:10px;display:block"></video>
+<video src="/clips/ptx-02.mp4" autoplay loop muted playsinline style="width:100%;border-radius:10px;display:block"></video>
 
 ## 素材
 

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-03 11:44:24",
+  "generated": "2026-10-03 11:48:30",
   "source": "D:\\工业设计作品集",
   "total": 43,
   "sectionOrder": [
@@ -42,7 +42,7 @@
             "救援",
             "产品设计"
           ],
-          "cover": "/works/03-29.jpg",
+          "cover": "/works/thumb/03-29.webp",
           "weight": 4,
           "files": 1,
           "sizeMB": 12.2,
@@ -70,7 +70,7 @@
             "穿戴",
             "产品设计"
           ],
-          "cover": "/works/03-30.jpg",
+          "cover": "/works/thumb/03-30.webp",
           "weight": 5,
           "files": 1,
           "sizeMB": 13.1,
@@ -98,7 +98,7 @@
             "消防",
             "产品设计"
           ],
-          "cover": "/works/03-31.jpg",
+          "cover": "/works/thumb/03-31.webp",
           "weight": 4,
           "files": 1,
           "sizeMB": 9.6,
@@ -125,7 +125,7 @@
             "排版",
             "渲染"
           ],
-          "cover": "/works/03-27.jpg",
+          "cover": "/works/thumb/03-27.webp",
           "weight": 5,
           "files": 7,
           "sizeMB": 50.1,
@@ -171,7 +171,7 @@
             "HUD",
             "数据可视化"
           ],
-          "cover": "/works/04-35.jpg",
+          "cover": "/works/thumb/04-35.webp",
           "weight": 5,
           "files": 432,
           "sizeMB": 2231.5,
@@ -203,7 +203,7 @@
             "三维动画",
             "场景"
           ],
-          "cover": "/works/04-36.jpg",
+          "cover": "/works/thumb/04-36.webp",
           "weight": 5,
           "files": 75,
           "sizeMB": 991.1,
@@ -238,7 +238,7 @@
             "雪花球",
             "建模"
           ],
-          "cover": "/works/02-22.jpg",
+          "cover": "/works/thumb/02-22.webp",
           "weight": 4,
           "files": 27,
           "sizeMB": 137.7,
@@ -264,7 +264,7 @@
             "产品",
             "渲染"
           ],
-          "cover": "/works/04-40.jpg",
+          "cover": "/works/thumb/04-40.webp",
           "weight": 4,
           "files": 6,
           "sizeMB": 14,
@@ -294,7 +294,7 @@
             "外壳",
             "建模"
           ],
-          "cover": "/works/02-24.jpg",
+          "cover": "/works/thumb/02-24.webp",
           "weight": 4,
           "files": 167,
           "sizeMB": 283,
@@ -322,7 +322,7 @@
             "建模",
             "视觉"
           ],
-          "cover": "/works/02-23.jpg",
+          "cover": "/works/thumb/02-23.webp",
           "weight": 4,
           "files": 54,
           "sizeMB": 121.6,
@@ -348,7 +348,7 @@
             "消费电子",
             "练习"
           ],
-          "cover": "/works/daily-07.jpg",
+          "cover": "/works/thumb/daily-07.webp",
           "weight": 1,
           "files": 1,
           "sizeMB": 0.1,
@@ -374,7 +374,7 @@
             "静物",
             "练习"
           ],
-          "cover": "/works/scene-03.jpg",
+          "cover": "/works/thumb/scene-03.webp",
           "weight": 1,
           "files": 0,
           "sizeMB": 0,
@@ -400,7 +400,7 @@
             "视口",
             "练习"
           ],
-          "cover": "/works/scene-04.jpg",
+          "cover": "/works/thumb/scene-04.webp",
           "weight": 1,
           "files": 0,
           "sizeMB": 0,
@@ -427,7 +427,7 @@
             "室内",
             "练习"
           ],
-          "cover": "/works/scene-05.jpg",
+          "cover": "/works/thumb/scene-05.webp",
           "weight": 1,
           "files": 0,
           "sizeMB": 0,
@@ -455,7 +455,7 @@
             "建模",
             "渲染"
           ],
-          "cover": "/works/02-14.jpg",
+          "cover": "/works/thumb/02-14.webp",
           "weight": 4,
           "files": 31,
           "sizeMB": 147.6,
@@ -481,7 +481,7 @@
             "工业设备",
             "练习"
           ],
-          "cover": "/works/daily-06.jpg",
+          "cover": "/works/thumb/daily-06.webp",
           "weight": 1,
           "files": 1,
           "sizeMB": 0.1,
@@ -507,7 +507,7 @@
             "飞行器",
             "练习"
           ],
-          "cover": "/works/daily-04.jpg",
+          "cover": "/works/thumb/daily-04.webp",
           "weight": 5,
           "files": 2,
           "sizeMB": 0.8,
@@ -535,7 +535,7 @@
             "建模",
             "渲染"
           ],
-          "cover": "/works/02-13.jpg",
+          "cover": "/works/thumb/02-13.webp",
           "weight": 3,
           "files": 31,
           "sizeMB": 136.9,
@@ -561,7 +561,7 @@
             "场景",
             "练习"
           ],
-          "cover": "/works/scene-01.jpg",
+          "cover": "/works/thumb/scene-01.webp",
           "weight": 1,
           "files": 0,
           "sizeMB": 0,
@@ -587,7 +587,7 @@
             "练习",
             "杂项"
           ],
-          "cover": "/works/02-26.jpg",
+          "cover": "/works/thumb/02-26.webp",
           "weight": 1,
           "files": 8,
           "sizeMB": 5.5,
@@ -615,7 +615,7 @@
             "香薰",
             "建模"
           ],
-          "cover": "/works/02-15.jpg",
+          "cover": "/works/thumb/02-15.webp",
           "weight": 5,
           "files": 29,
           "sizeMB": 133.6,
@@ -644,7 +644,7 @@
             "建模",
             "渲染"
           ],
-          "cover": "/works/02-17.jpg",
+          "cover": "/works/thumb/02-17.webp",
           "weight": 4,
           "files": 22,
           "sizeMB": 167.7,
@@ -672,7 +672,7 @@
             "相机",
             "建模"
           ],
-          "cover": "/works/02-19.jpg",
+          "cover": "/works/thumb/02-19.webp",
           "weight": 5,
           "files": 28,
           "sizeMB": 96.8,
@@ -701,7 +701,7 @@
             "浴缸",
             "建模"
           ],
-          "cover": "/works/02-12.jpg",
+          "cover": "/works/thumb/02-12.webp",
           "weight": 4,
           "files": 42,
           "sizeMB": 243.2,
@@ -729,7 +729,7 @@
             "建模",
             "产品设计"
           ],
-          "cover": "/works/02-20.jpg",
+          "cover": "/works/thumb/02-20.webp",
           "weight": 1,
           "files": 5,
           "sizeMB": 103.3,
@@ -757,7 +757,7 @@
             "工具",
             "建模"
           ],
-          "cover": "/works/02-16.jpg",
+          "cover": "/works/thumb/02-16.webp",
           "weight": 1,
           "files": 24,
           "sizeMB": 305.9,
@@ -782,7 +782,7 @@
             "渲染",
             "静物"
           ],
-          "cover": "/works/03-34.jpg",
+          "cover": "/works/thumb/03-34.webp",
           "weight": 1,
           "files": 4,
           "sizeMB": 4.7,
@@ -811,7 +811,7 @@
             "建模",
             "草图"
           ],
-          "cover": "/works/02-11.jpg",
+          "cover": "/works/thumb/02-11.webp",
           "weight": 3,
           "files": 78,
           "sizeMB": 497.8,
@@ -838,7 +838,7 @@
             "角色",
             "练习"
           ],
-          "cover": "/works/scene-02.jpg",
+          "cover": "/works/thumb/scene-02.webp",
           "weight": 1,
           "files": 0,
           "sizeMB": 0,
@@ -864,7 +864,7 @@
             "无人机",
             "练习"
           ],
-          "cover": "/works/daily-02.jpg",
+          "cover": "/works/thumb/daily-02.webp",
           "weight": 5,
           "files": 1,
           "sizeMB": 0.1,
@@ -890,7 +890,7 @@
             "静物",
             "练习"
           ],
-          "cover": "/works/daily-01.jpg",
+          "cover": "/works/thumb/daily-01.webp",
           "weight": 1,
           "files": 1,
           "sizeMB": 0,
@@ -918,7 +918,7 @@
             "建模",
             "渲染"
           ],
-          "cover": "/works/02-21.jpg",
+          "cover": "/works/thumb/02-21.webp",
           "weight": 1,
           "files": 11,
           "sizeMB": 97.2,
@@ -944,7 +944,7 @@
             "智能家居",
             "练习"
           ],
-          "cover": "/works/daily-03.jpg",
+          "cover": "/works/thumb/daily-03.webp",
           "weight": 1,
           "files": 1,
           "sizeMB": 0.1,
@@ -971,7 +971,7 @@
             "开关",
             "建模"
           ],
-          "cover": "/works/02-18.jpg",
+          "cover": "/works/thumb/02-18.webp",
           "weight": 1,
           "files": 11,
           "sizeMB": 81.5,
@@ -998,7 +998,7 @@
             "产品",
             "练习"
           ],
-          "cover": "/works/spice-box.jpg",
+          "cover": "/works/thumb/spice-box.webp",
           "weight": 1,
           "files": 1,
           "sizeMB": 0,
@@ -1061,7 +1061,7 @@
             "文化",
             "平面"
           ],
-          "cover": "/works/01-09.jpg",
+          "cover": "/works/thumb/01-09.webp",
           "weight": 5,
           "files": 54,
           "sizeMB": 385.3,
@@ -1087,7 +1087,7 @@
             "版式",
             "平面"
           ],
-          "cover": "/works/01-07.jpg",
+          "cover": "/works/thumb/01-07.webp",
           "weight": 3,
           "files": 4,
           "sizeMB": 12.1,
@@ -1114,7 +1114,7 @@
             "练习",
             "平面"
           ],
-          "cover": "/works/pack-2024.jpg",
+          "cover": "/works/thumb/pack-2024.webp",
           "weight": 4,
           "files": 0,
           "sizeMB": 0,
@@ -1142,7 +1142,7 @@
             "标志",
             "平面"
           ],
-          "cover": "/works/01-03.jpg",
+          "cover": "/works/thumb/01-03.webp",
           "weight": 4,
           "files": 22,
           "sizeMB": 14.4,
@@ -1169,7 +1169,7 @@
             "节气",
             "平面"
           ],
-          "cover": "/works/01-01.jpg",
+          "cover": "/works/thumb/01-01.webp",
           "weight": 3,
           "files": 5,
           "sizeMB": 16.7,
@@ -1196,7 +1196,7 @@
             "包装",
             "平面"
           ],
-          "cover": "/works/01-02.jpg",
+          "cover": "/works/thumb/01-02.webp",
           "weight": 3,
           "files": 18,
           "sizeMB": 8.7,
@@ -1230,7 +1230,7 @@
             "素材",
             "纪录"
           ],
-          "cover": "/works/01-08.jpg",
+          "cover": "/works/thumb/01-08.webp",
           "weight": 1,
           "files": 137,
           "sizeMB": 1317.9,

@@ -36,9 +36,9 @@ pinTop: 0
 
 ## 动图
 
-![电泳线开场 0–6s](/clips/kps-01.gif)
-![电镀段 20–26s](/clips/kps-02.gif)
-![后段 60–66s](/clips/kps-03.gif)
+<video src="/clips/kps-01.mp4" autoplay loop muted playsinline style="width:100%;border-radius:10px;display:block"></video>
+<video src="/clips/kps-02.mp4" autoplay loop muted playsinline style="width:100%;border-radius:10px;display:block"></video>
+<video src="/clips/kps-03.mp4" autoplay loop muted playsinline style="width:100%;border-radius:10px;display:block"></video>
 
 ## 素材
 

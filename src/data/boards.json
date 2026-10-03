@@ -1,10 +1,11 @@
 {
-  "generated": "2026-10-03 11:03:03",
+  "generated": "2026-10-03 11:48:30",
   "total": 9,
   "note": "全站展板汇总（按图片内容去重；素材站下载的参考板已排除）",
   "items": [
     {
-      "file": "/boards/01.jpg",
+      "file": "/boards/thumb/01.webp",
+      "fileLarge": "/boards/01.jpg",
       "name": "连杆吊灯《CHANDELIER》 展板",
       "workId": "02-17",
       "workTitle": "连杆吊灯《CHANDELIER》",
@@ -12,7 +13,8 @@
       "from": "03-27"
     },
     {
-      "file": "/boards/02.jpg",
+      "file": "/boards/thumb/02.webp",
+      "fileLarge": "/boards/02.jpg",
       "name": "电动工具设计 · 角磨机 / 电钻 展板",
       "workId": "02-11",
       "workTitle": "电动工具设计 · 角磨机 / 电钻",
@@ -20,7 +22,8 @@
       "from": "03-27"
     },
     {
-      "file": "/boards/03.jpg",
+      "file": "/boards/thumb/03.webp",
+      "fileLarge": "/boards/03.jpg",
       "name": "绿色碎纸机设计 展板",
       "workId": "02-14",
       "workTitle": "绿色碎纸机设计",
@@ -28,7 +31,8 @@
       "from": "03-27"
     },
     {
-      "file": "/boards/04.jpg",
+      "file": "/boards/thumb/04.webp",
+      "fileLarge": "/boards/04.jpg",
       "name": "茶艺香薰机设计 展板",
       "workId": "02-15",
       "workTitle": "茶艺香薰机设计",
@@ -36,7 +40,8 @@
       "from": "03-27"
     },
     {
-      "file": "/boards/05.jpg",
+      "file": "/boards/thumb/05.webp",
+      "fileLarge": "/boards/05.jpg",
       "name": "适老化浴缸设计《C-CUP》 展板",
       "workId": "02-12",
       "workTitle": "适老化浴缸设计《C-CUP》",
@@ -44,7 +49,8 @@
       "from": "03-27"
     },
     {
-      "file": "/boards/06.jpg",
+      "file": "/boards/thumb/06.webp",
+      "fileLarge": "/boards/06.jpg",
       "name": "电动工具设计 · 角磨机 / 电钻 展板",
       "workId": "02-11",
       "workTitle": "电动工具设计 · 角磨机 / 电钻",
@@ -52,7 +58,8 @@
       "from": "03-27"
     },
     {
-      "file": "/boards/07.jpg",
+      "file": "/boards/thumb/07.webp",
+      "fileLarge": "/boards/07.jpg",
       "name": "展板 · 震后救援侦察无人机 展板",
       "workId": "03-29",
       "workTitle": "展板 · 震后救援侦察无人机",
@@ -60,7 +67,8 @@
       "from": ""
     },
     {
-      "file": "/boards/08.jpg",
+      "file": "/boards/thumb/08.webp",
+      "fileLarge": "/boards/08.jpg",
       "name": "展板 · 智能骑行穿戴头盔《Vision Rider》 展板",
       "workId": "03-30",
       "workTitle": "展板 · 智能骑行穿戴头盔《Vision Rider》",
@@ -68,7 +76,8 @@
       "from": ""
     },
     {
-      "file": "/boards/09.jpg",
+      "file": "/boards/thumb/09.webp",
+      "fileLarge": "/boards/09.jpg",
       "name": "展板 · 公路隧道消防巡检机器人 展板",
       "workId": "03-31",
       "workTitle": "展板 · 公路隧道消防巡检机器人",

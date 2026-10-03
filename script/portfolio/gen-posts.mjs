@@ -427,22 +427,21 @@ for (const e of entries) {
       copied.push(name);
       if (!writeImages) continue;
       const out = path.join(postDir, name);
-      if (p.manual) {
-        // 暂定里的原图很大（最大 28 MB），压到最长边 1600 再入库
-        await sharp(p.src).resize({ width: 1600, height: 1600, fit: 'inside', withoutEnlargement: true })
-          .jpeg({ quality: 85, progressive: true }).toFile(out);
-      } else {
-        fs.copyFileSync(p.src, out);
-      }
+      // 统一压到最长边 1200、JPEG q80：正文栏宽约 860px，出 1600 是浪费（Astro 还会再生成派生图）
+      await sharp(p.src).resize({ width: 1200, height: 1200, fit: 'inside', withoutEnlargement: true })
+        .jpeg({ quality: 80, progressive: true, mozjpeg: true }).toFile(out);
     }
   }
 
-  // 作品集网格封面
-  const publicCover = (!skipImages && picks.length) ? `/works/${main.id}.jpg` : '';
+  // 作品集网格封面：卡片用 400px WebP（约 12KB），另存一张 800px JPEG 备用
+  const publicCover = (!skipImages && picks.length) ? `/works/thumb/${main.id}.webp` : '';
   if (publicCover && !DRY) {
     if (fs.existsSync(picks[0].src)) {
       await sharp(picks[0].src).resize({ width: 800, height: 800, fit: 'inside', withoutEnlargement: true })
         .jpeg({ quality: 82, progressive: true }).toFile(path.join(PUBLIC_WORKS, `${main.id}.jpg`));
+      fs.mkdirSync(path.join(PUBLIC_WORKS, 'thumb'), { recursive: true });
+      await sharp(picks[0].src).resize({ width: 400, height: 400, fit: 'inside', withoutEnlargement: true })
+        .webp({ quality: 78 }).toFile(path.join(PUBLIC_WORKS, 'thumb', `${main.id}.webp`));
     }
   }
 

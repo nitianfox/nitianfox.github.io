@@ -90,10 +90,15 @@ for (const r of rows) {
   const file = `${String(n).padStart(2, '0')}.jpg`;
   await sharp(r.abs).resize({ width: 1100, height: 1100, fit: 'inside', withoutEnlargement: true })
     .jpeg({ quality: 84, progressive: true }).toFile(path.join(OUT_DIR, file));
+  // 网格里只显示 ~380px 宽，另出一张 600px WebP 给页面用
+  fs.mkdirSync(path.join(OUT_DIR, 'thumb'), { recursive: true });
+  await sharp(r.abs).resize({ width: 600, height: 600, fit: 'inside', withoutEnlargement: true })
+    .webp({ quality: 80 }).toFile(path.join(OUT_DIR, 'thumb', `${String(n).padStart(2, '0')}.webp`));
   const targetId = BOARD_TARGET[`${r.workId}|${r.name}`] ?? BOARD_TARGET[r.name] ?? r.workId;
   const target = byId.get(targetId);
   items.push({
-    file: `/boards/${file}`,
+    file: `/boards/thumb/${String(n).padStart(2, '0')}.webp`,
+    fileLarge: `/boards/${file}`,
     name: target ? `${target.title} 展板` : r.name,
     workId: targetId,
     workTitle: target ? target.title : r.workTitle,
