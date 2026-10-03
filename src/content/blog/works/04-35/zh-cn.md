@@ -1,9 +1,9 @@
 ---
 title: 康帕斯 · 电泳线产线动画（含材质静帧与 HUD）
-pubDate: 2026-09-30
+pubDate: '2026-09-30'
 description: 工业产线三维动画 + 材质静帧 + HUD 数据看板（成片 143 秒 / 2560×1440）
 category: 动画
-image: "./cover.jpg"
+image: ./cover.jpg
 draft: false
 slugId: works/04-35
 pinTop: 0

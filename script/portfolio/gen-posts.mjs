@@ -333,15 +333,16 @@ for (const e of entries) {
   // 候选图先剔掉「也出现在别的条目里」的串图（精选合集与手工配图不受限）
   const cands = candidatesOf(parts).filter((c) => !isForeign(c.thumb, main.id));
   const picks = []; // { src, manual }
-  const fixedThumbs = extraImages[main.id]?.thumbs ?? []; // 「其实属于这个项目」的图，固定要用
   const seenSrc = new Set();
   const addPick = (abs, isManual) => {
     if (!abs || seenSrc.has(abs)) return;
     seenSrc.add(abs);
     picks.push({ src: abs, manual: !!isManual });
   };
+  // 条目可以自带图片目录（从视频里抽的帧、用户单独给的图都放这类目录）
+  const ownDir = man?.dir || '';
   const resolveManual = (list) => list
-    .map((rel) => manual.dirs.map((d) => path.join(d, rel)).find((p) => fs.existsSync(p)))
+    .map((rel) => (ownDir ? [ownDir] : manual.dirs).map((d) => path.join(d, rel)).find((p) => fs.existsSync(p)))
     .filter(Boolean);
 
   // 1) 额外条目自带的图片清单（thumbs 或暂定文件）
@@ -356,7 +357,8 @@ for (const e of entries) {
     hasFixedList = true;
     for (const abs of resolveManual(man.files)) addPick(abs, true);
   }
-  // 2) 从别的作品归回来的固定配图（放在前面，优先保留）
+  // 2) 从别的作品归回来的固定配图（只在没有手工/自带清单时加，手工清单完全优先）
+  const fixedThumbs = hasFixedList ? [] : (extraImages[main.id]?.thumbs ?? []);
   const fixedCount = fixedThumbs.filter((t) => fs.existsSync(path.join(SRC, t))).length;
   for (const t of fixedThumbs) addPick(path.join(SRC, t), false);
 

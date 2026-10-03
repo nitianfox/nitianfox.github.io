@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-03 09:42:28",
+  "generated": "2026-10-03 10:11:45",
   "source": "D:\\工业设计作品集",
   "total": 37,
   "sectionOrder": [
@@ -27,7 +27,7 @@
         {
           "id": "02-22",
           "slug": "works/02-22",
-          "title": "机械手套与外壳工程",
+          "title": "机械手套",
           "subtitle": "外骨骼手套结构 + 桌面景观雪花球",
           "year": "2026-08",
           "doneDate": "2026-09-18",
@@ -62,7 +62,7 @@
             "DNA 外壳设计",
             "产品外壳工程（SolidWorks / Plasticity）"
           ],
-          "imgSource": "挑选台"
+          "imgSource": "暂定手工"
         },
         {
           "id": "daily-07",
@@ -83,7 +83,7 @@
           "cover": "/works/daily-07.jpg",
           "weight": 1,
           "files": 1,
-          "sizeMB": 0,
+          "sizeMB": 0.1,
           "images": 1,
           "videos": 0,
           "client": "",
@@ -137,7 +137,7 @@
           "cover": "/works/daily-06.jpg",
           "weight": 1,
           "files": 1,
-          "sizeMB": 0,
+          "sizeMB": 0.1,
           "images": 1,
           "videos": 0,
           "client": "",
@@ -163,7 +163,7 @@
           "cover": "/works/daily-04.jpg",
           "weight": 1,
           "files": 1,
-          "sizeMB": 0,
+          "sizeMB": 0.2,
           "images": 1,
           "videos": 0,
           "client": "",
@@ -189,7 +189,7 @@
           "cover": "/works/daily-05.jpg",
           "weight": 1,
           "files": 1,
-          "sizeMB": 0,
+          "sizeMB": 0.5,
           "images": 1,
           "videos": 0,
           "client": "",
@@ -215,7 +215,7 @@
           "cover": "/works/daily-03.jpg",
           "weight": 1,
           "files": 1,
-          "sizeMB": 0,
+          "sizeMB": 0.1,
           "images": 1,
           "videos": 0,
           "client": "",
@@ -547,7 +547,7 @@
           "cover": "/works/daily-02.jpg",
           "weight": 1,
           "files": 1,
-          "sizeMB": 0,
+          "sizeMB": 0.1,
           "images": 1,
           "videos": 0,
           "client": "",
@@ -735,7 +735,7 @@
           "videos": 18,
           "client": "",
           "parts": [],
-          "imgSource": "挑选台"
+          "imgSource": "暂定手工"
         },
         {
           "id": "04-39",
@@ -889,7 +889,7 @@
         {
           "id": "01-09",
           "slug": "works/01-09",
-          "title": "毕业设计 · 白酒包装设计",
+          "title": "基于宝鸡地域文化的白酒包装设计",
           "subtitle": "宝鸡地域文化 × 宝鸡文理学院校园文化的白酒包装设计",
           "year": "2026-01",
           "doneDate": "2026-02-10",
