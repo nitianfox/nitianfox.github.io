@@ -25,7 +25,11 @@ export function absoluteUrl(path = '/'): string {
     // 已经是绝对地址（含协议或协议相对）
     if (/^[a-z][a-z0-9+.-]*:\/\//i.test(p) || p.startsWith('//')) return p
 
-    const origin = (siteConfig.rootSiteUrl || '').replace(/\/+$/, '')
+    // 部署时用环境变量 SITE_URL 覆盖（本地开发不用改 src/config.ts）
+    const envUrl = (typeof process !== 'undefined' && process.env?.SITE_URL)
+        || (import.meta.env?.SITE_URL as string | undefined)
+        || ''
+    const origin = (envUrl || siteConfig.rootSiteUrl || '').replace(/\/+$/, '')
     const base = (import.meta.env.BASE_URL || '/').replace(/\/+$/, '') // 根路径时为 ''
     let rel = p.startsWith('/') ? p : `/${p}`
     if (base && rel !== base && !rel.startsWith(`${base}/`)) rel = base + rel

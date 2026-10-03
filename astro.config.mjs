@@ -40,7 +40,7 @@ const collageSettings = siteConfig.theme?.imageCollage ?? {};
 
 // https://astro.build/config
 export default defineConfig({
-  site: siteConfig.rootSiteUrl || 'https://momo.motues.top', // Root URL of site
+  site: process.env.SITE_URL || siteConfig.rootSiteUrl || 'https://momo.motues.top', // Root URL of site（部署时用 SITE_URL 覆盖）
   i18n: {
     locales: i18nConfig.supportedLanguages,
     defaultLocale: i18nConfig.defaultLanguage,
