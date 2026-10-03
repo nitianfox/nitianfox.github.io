@@ -1,11 +1,11 @@
 {
-  "generated": "2026-10-03 08:03:42",
+  "generated": "2026-10-03 08:14:36",
   "source": "D:\\工业设计作品集",
-  "total": 41,
+  "total": 35,
   "categories": [
     {
       "name": "平面设计",
-      "count": 10,
+      "count": 6,
       "works": [
         {
           "id": "01-09",
@@ -29,32 +29,10 @@
             "平面"
           ],
           "cover": "/works/01-09.jpg",
+          "weight": 5,
           "files": 54,
           "sizeMB": 385.3,
           "images": 7,
-          "videos": 0
-        },
-        {
-          "id": "01-10",
-          "slug": "works/01-10",
-          "title": "设计管理结课作业 · 智能助眠唤醒灯",
-          "subtitle": "产品设计提案（设计管理思维与工具）",
-          "year": "2025-11",
-          "doneDate": "2025-11-05",
-          "span": "2025-11-03 ～ 2025-11-05",
-          "tools": [
-            "PowerPoint",
-            "Word"
-          ],
-          "tags": [
-            "设计管理",
-            "提案",
-            "平面"
-          ],
-          "cover": "/works/01-10.jpg",
-          "files": 9,
-          "sizeMB": 9.8,
-          "images": 5,
           "videos": 0
         },
         {
@@ -74,33 +52,10 @@
             "平面"
           ],
           "cover": "/works/01-07.jpg",
+          "weight": 1,
           "files": 4,
           "sizeMB": 12.1,
           "images": 4,
-          "videos": 0
-        },
-        {
-          "id": "01-06",
-          "slug": "works/01-06",
-          "title": "书法作品与「忠 / 反」卡牌",
-          "subtitle": "毛笔字练习 · 卡牌纹样设计",
-          "year": "2025-05",
-          "doneDate": "2025-09-07",
-          "span": "2025-05-17 ～ 2025-09-07",
-          "tools": [
-            "Photoshop",
-            "Blender"
-          ],
-          "tags": [
-            "书法",
-            "传统",
-            "卡牌",
-            "平面"
-          ],
-          "cover": "/works/01-06.jpg",
-          "files": 52,
-          "sizeMB": 27.4,
-          "images": 57,
           "videos": 0
         },
         {
@@ -124,34 +79,11 @@
             "平面"
           ],
           "cover": "/works/01-08.jpg",
+          "weight": 1,
           "files": 59,
           "sizeMB": 270.5,
           "images": 47,
           "videos": 3
-        },
-        {
-          "id": "01-04",
-          "slug": "works/01-04",
-          "title": "包装结构设计 · 真无线耳机包装",
-          "subtitle": "盒型展开图 / 刀模 / 实物打样照片",
-          "year": "2024-12",
-          "doneDate": "2024-12-29",
-          "span": "2024-12-08 ～ 2024-12-29",
-          "tools": [
-            "Photoshop",
-            "Illustrator"
-          ],
-          "tags": [
-            "包装",
-            "结构",
-            "刀模",
-            "平面"
-          ],
-          "cover": "/works/01-04.jpg",
-          "files": 115,
-          "sizeMB": 499,
-          "images": 116,
-          "videos": 0
         },
         {
           "id": "01-03",
@@ -172,6 +104,7 @@
             "平面"
           ],
           "cover": "/works/01-03.jpg",
+          "weight": 3,
           "files": 22,
           "sizeMB": 14.4,
           "images": 20,
@@ -195,6 +128,7 @@
             "平面"
           ],
           "cover": "/works/01-01.jpg",
+          "weight": 2,
           "files": 5,
           "sizeMB": 16.7,
           "images": 4,
@@ -218,32 +152,10 @@
             "平面"
           ],
           "cover": "/works/01-02.jpg",
+          "weight": 2,
           "files": 18,
           "sizeMB": 8.7,
           "images": 16,
-          "videos": 0
-        },
-        {
-          "id": "01-05",
-          "slug": "works/01-05",
-          "title": "名片设计",
-          "subtitle": "个人 / 商业名片排版练习",
-          "year": "2023-11",
-          "doneDate": "2023-11-07",
-          "span": "2023-11-03 ～ 2023-11-07",
-          "tools": [
-            "Photoshop",
-            "Illustrator"
-          ],
-          "tags": [
-            "名片",
-            "排版",
-            "平面"
-          ],
-          "cover": "/works/01-05.jpg",
-          "files": 7,
-          "sizeMB": 3.7,
-          "images": 7,
           "videos": 0
         }
       ]
@@ -272,6 +184,7 @@
             "建模"
           ],
           "cover": "/works/02-22.jpg",
+          "weight": 3,
           "files": 27,
           "sizeMB": 137.7,
           "images": 25,
@@ -298,6 +211,7 @@
             "建模"
           ],
           "cover": "/works/02-24.jpg",
+          "weight": 2,
           "files": 167,
           "sizeMB": 283,
           "images": 32,
@@ -322,6 +236,7 @@
             "视觉"
           ],
           "cover": "/works/02-23.jpg",
+          "weight": 3,
           "files": 54,
           "sizeMB": 121.6,
           "images": 40,
@@ -346,6 +261,7 @@
             "渲染"
           ],
           "cover": "/works/02-14.jpg",
+          "weight": 2,
           "files": 31,
           "sizeMB": 147.6,
           "images": 33,
@@ -370,6 +286,7 @@
             "渲染"
           ],
           "cover": "/works/02-13.jpg",
+          "weight": 3,
           "files": 31,
           "sizeMB": 136.9,
           "images": 35,
@@ -392,6 +309,7 @@
             "杂项"
           ],
           "cover": "/works/02-26.jpg",
+          "weight": 1,
           "files": 8,
           "sizeMB": 5.5,
           "images": 12,
@@ -416,6 +334,7 @@
             "建模"
           ],
           "cover": "/works/02-15.jpg",
+          "weight": 3,
           "files": 29,
           "sizeMB": 133.6,
           "images": 31,
@@ -441,6 +360,7 @@
             "渲染"
           ],
           "cover": "/works/02-17.jpg",
+          "weight": 3,
           "files": 22,
           "sizeMB": 167.7,
           "images": 24,
@@ -465,6 +385,7 @@
             "建模"
           ],
           "cover": "/works/02-19.jpg",
+          "weight": 4,
           "files": 28,
           "sizeMB": 96.8,
           "images": 29,
@@ -490,6 +411,7 @@
             "建模"
           ],
           "cover": "/works/02-12.jpg",
+          "weight": 3,
           "files": 42,
           "sizeMB": 243.2,
           "images": 42,
@@ -514,6 +436,7 @@
             "产品设计"
           ],
           "cover": "/works/02-20.jpg",
+          "weight": 1,
           "files": 5,
           "sizeMB": 103.3,
           "images": 6,
@@ -538,6 +461,7 @@
             "渲染"
           ],
           "cover": "/works/02-21.jpg",
+          "weight": 1,
           "files": 11,
           "sizeMB": 97.2,
           "images": 11,
@@ -562,6 +486,7 @@
             "建模"
           ],
           "cover": "/works/02-16.jpg",
+          "weight": 1,
           "files": 24,
           "sizeMB": 305.9,
           "images": 25,
@@ -587,6 +512,7 @@
             "草图"
           ],
           "cover": "/works/02-11.jpg",
+          "weight": 1,
           "files": 78,
           "sizeMB": 497.8,
           "images": 68,
@@ -610,6 +536,7 @@
             "建模"
           ],
           "cover": "/works/02-18.jpg",
+          "weight": 1,
           "files": 11,
           "sizeMB": 81.5,
           "images": 14,
@@ -632,6 +559,7 @@
             "练习"
           ],
           "cover": "/works/02-25.jpg",
+          "weight": 1,
           "files": 15,
           "sizeMB": 14,
           "images": 3,
@@ -641,7 +569,7 @@
     },
     {
       "name": "产品渲染",
-      "count": 8,
+      "count": 7,
       "works": [
         {
           "id": "03-33",
@@ -662,34 +590,10 @@
             "静帧"
           ],
           "cover": "/works/03-33.jpg",
+          "weight": 3,
           "files": 160,
           "sizeMB": 181,
           "images": 8,
-          "videos": 0
-        },
-        {
-          "id": "03-32",
-          "slug": "works/03-32",
-          "title": "视觉设计师能力测试 · ORICO C10",
-          "subtitle": "白模 → 光影 → 场景合成 的三段式考核",
-          "year": "2026-07",
-          "doneDate": "2026-08-10",
-          "span": "2025-11-11 ～ 2026-08-10",
-          "tools": [
-            "Blender",
-            "Octane",
-            "Photoshop"
-          ],
-          "tags": [
-            "渲染",
-            "测试",
-            "产品",
-            "场景"
-          ],
-          "cover": "/works/03-32.jpg",
-          "files": 17,
-          "sizeMB": 118.7,
-          "images": 16,
           "videos": 0
         },
         {
@@ -711,6 +615,7 @@
             "产品设计"
           ],
           "cover": "/works/03-29.jpg",
+          "weight": 4,
           "files": 1,
           "sizeMB": 12.2,
           "images": 2,
@@ -735,6 +640,7 @@
             "产品设计"
           ],
           "cover": "/works/03-30.jpg",
+          "weight": 4,
           "files": 1,
           "sizeMB": 13.1,
           "images": 2,
@@ -759,6 +665,7 @@
             "产品设计"
           ],
           "cover": "/works/03-31.jpg",
+          "weight": 4,
           "files": 1,
           "sizeMB": 9.6,
           "images": 2,
@@ -782,6 +689,7 @@
             "渲染"
           ],
           "cover": "/works/03-27.jpg",
+          "weight": 2,
           "files": 7,
           "sizeMB": 50.1,
           "images": 7,
@@ -805,6 +713,7 @@
             "静物"
           ],
           "cover": "/works/03-28.jpg",
+          "weight": 4,
           "files": 19,
           "sizeMB": 238.6,
           "images": 19,
@@ -826,6 +735,7 @@
             "静物"
           ],
           "cover": "/works/03-34.jpg",
+          "weight": 2,
           "files": 4,
           "sizeMB": 4.7,
           "images": 8,
@@ -835,7 +745,7 @@
     },
     {
       "name": "场景动画",
-      "count": 7,
+      "count": 6,
       "works": [
         {
           "id": "04-35",
@@ -858,6 +768,7 @@
             "场景"
           ],
           "cover": "/works/04-35.jpg",
+          "weight": 5,
           "files": 260,
           "sizeMB": 2025.3,
           "images": 17,
@@ -883,6 +794,7 @@
             "数据可视化"
           ],
           "cover": "/works/04-37.jpg",
+          "weight": 4,
           "files": 12,
           "sizeMB": 25.1,
           "images": 0,
@@ -905,6 +817,7 @@
             "渲染"
           ],
           "cover": "/works/04-40.jpg",
+          "weight": 2,
           "files": 6,
           "sizeMB": 14,
           "images": 6,
@@ -929,6 +842,7 @@
             "场景"
           ],
           "cover": "/works/04-36.jpg",
+          "weight": 4,
           "files": 75,
           "sizeMB": 991.1,
           "images": 0,
@@ -951,6 +865,7 @@
             "静帧"
           ],
           "cover": "/works/04-39.jpg",
+          "weight": 1,
           "files": 10,
           "sizeMB": 39.5,
           "images": 9,
@@ -973,34 +888,11 @@
             "纪录"
           ],
           "cover": "/works/04-41.jpg",
+          "weight": 1,
           "files": 78,
           "sizeMB": 1047.5,
           "images": 49,
           "videos": 16
-        },
-        {
-          "id": "04-38",
-          "slug": "works/04-38",
-          "title": "风格化卡通场景与《Mita》开场动画",
-          "subtitle": "Blender 卡通渲染 + MMD 角色开场动画",
-          "year": "2024-12",
-          "doneDate": "2025-01-01",
-          "span": "2024-04-07 ～ 2025-01-01",
-          "tools": [
-            "Blender",
-            "MMD"
-          ],
-          "tags": [
-            "场景",
-            "卡通",
-            "动画",
-            "角色"
-          ],
-          "cover": "/works/04-38.jpg",
-          "files": 15,
-          "sizeMB": 188.9,
-          "images": 18,
-          "videos": 1
         }
       ]
     }

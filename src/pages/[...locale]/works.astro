@@ -26,8 +26,8 @@ const total = portfolio.total;
     <div class="mx-auto w-full max-w-[var(--page-width)]">
         <Cover title={t("cover.title.works")} subTitle={t("cover.subTitle.works")} />
 
-        <!-- 分类锚点：点一下跳到下面某一类 -->
-        <nav class="flex flex-wrap items-center justify-center gap-2 mb-10 -mt-4">
+        <!-- 分类锚点 + 排序切换 -->
+        <div class="flex flex-wrap items-center justify-center gap-2 mb-10 -mt-4">
             {portfolio.categories.map((cat) => (
                 <a
                     href={`#cat-${cat.name}`}
@@ -37,7 +37,10 @@ const total = portfolio.total;
                     <span class="text-[var(--text-color-70)]">{cat.count}</span>
                 </a>
             ))}
-        </nav>
+            <span class="hidden sm:block w-px h-5 bg-[var(--button-border-color)] mx-1"></span>
+            <button type="button" data-sort-btn="time" class="sort-btn">按时间</button>
+            <button type="button" data-sort-btn="weight" class="sort-btn">按权重</button>
+        </div>
 
         {portfolio.categories.map((cat) => (
             <section class="mb-14">
@@ -46,13 +49,15 @@ const total = portfolio.total;
                     <span class="ml-2 text-base font-normal text-[var(--text-color-70)]">{cat.count}</span>
                 </h2>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6" data-sort-grid>
                     {cat.works.map((work) => (
                         <a
                             href={getRelativeLocaleUrl(currentLang, `/blog/${work.slug}/`)}
-                            class="group block rounded-xl overflow-hidden border border-[var(--button-border-color)] shadow hover:border-[var(--link-color)] transition-colors duration-300"
+                            data-w={work.weight}
+                            data-d={work.doneDate}
+                            class="work-card group block rounded-xl overflow-hidden border border-[var(--button-border-color)] shadow hover:border-[var(--link-color)] transition-colors duration-300"
                         >
-                            <div class="h-40 bg-[var(--button-hover-color)] overflow-hidden">
+                            <div class="relative h-40 bg-[var(--button-hover-color)] overflow-hidden">
                                 {work.cover && (
                                     <ImageModule
                                         src={work.cover}
@@ -60,6 +65,7 @@ const total = portfolio.total;
                                         class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                                     />
                                 )}
+                                {work.weight >= 5 && <span class="pick-badge">代表作</span>}
                             </div>
                             <div class="p-4">
                                 <h3 class="font-semibold text-[var(--text-color)] group-hover:text-[var(--link-color)] transition-colors leading-snug">
@@ -80,7 +86,7 @@ const total = portfolio.total;
         ))}
 
         <p class="text-center text-sm text-[var(--text-color-70)] mb-10">
-            共 {total} 件作品 · 数据来自 <code>src/data/portfolio.json</code>
+            共 {total} 件作品 · 点卡片看详情
         </p>
     </div>
 
@@ -89,3 +95,83 @@ const total = portfolio.total;
         <FabMenu showBackBottom={true} />
     </div>
 </MainPageLayout>
+
+<style>
+    .sort-btn {
+        font-size: 13px;
+        padding: 6px 14px;
+        border-radius: 8px;
+        border: 1px solid var(--button-border-color);
+        background: transparent;
+        color: var(--text-color);
+        cursor: pointer;
+        transition: 0.2s;
+    }
+    .sort-btn:hover {
+        border-color: var(--link-color);
+        color: var(--link-color);
+    }
+    .sort-btn.sort-on {
+        background: var(--link-color);
+        border-color: var(--link-color);
+        color: #fff;
+    }
+    .pick-badge {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        /* ⚠️ 必须高于 1：LQIP 会给卡片图片加 position:relative + z-index:1，
+           不抬高层级的话这个角标会被图片整个盖住（实测命中测试里 IMG 在 SPAN 之上） */
+        z-index: 2;
+        font-size: 11px;
+        line-height: 1;
+        padding: 5px 9px;
+        border-radius: 999px;
+        background: var(--link-color);
+        color: #fff;
+        letter-spacing: 0.5px;
+    }
+</style>
+
+<script is:inline data-swup-ignore-script>
+    // 作品集排序：按完成时间倒序 / 按权重（代表作在前），选择记在 localStorage。
+    // 顶栏不在 swup 容器里，但这段脚本在容器内、会被换页替换掉，所以：
+    //   · 点击用 document 上的事件委托（只注册一次，永久有效）
+    //   · 每次换页由 astro:page-load 重新对新 DOM 排序
+    (function () {
+        var KEY = 'ntfox-works-sort';
+
+        function readMode() {
+            try { return localStorage.getItem(KEY) || 'time'; } catch (e) { return 'time'; }
+        }
+
+        function applySort(mode) {
+            document.querySelectorAll('[data-sort-grid]').forEach(function (grid) {
+                var cards = Array.prototype.slice.call(grid.children);
+                cards.sort(function (a, b) {
+                    if (mode === 'weight') {
+                        var dw = (+(b.dataset.w || 0)) - (+(a.dataset.w || 0));
+                        if (dw) return dw;
+                    }
+                    return (b.dataset.d || '').localeCompare(a.dataset.d || '');
+                });
+                cards.forEach(function (card) { grid.appendChild(card); });
+            });
+            document.querySelectorAll('[data-sort-btn]').forEach(function (btn) {
+                btn.classList.toggle('sort-on', btn.dataset.sortBtn === mode);
+            });
+        }
+
+        document.addEventListener('click', function (e) {
+            var btn = e.target && e.target.closest ? e.target.closest('[data-sort-btn]') : null;
+            if (!btn) return;
+            e.preventDefault();
+            var mode = btn.dataset.sortBtn;
+            try { localStorage.setItem(KEY, mode); } catch (err) {}
+            applySort(mode);
+        });
+
+        document.addEventListener('astro:page-load', function () { applySort(readMode()); });
+        applySort(readMode());
+    })();
+</script>
