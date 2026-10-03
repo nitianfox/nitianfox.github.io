@@ -1,18 +1,18 @@
 /**
- * /sitemap.xml —— 站点地图（含文章发布时间与各语言 hreflang 对照）
+ * /sitemap.xml —— 站点地图（含分页、文章发布时间与各语言 hreflang 对照）
  *
- * 手写而不是引入 @astrojs/sitemap：URL 由 `getBlogEntrySort` 推导，
+ * 手写而不是引入 @astrojs/sitemap：URL 由 `getBlogEntrySort` 与分页规则推导，
  * 与页面实际生成的路径严格一致，同时不给模板增加新依赖。
- * （首页已改为一次性渲染全部作品，不再分页，所以没有 /2/、/3/ … 这类地址）
  */
 import type { APIContext } from 'astro';
 import { i18n } from 'astro:config/client';
+import { siteConfig } from '@/config';
 import { getBlogEntrySort } from '@utils/contentUtils';
 import { absoluteUrl, bcp47, normalizePath } from '@utils/seo';
 import { getRelativeLocaleUrl } from '@utils/urlUtils';
 
 interface Entry {
-  /** 语言无关路径，如 `/`、`/works/`、`/blog/xxx/` */
+  /** 语言无关路径，如 `/`、`/2/`、`/blog/xxx/` */
   rest: string;
   lastmod?: string;
   /** 各语言下的绝对地址 */
@@ -56,9 +56,11 @@ export async function GET(_context: APIContext) {
 
   for (const locale of locales) {
     const posts = await getBlogEntrySort(locale);
+    const totalPages = Math.max(1, Math.ceil(posts.length / siteConfig.pageSize));
 
-    // 首页（首页已不再分页，不再生成 /2/、/3/ …）
+    // 首页与分页
     push('/');
+    for (let page = 2; page <= totalPages; page++) push(`/${page}/`);
 
     // 独立页面
     for (const page of ['/archives/', '/about/', '/works/']) push(page);
