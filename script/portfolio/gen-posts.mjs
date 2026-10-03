@@ -17,6 +17,7 @@
 //   4. src/data/portfolio.json                  作品集页数据（含权重/合并分组/客户）
 import fs from 'node:fs';
 import path from 'node:path';
+import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 
@@ -45,6 +46,7 @@ const byId = new Map(works.map((w) => [w.id, w]));
 const weights = JSON.parse(fs.readFileSync(WEIGHTS, 'utf8')).works;
 const merges = JSON.parse(fs.readFileSync(MERGES, 'utf8'));
 const groups = merges.groups ?? [];
+const renames = merges.renames ?? {};
 const groupOf = new Map(groups.map((g) => [g.id, g]));
 const absorbed = new Set(groups.flatMap((g) => g.absorb));
 
@@ -146,6 +148,49 @@ function composition(files) {
   return parts.join(' · ');
 }
 
+// ---------- 跨项目串图剔除 ----------
+// 同一张图（按内容哈希）如果也出现在「别的条目」里，就不许进这篇——康帕斯那篇混进雪花球/DNA 图就是这么来的。
+// 例外：精选合集（下面 PRIMARY）与手工指定配图的条目不受限。
+const PRIMARY = new Set(['03-27', '03-28', '04-39', '04-40']);
+const entryIdOf = (id) => {
+  for (const g of groups) if (g.absorb.includes(id)) return g.id;
+  return id;
+};
+let hashEntries = null;
+const hashCache = new Map();
+function hashOfFile(p) {
+  if (hashCache.has(p)) return hashCache.get(p);
+  const h = crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+  hashCache.set(p, h);
+  return h;
+}
+function getHashEntries() {
+  if (hashEntries) return hashEntries;
+  hashEntries = new Map();
+  for (const w of works) {
+    if ((weights[w.id] ?? 0) <= 0) continue;
+    const ent = entryIdOf(w.id);
+    for (const i of w.images ?? []) {
+      if (!i.thumb) continue;
+      const p = path.join(SRC, i.thumb);
+      if (!fs.existsSync(p)) continue;
+      const h = hashOfFile(p);
+      if (!hashEntries.has(h)) hashEntries.set(h, new Set());
+      hashEntries.get(h).add(ent);
+    }
+  }
+  return hashEntries;
+}
+function isForeign(thumb, entryId) {
+  if (PRIMARY.has(entryId)) return false;
+  const p = path.join(SRC, thumb);
+  if (!fs.existsSync(p)) return true;
+  const set = getHashEntries().get(hashOfFile(p));
+  if (!set) return false;
+  for (const e of set) if (e !== entryId) return true;
+  return false;
+}
+
 // 只更新文章里的「## 预览」小节，让图片行与磁盘上实际存在的图一致（正文其余部分一个字不动）
 function syncPreviewSection(mdPath, title, previewNames) {
   if (!fs.existsSync(mdPath)) return false;
@@ -196,9 +241,9 @@ for (const w of works) {
   const g = groupOf.get(w.id);
   if (g) {
     const parts = (g.parts ?? []).map((p) => byId.get(p.id)).filter(Boolean);
-    entries.push({ main: w, weight: g.weight ?? weight, title: g.title ?? w.title, category: g.category ?? w.category, group: g, parts });
+    entries.push({ main: w, weight: g.weight ?? weight, title: renames[w.id] ?? g.title ?? w.title, category: g.category ?? w.category, group: g, parts });
   } else {
-    entries.push({ main: w, weight, title: w.title, category: w.category, group: null, parts: [w] });
+    entries.push({ main: w, weight, title: renames[w.id] ?? w.title, category: w.category, group: null, parts: [w] });
   }
 }
 
@@ -230,9 +275,11 @@ for (const e of entries) {
   const skipPost = !writeMd;
 
   // 配图优先级：手工指定（桌面「暂定」）> 挑选台保存的选择 > 自动规则
-  const cands = candidatesOf(parts);
   const man = manual.items?.[main.id];
   const sel = selection?.items?.[main.id];
+  const skipImages = man?.skip === true; // 用户说「配图不对，先清空」
+  // 候选图先剔掉「也出现在别的条目里」的串图（精选合集与手工配图不受限）
+  const cands = candidatesOf(parts).filter((c) => !isForeign(c.thumb, main.id));
   const picks = []; // { src, manual }
   if (man?.files?.length) {
     for (const rel of man.files) {
@@ -240,7 +287,8 @@ for (const e of entries) {
       if (abs) picks.push({ src: abs, manual: true });
     }
   }
-  if (!picks.length) {
+  // 手工图不按权重裁剪：你在「暂定」里挑了几张就用几张，权重只管正文结构
+  if (!skipImages && !picks.length) {
     let chosen = [];
     if (sel?.selected?.length) {
       const valid = new Set(cands.map((c) => c.thumb));
@@ -250,34 +298,46 @@ for (const e of entries) {
     if (!chosen.length) chosen = pickByRule(cands, plan.images);
     if (chosen.length > plan.images) chosen = chosen.slice(0, plan.images);
     for (const t of chosen) picks.push({ src: path.join(SRC, t), manual: false });
-  } else if (false) {
-    // 手工图不按权重裁剪：你在「暂定」里挑了几张就用几张，权重只管正文结构
   }
 
   const copied = [];
-  if (writeImages) {
-    fs.mkdirSync(postDir, { recursive: true });
-    for (const f of fs.readdirSync(postDir)) if (/\.(jpg|png|jpeg|webp)$/i.test(f)) fs.rmSync(path.join(postDir, f), { force: true });
-  }
-  for (let i = 0; i < picks.length; i++) {
-    const p = picks[i];
-    if (!fs.existsSync(p.src)) continue;
-    const name = i === 0 ? 'cover.jpg' : `${String(i).padStart(2, '0')}.jpg`;
-    copied.push(name);
-    if (!writeImages) continue;
-    const out = path.join(postDir, name);
-    if (p.manual) {
-      // 暂定里的原图很大（最大 28 MB），压到最长边 1600 再入库
-      await sharp(p.src).resize({ width: 1600, height: 1600, fit: 'inside', withoutEnlargement: true })
-        .jpeg({ quality: 85, progressive: true }).toFile(out);
-    } else {
-      fs.copyFileSync(p.src, out);
+  if (skipImages) {
+    // 清空这篇的配图，并把 frontmatter 的 image 置空（否则会引用不存在的封面导致构建失败）
+    if (writeImages && fs.existsSync(postDir)) {
+      for (const f of fs.readdirSync(postDir)) if (/\.(jpg|png|jpeg|webp)$/i.test(f)) fs.rmSync(path.join(postDir, f), { force: true });
+      if (fs.existsSync(mdPath)) {
+        const t = fs.readFileSync(mdPath, 'utf8');
+        const t2 = t.replace(/^image: .*$/m, 'image: ""');
+        if (t2 !== t) fs.writeFileSync(mdPath, t2, 'utf8');
+        syncPreviewSection(mdPath, title, []);
+      }
+    }
+    if (!DRY) fs.rmSync(path.join(PUBLIC_WORKS, `${main.id}.jpg`), { force: true });
+  } else {
+    if (writeImages) {
+      fs.mkdirSync(postDir, { recursive: true });
+      for (const f of fs.readdirSync(postDir)) if (/\.(jpg|png|jpeg|webp)$/i.test(f)) fs.rmSync(path.join(postDir, f), { force: true });
+    }
+    for (let i = 0; i < picks.length; i++) {
+      const p = picks[i];
+      if (!fs.existsSync(p.src)) continue;
+      const name = i === 0 ? 'cover.jpg' : `${String(i).padStart(2, '0')}.jpg`;
+      copied.push(name);
+      if (!writeImages) continue;
+      const out = path.join(postDir, name);
+      if (p.manual) {
+        // 暂定里的原图很大（最大 28 MB），压到最长边 1600 再入库
+        await sharp(p.src).resize({ width: 1600, height: 1600, fit: 'inside', withoutEnlargement: true })
+          .jpeg({ quality: 85, progressive: true }).toFile(out);
+      } else {
+        fs.copyFileSync(p.src, out);
+      }
     }
   }
 
   // 作品集网格封面
-  const publicCover = picks.length ? `/works/${main.id}.jpg` : '';
-  if (picks.length && !DRY) {
+  const publicCover = (!skipImages && picks.length) ? `/works/${main.id}.jpg` : '';
+  if (publicCover && !DRY) {
     if (fs.existsSync(picks[0].src)) {
       await sharp(picks[0].src).resize({ width: 800, height: 800, fit: 'inside', withoutEnlargement: true })
         .jpeg({ quality: 82, progressive: true }).toFile(path.join(PUBLIC_WORKS, `${main.id}.jpg`));

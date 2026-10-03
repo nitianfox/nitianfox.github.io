@@ -1,7 +1,7 @@
 {
-  "generated": "2026-10-03 08:55:55",
+  "generated": "2026-10-03 09:13:57",
   "source": "D:\\工业设计作品集",
-  "total": 29,
+  "total": 30,
   "relatedClients": [
     {
       "client": "康帕斯",
@@ -20,7 +20,7 @@
         {
           "id": "01-09",
           "slug": "works/01-09",
-          "title": "毕业设计 · 白酒包装《陈仓学酿》",
+          "title": "毕业设计 · 白酒包装设计",
           "subtitle": "宝鸡地域文化 × 宝鸡文理学院校园文化的白酒包装设计",
           "year": "2026-01",
           "doneDate": "2026-02-10",
@@ -46,7 +46,7 @@
           "videos": 0,
           "client": "",
           "parts": [],
-          "imgSource": "暂定手工"
+          "imgSource": "挑选台"
         },
         {
           "id": "01-07",
@@ -202,7 +202,7 @@
         {
           "id": "02-22",
           "slug": "works/02-22",
-          "title": "机械手套与外壳工程（含桌面雪花球）",
+          "title": "机械手套与外壳工程",
           "subtitle": "外骨骼手套结构 + 桌面景观雪花球",
           "year": "2026-08",
           "doneDate": "2026-09-18",
@@ -223,23 +223,19 @@
             "外壳",
             "视觉",
             "工程",
-            "钣金",
-            "场景",
-            "产品",
-            "渲染"
+            "钣金"
           ],
           "cover": "/works/02-22.jpg",
           "weight": 3,
-          "files": 254,
-          "sizeMB": 556.4,
-          "images": 103,
+          "files": 248,
+          "sizeMB": 542.3,
+          "images": 97,
           "videos": 0,
           "client": "",
           "parts": [
-            "机械手套与桌面雪花球建模",
+            "机械手套建模",
             "DNA 外壳设计",
-            "产品外壳工程（SolidWorks / Plasticity）",
-            "桌面雪花球场景渲染"
+            "产品外壳工程（SolidWorks / Plasticity）"
           ],
           "imgSource": "挑选台"
         },
@@ -595,7 +591,7 @@
             "建模",
             "练习"
           ],
-          "cover": "/works/02-25.jpg",
+          "cover": "",
           "weight": 1,
           "files": 15,
           "sizeMB": 14,
@@ -713,7 +709,7 @@
             "渲染"
           ],
           "cover": "/works/03-27.jpg",
-          "weight": 2,
+          "weight": 5,
           "files": 7,
           "sizeMB": 50.1,
           "images": 7,
@@ -740,7 +736,7 @@
             "静物"
           ],
           "cover": "/works/03-28.jpg",
-          "weight": 4,
+          "weight": 5,
           "files": 19,
           "sizeMB": 238.6,
           "images": 19,
@@ -778,7 +774,7 @@
     },
     {
       "name": "场景动画",
-      "count": 3,
+      "count": 4,
       "works": [
         {
           "id": "04-35",
@@ -822,6 +818,32 @@
             "材质与静帧素材",
             "HUD 数据看板动效"
           ],
+          "imgSource": "挑选台"
+        },
+        {
+          "id": "04-40",
+          "slug": "works/04-40",
+          "title": "桌面雪花球场景渲染",
+          "subtitle": "产品 + 场景的合成展示",
+          "year": "2026-09",
+          "doneDate": "2026-09-18",
+          "span": "2026-09-17 ～ 2026-09-18",
+          "tools": [
+            "Blender"
+          ],
+          "tags": [
+            "场景",
+            "产品",
+            "渲染"
+          ],
+          "cover": "/works/04-40.jpg",
+          "weight": 5,
+          "files": 6,
+          "sizeMB": 14,
+          "images": 6,
+          "videos": 0,
+          "client": "",
+          "parts": [],
           "imgSource": "挑选台"
         },
         {
@@ -869,7 +891,7 @@
             "静帧"
           ],
           "cover": "/works/04-39.jpg",
-          "weight": 1,
+          "weight": 5,
           "files": 10,
           "sizeMB": 39.5,
           "images": 9,
