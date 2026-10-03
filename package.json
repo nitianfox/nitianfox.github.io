@@ -7,7 +7,6 @@
     "build": "astro build && node script/apply-base.mjs && pagefind --site dist",
     "preview": "astro preview",
     "astro": "astro",
-    "momo": "node script/momo/index.js",
     "cms": "cd cms && pnpm dev"
   },
   "dependencies": {

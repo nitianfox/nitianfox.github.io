@@ -18,7 +18,7 @@ Write-Host '=== 1/3 生成站点地址 ===' -ForegroundColor Cyan
 if ($SiteUrl) {
     $env:SITE_URL = $SiteUrl
 } elseif (-not $env:SITE_URL) {
-    $env:SITE_URL = "https://$Project.pages.dev"
+    $env:SITE_URL = "https://204041.xyz"
 }
 Write-Host "  SITE_URL = $env:SITE_URL"
 

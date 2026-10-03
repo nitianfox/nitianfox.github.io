@@ -1,8 +1,8 @@
 ﻿# ============================================================
 #  把 NTFOX 推送到你自己的 GitHub 仓库
 #  用法（在 D:\NTFOX 下，仓库要先在 GitHub 网页上建好、不要勾 README）：
-#      .\push-github.ps1 -Repo https://github.com/你的用户名/ntfox.git
-#      .\push-github.ps1 -Repo https://github.com/你的用户名/ntfox.git -Proxy http://127.0.0.1:7890
+#      .\push-github.ps1 -Repo https://github.com/nitianfox/nitianfox.github.io.git
+#      .\push-github.ps1 -Repo https://github.com/nitianfox/nitianfox.github.io.git -Proxy http://127.0.0.1:7890
 #  脚本会：① 解除 hosts 里的 github 黑洞（需要点一次 UAC）② 设置 remote ③ 推送
 # ============================================================
 param(

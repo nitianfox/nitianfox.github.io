@@ -5,6 +5,27 @@
 
 > **想改站点的各种内容，直接看 [`自定义指南.md`](./自定义指南.md)** —— 里面按「想改什么 → 改哪个文件」列全了。
 
+## 线上地址
+
+| 地址 | 说明 |
+| --- | --- |
+| **https://204041.xyz/** | **正式域名**（Cloudflare Pages，主站） |
+| https://ntfox.pages.dev/ | Cloudflare Pages 默认域名（同一项目） |
+| https://nitianfox.github.io/ | GitHub Pages 镜像（备胎） |
+
+三个地址内容一致：同一个仓库、每次推送各自构建。canonical 与 sitemap 统一指向 `204041.xyz`，镜像不会被搜索引擎当成重复内容。
+
+## 发布
+
+改完内容后一键提交并推送，两个平台会自动构建上线（约 1~3 分钟）：
+
+```powershell
+cd D:\NTFOX
+.\publish.ps1 "这次改了什么"      # git add + commit + push（自动走代理）
+```
+
+部署细节见 [`自定义指南.md`](./自定义指南.md) 第 14 节。
+
 ## 本地开发
 
 环境要求：Node.js **>= 22** + [pnpm](https://pnpm.io/zh/)。
