@@ -26,8 +26,6 @@ pinTop: 0
 ![连杆吊灯《CHANDELIER》](./03.jpg)
 ![连杆吊灯《CHANDELIER》](./04.jpg)
 ![连杆吊灯《CHANDELIER》](./05.jpg)
-![连杆吊灯《CHANDELIER》](./06.jpg)
-![连杆吊灯《CHANDELIER》](./07.jpg)
 
 ## 素材
 

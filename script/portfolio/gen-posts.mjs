@@ -364,6 +364,9 @@ for (const e of entries) {
   const fixedThumbs = fixedSpec.thumbs ?? [];
   const fixedManual = fixedSpec.files ?? [];
   const fixedDir = fixedSpec.dir ?? '';
+  // 排除清单：按路径片段剔掉重复/不要的图（例如同一张图既当封面又被选中过一次）
+  const exclude = fixedSpec.exclude ?? [];
+  const isExcluded = (thumb) => exclude.some((pat) => String(thumb).includes(pat));
   const fixedManualAbs = fixedDir
     ? fixedManual.map((rel) => path.join(fixedDir, rel)).filter((p) => fs.existsSync(p))
     : null;
@@ -374,8 +377,8 @@ for (const e of entries) {
     if (!hasFixedList) { /* skip: 清空配图 */ }
   } else {
     const valid = new Set(cands.map((c) => c.thumb));
-    const selPicked = (sel?.selected ?? []).filter((t) => valid.has(t));
-    const selCover = sel?.cover && valid.has(sel.cover) ? sel.cover : null;
+    const selPicked = (sel?.selected ?? []).filter((t) => valid.has(t) && !isExcluded(t));
+    const selCover = sel?.cover && valid.has(sel.cover) && !isExcluded(sel.cover) ? sel.cover : null;
     if (selPicked.length || fixedCount) {
       if (fixedSpec.first) {
         // 固定图当封面（例如「用展板当封面」）

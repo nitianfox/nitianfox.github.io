@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-03 11:21:53",
+  "generated": "2026-10-03 11:43:50",
   "source": "D:\\工业设计作品集",
   "total": 43,
   "sectionOrder": [
@@ -265,7 +265,7 @@
             "渲染"
           ],
           "cover": "/works/04-40.jpg",
-          "weight": 5,
+          "weight": 4,
           "files": 6,
           "sizeMB": 14,
           "images": 6,
@@ -508,7 +508,7 @@
             "练习"
           ],
           "cover": "/works/daily-04.jpg",
-          "weight": 1,
+          "weight": 5,
           "files": 2,
           "sizeMB": 0.8,
           "images": 2,
@@ -645,7 +645,7 @@
             "渲染"
           ],
           "cover": "/works/02-17.jpg",
-          "weight": 5,
+          "weight": 4,
           "files": 22,
           "sizeMB": 167.7,
           "images": 24,
@@ -673,7 +673,7 @@
             "建模"
           ],
           "cover": "/works/02-19.jpg",
-          "weight": 4,
+          "weight": 5,
           "files": 28,
           "sizeMB": 96.8,
           "images": 29,
@@ -702,7 +702,7 @@
             "建模"
           ],
           "cover": "/works/02-12.jpg",
-          "weight": 5,
+          "weight": 4,
           "files": 42,
           "sizeMB": 243.2,
           "images": 42,
@@ -865,7 +865,7 @@
             "练习"
           ],
           "cover": "/works/daily-02.jpg",
-          "weight": 1,
+          "weight": 5,
           "files": 1,
           "sizeMB": 0.1,
           "images": 1,

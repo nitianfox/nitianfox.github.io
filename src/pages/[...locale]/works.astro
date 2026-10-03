@@ -28,7 +28,7 @@ const defaultSort = portfolio.defaultSort ?? 'weight';
 // 精选每类取前几件（用户 2026-10-03：展板 4 / 动画 2 / 渲染 4 / 平面 4）
 const FEATURED: [string, number][] = [['展板', 4], ['动画', 2], ['建模渲染', 4], ['平面', 4]];
 // 下方「全部作品」的分区顺序
-const ALL_ORDER = ['展板', '动画', '平面', '建模渲染'];
+const ALL_ORDER = ['展板', '建模渲染', '动画', '平面'];
 
 // 作品集页默认按权重排（由 script/portfolio/sections.json 的 defaultSort 决定），
 // 服务端就按这个顺序渲染，避免首屏先按时间排再被脚本重排造成的跳动。
