@@ -41,6 +41,8 @@ const collageSettings = siteConfig.theme?.imageCollage ?? {};
 // https://astro.build/config
 export default defineConfig({
   site: process.env.SITE_URL || siteConfig.rootSiteUrl || 'https://momo.motues.top', // Root URL of site（部署时用 SITE_URL 覆盖）
+  // 部署在子路径（GitHub Pages 项目页 /ntfox/）时用 BASE_PATH 指定；本地与 Cloudflare 用 '/'。
+  base: process.env.BASE_PATH || '/',
   i18n: {
     locales: i18nConfig.supportedLanguages,
     defaultLocale: i18nConfig.defaultLanguage,

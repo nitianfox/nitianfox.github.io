@@ -1,7 +1,7 @@
 ---
 // 作品卡片网格：作品集页「精选」与「全部」两处共用
 import ImageModule from '@components/misc/ImageModule.astro'
-import { getRelativeLocaleUrl } from '@utils/urlUtils'
+import { getRelativeLocaleUrl, baseUrl } from '@utils/urlUtils'
 
 interface Work {
     id: string
@@ -33,7 +33,7 @@ const { works, lang, sortable = false } = Astro.props
             <div class="relative h-40 bg-[var(--button-hover-color)] overflow-hidden">
                 {work.cover && (
                     <ImageModule
-                        src={work.cover}
+                        src={baseUrl(work.cover)}
                         alt={work.title}
                         class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />

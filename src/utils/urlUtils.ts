@@ -41,10 +41,12 @@ export function blogCoverUrl(contentPath: string, blogName: string): string {
 
 export function getRelativeLocaleUrl(lang: string, path: string) : string { 
     const prefixDefaultLocale = i18n.routing.prefixDefaultLocale;
+    let p: string;
     if(prefixDefaultLocale) {
-        return joinUrl("/", lang, path);
+        p = joinUrl("/", lang, path);
     }else {
-        if(lang === i18n.defaultLocale) return joinUrl("/", path);
-        return joinUrl("/", lang, path);
+        p = lang === i18n.defaultLocale ? joinUrl("/", path) : joinUrl("/", lang, path);
     }
+    // 部署在子路径（如 GitHub Pages 项目页 /ntfox/）时补上站点 base；根目录部署时结果不变
+    return baseUrl(p);
 }

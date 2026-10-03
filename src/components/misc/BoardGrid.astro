@@ -1,7 +1,7 @@
 ---
 // 各项目的最终展板总览（数据由 script/portfolio/gen-boards.mjs 生成）
 import ImageModule from '@components/misc/ImageModule.astro'
-import { getRelativeLocaleUrl } from '@utils/urlUtils'
+import { getRelativeLocaleUrl, baseUrl } from '@utils/urlUtils'
 import boards from '@/data/boards.json'
 
 interface Props {
@@ -20,7 +20,7 @@ const { lang } = Astro.props
                 class="group block rounded-lg overflow-hidden border border-[var(--button-border-color)] bg-white hover:border-[var(--link-color)] transition-colors duration-300"
                 title={b.name}
             >
-                <ImageModule src={b.file} alt={b.name} class="w-full aspect-[3/4] object-contain" />
+                <ImageModule src={baseUrl(b.file)} alt={b.name} class="w-full aspect-[3/4] object-contain" />
                 <div class="px-2 py-1.5 text-xs text-[var(--text-color-70)] border-t border-[var(--button-border-color)] truncate group-hover:text-[var(--link-color)]">
                     {b.workTitle}
                 </div>

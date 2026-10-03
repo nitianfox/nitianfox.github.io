@@ -4,7 +4,7 @@
   "version": "26.10.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && pagefind --site dist",
+    "build": "astro build && node script/apply-base.mjs && pagefind --site dist",
     "preview": "astro preview",
     "astro": "astro",
     "momo": "node script/momo/index.js",

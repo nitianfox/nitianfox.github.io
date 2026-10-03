@@ -93,7 +93,7 @@ if (profileConfig.indexPage) {
     <div class="pr-4 py-2 z-30 header-logo">
         <a href={ indexPage } class="group flex items-center gap-2.5">
             <img
-                src={ profileConfig.avatar }
+                src={ baseUrl(profileConfig.avatar) }
                 alt={ siteConfig.title }
                 width="44"
                 height="44"
@@ -182,7 +182,7 @@ if (profileConfig.indexPage) {
         
         <div class="flex items-center justify-between p-5 border-b border-[var(--button-border-color)]">
             <span class="flex items-center gap-2.5 header-logo">
-                <img src={ profileConfig.avatar } alt={ siteConfig.title } width="36" height="36"
+                <img src={ baseUrl(profileConfig.avatar) } alt={ siteConfig.title } width="36" height="36"
                      class="w-9 h-9 rounded-full object-cover border border-[var(--button-border-color)]" />
                 <span class="text-xl font-bold">{ siteConfig.title }</span>
             </span>

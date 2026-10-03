@@ -1,0 +1,71 @@
+name: 构建并部署到 GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # 也可以在 Actions 页面手动触发
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4 # 版本读 package.json 的 packageManager
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: 安装依赖
+        run: pnpm install --frozen-lockfile
+
+      # 站点地址与 base 由仓库名自动判断：
+      #   仓库名 = <用户名>.github.io  ->  https://<用户名>.github.io            base=/
+      #   其它仓库名（项目站点）        ->  https://<用户名>.github.io/<仓库名>    base=/<仓库名>
+      - name: 计算站点地址
+        id: site
+        run: |
+          repo="${GITHUB_REPOSITORY#*/}"
+          owner="${GITHUB_REPOSITORY_OWNER}"
+          if [ "$repo" = "${owner}.github.io" ]; then
+            echo "url=https://${owner}.github.io" >> "$GITHUB_OUTPUT"
+            echo "base=/" >> "$GITHUB_OUTPUT"
+          else
+            echo "url=https://${owner}.github.io/${repo}" >> "$GITHUB_OUTPUT"
+            echo "base=/${repo}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: 构建（astro build + 子路径适配 + Pagefind 索引）
+        run: pnpm build
+        env:
+          SITE_URL: ${{ steps.site.outputs.url }}
+          BASE_PATH: ${{ steps.site.outputs.base }}
+
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true # 首次运行自动开启 Pages（无需手动去设置里点）
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
