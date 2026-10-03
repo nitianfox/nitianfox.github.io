@@ -72,6 +72,18 @@ const src = "/music/intro-another-line.mp3";
     // 半径要够大：取屏幕对角线
     const bigR = () => Math.round(Math.hypot(window.innerWidth, window.innerHeight) * 1.1);
 
+    // 关键：点导航里的「摄影」链接时，在用户手势内立刻播放（浏览器只允许手势内自动播放）
+    document.addEventListener('click', (e) => {
+      const a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+      if (!a) return;
+      const href = a.getAttribute('href') || '';
+      if (/\/photos\/?(?:$|[?#])/.test(href)) {
+        userPaused = false;
+        setOrigin();
+        audio.play().catch(() => {});
+      }
+    }, true);
+
     btn.addEventListener('click', () => {
       setOrigin();
       if (audio.paused) audio.play().catch(() => {});
