@@ -357,26 +357,29 @@ for (const e of entries) {
     hasFixedList = true;
     for (const abs of resolveManual(man.files)) addPick(abs, true);
   }
-  // 2) 从别的作品归回来的固定配图（只在没有手工/自带清单时加，手工清单完全优先）
-  const fixedThumbs = hasFixedList ? [] : (extraImages[main.id]?.thumbs ?? []);
-  const fixedCount = fixedThumbs.filter((t) => fs.existsSync(path.join(SRC, t))).length;
-  for (const t of fixedThumbs) addPick(path.join(SRC, t), false);
+  // 2) 从别的作品归回来的固定配图（thumbs = 作品集缩略图，files = 桌面暂定里的文件）
+  const fixedSpec = hasFixedList ? {} : (extraImages[main.id] ?? {});
+  const fixedThumbs = fixedSpec.thumbs ?? [];
+  const fixedManual = fixedSpec.files ?? [];
+  const fixedCount = fixedThumbs.filter((t) => fs.existsSync(path.join(SRC, t))).length + fixedManual.length;
 
-  // 3) 没有固定清单时，按挑选台选择或自动规则补足到权重预算
-  if (!skipImages && !hasFixedList) {
-    const inPicks = new Set(picks.map((p) => p.src));
-    let chosen = [];
-    if (sel?.selected?.length) {
-      const valid = new Set(cands.map((c) => c.thumb));
-      chosen = sel.selected.filter((t) => valid.has(t) && !inPicks.has(path.join(SRC, t)));
-      if (sel.cover && valid.has(sel.cover)) {
-        const absCover = path.join(SRC, sel.cover);
-        chosen = [sel.cover, ...chosen.filter((t) => t !== sel.cover)];
-        if (inPicks.has(absCover)) chosen = chosen.filter((t) => t !== sel.cover);
-      }
+  // 3) 没有固定清单时：封面优先 → 归回来的固定图 → 其余选择/自动规则
+  if (skipImages || hasFixedList) {
+    if (!hasFixedList) { /* skip: 清空配图 */ }
+  } else {
+    const valid = new Set(cands.map((c) => c.thumb));
+    const selPicked = (sel?.selected ?? []).filter((t) => valid.has(t));
+    const selCover = sel?.cover && valid.has(sel.cover) ? sel.cover : null;
+    if (selPicked.length) {
+      if (selCover) addPick(path.join(SRC, selCover), false);
+      for (const t of fixedThumbs) addPick(path.join(SRC, t), false);
+      for (const abs of resolveManual(fixedManual)) addPick(abs, true);
+      for (const t of selPicked) addPick(path.join(SRC, t), false);
+    } else {
+      for (const t of pickByRule(cands, plan.images)) addPick(path.join(SRC, t), false);
+      for (const t of fixedThumbs) addPick(path.join(SRC, t), false);
+      for (const abs of resolveManual(fixedManual)) addPick(abs, true);
     }
-    if (!chosen.length) chosen = pickByRule(cands, plan.images);
-    for (const t of chosen) addPick(path.join(SRC, t), false);
   }
   // 4) 收敛到权重预算（手工/额外清单不截；归回来的固定图不截，其余补足到预算）
   if (!hasFixedList && picks.length > Math.max(plan.images, fixedCount)) picks.length = Math.max(plan.images, fixedCount);

@@ -1,7 +1,7 @@
 {
-  "generated": "2026-10-03 10:11:45",
+  "generated": "2026-10-03 10:20:33",
   "source": "D:\\工业设计作品集",
-  "total": 37,
+  "total": 41,
   "sectionOrder": [
     "建模渲染",
     "动画",
@@ -22,7 +22,7 @@
   "categories": [
     {
       "name": "建模渲染",
-      "count": 22,
+      "count": 27,
       "works": [
         {
           "id": "02-22",
@@ -85,6 +85,85 @@
           "files": 1,
           "sizeMB": 0.1,
           "images": 1,
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "imgSource": "条目自带"
+        },
+        {
+          "id": "scene-03",
+          "slug": "works/scene-03",
+          "title": "场景练习 · 香水瓶静物",
+          "subtitle": "香水瓶 + 花丛静物渲染",
+          "year": "2025",
+          "doneDate": "2025-10-17",
+          "span": "2025-10-17",
+          "tools": [
+            "Blender"
+          ],
+          "tags": [
+            "渲染",
+            "静物",
+            "练习"
+          ],
+          "cover": "/works/scene-03.jpg",
+          "weight": 1,
+          "files": 0,
+          "sizeMB": 0,
+          "images": 0,
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "imgSource": "条目自带"
+        },
+        {
+          "id": "scene-04",
+          "slug": "works/scene-04",
+          "title": "练习 · 地球（Blender 视口）",
+          "subtitle": "带坐标轴与准星的工作视口截图",
+          "year": "2025",
+          "doneDate": "2025-10-17",
+          "span": "2025-10-17",
+          "tools": [
+            "Blender"
+          ],
+          "tags": [
+            "Blender",
+            "视口",
+            "练习"
+          ],
+          "cover": "/works/scene-04.jpg",
+          "weight": 1,
+          "files": 0,
+          "sizeMB": 0,
+          "images": 0,
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "imgSource": "条目自带"
+        },
+        {
+          "id": "scene-05",
+          "slug": "works/scene-05",
+          "title": "练习 · 日式室内白模（Blender 视口）",
+          "subtitle": "未上材质的室内空间练习",
+          "year": "2025",
+          "doneDate": "2025-10-17",
+          "span": "2025-10-17",
+          "tools": [
+            "Blender"
+          ],
+          "tags": [
+            "Blender",
+            "视口",
+            "室内",
+            "练习"
+          ],
+          "cover": "/works/scene-05.jpg",
+          "weight": 1,
+          "files": 0,
+          "sizeMB": 0,
+          "images": 0,
           "videos": 0,
           "client": "",
           "parts": [],
@@ -249,6 +328,32 @@
           "client": "",
           "parts": [],
           "imgSource": "挑选台"
+        },
+        {
+          "id": "scene-01",
+          "slug": "works/scene-01",
+          "title": "场景练习 · 水晶微缩景观",
+          "subtitle": "同一幻想场景换机位的四张",
+          "year": "2025",
+          "doneDate": "2025-05-10",
+          "span": "2025-05-10",
+          "tools": [
+            "Blender"
+          ],
+          "tags": [
+            "渲染",
+            "场景",
+            "练习"
+          ],
+          "cover": "/works/scene-01.jpg",
+          "weight": 1,
+          "files": 0,
+          "sizeMB": 0,
+          "images": 0,
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "imgSource": "条目自带"
         },
         {
           "id": "02-26",
@@ -529,6 +634,33 @@
           "imgSource": "挑选台"
         },
         {
+          "id": "scene-02",
+          "slug": "works/scene-02",
+          "title": "场景练习 · 和风角色与雾天",
+          "subtitle": "红和服角色 + 油纸伞 + 武士刀",
+          "year": "2024",
+          "doneDate": "2024-05-03",
+          "span": "2024-05-03",
+          "tools": [
+            "Blender"
+          ],
+          "tags": [
+            "渲染",
+            "场景",
+            "角色",
+            "练习"
+          ],
+          "cover": "/works/scene-02.jpg",
+          "weight": 1,
+          "files": 0,
+          "sizeMB": 0,
+          "images": 0,
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "imgSource": "条目自带"
+        },
+        {
           "id": "daily-02",
           "slug": "works/daily-02",
           "title": "练习 · 黑色多旋翼无人机",
@@ -637,7 +769,7 @@
     },
     {
       "name": "动画",
-      "count": 4,
+      "count": 3,
       "works": [
         {
           "id": "04-35",
@@ -733,32 +865,6 @@
           "sizeMB": 991.1,
           "images": 0,
           "videos": 18,
-          "client": "",
-          "parts": [],
-          "imgSource": "暂定手工"
-        },
-        {
-          "id": "04-39",
-          "slug": "works/04-39",
-          "title": "场景渲染静帧",
-          "subtitle": "雪山 / 水晶 / 蓝面角色等场景练习",
-          "year": "2024-2025",
-          "doneDate": "2025-10-17",
-          "span": "2024-05-03 ～ 2025-10-17",
-          "tools": [
-            "Blender"
-          ],
-          "tags": [
-            "场景",
-            "渲染",
-            "静帧"
-          ],
-          "cover": "/works/04-39.jpg",
-          "weight": 5,
-          "files": 10,
-          "sizeMB": 39.5,
-          "images": 9,
-          "videos": 1,
           "client": "",
           "parts": [],
           "imgSource": "暂定手工"
