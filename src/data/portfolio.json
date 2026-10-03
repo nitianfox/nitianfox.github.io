@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-03 08:38:39",
+  "generated": "2026-10-03 08:53:12",
   "source": "D:\\工业设计作品集",
   "total": 29,
   "relatedClients": [
@@ -46,7 +46,7 @@
           "videos": 0,
           "client": "",
           "parts": [],
-          "selectedBy": "auto"
+          "imgSource": "暂定手工"
         },
         {
           "id": "01-07",
@@ -72,7 +72,7 @@
           "videos": 0,
           "client": "",
           "parts": [],
-          "selectedBy": "auto"
+          "imgSource": "暂定手工"
         },
         {
           "id": "01-08",
@@ -109,7 +109,7 @@
             "界面与交互设计",
             "APP 交互演示录屏"
           ],
-          "selectedBy": "auto"
+          "imgSource": "挑选台"
         },
         {
           "id": "01-03",
@@ -137,7 +137,7 @@
           "videos": 0,
           "client": "",
           "parts": [],
-          "selectedBy": "auto"
+          "imgSource": "暂定手工"
         },
         {
           "id": "01-01",
@@ -164,7 +164,7 @@
           "videos": 0,
           "client": "",
           "parts": [],
-          "selectedBy": "auto"
+          "imgSource": "暂定手工"
         },
         {
           "id": "01-02",
@@ -191,7 +191,7 @@
           "videos": 0,
           "client": "",
           "parts": [],
-          "selectedBy": "auto"
+          "imgSource": "暂定手工"
         }
       ]
     },
@@ -241,7 +241,7 @@
             "产品外壳工程（SolidWorks / Plasticity）",
             "桌面雪花球场景渲染"
           ],
-          "selectedBy": "auto"
+          "imgSource": "挑选台"
         },
         {
           "id": "02-14",
@@ -269,7 +269,7 @@
           "videos": 0,
           "client": "",
           "parts": [],
-          "selectedBy": "auto"
+          "imgSource": "挑选台"
         },
         {
           "id": "02-13",
@@ -297,7 +297,7 @@
           "videos": 0,
           "client": "",
           "parts": [],
-          "selectedBy": "auto"
+          "imgSource": "挑选台"
         },
         {
           "id": "02-26",
@@ -323,7 +323,7 @@
           "videos": 0,
           "client": "",
           "parts": [],
-          "selectedBy": "auto"
+          "imgSource": "挑选台"
         },
         {
           "id": "02-15",
@@ -351,7 +351,7 @@
           "videos": 0,
           "client": "",
           "parts": [],
-          "selectedBy": "auto"
+          "imgSource": "挑选台"
         },
         {
           "id": "02-17",
@@ -380,7 +380,7 @@
           "videos": 0,
           "client": "",
           "parts": [],
-          "selectedBy": "auto"
+          "imgSource": "挑选台"
         },
         {
           "id": "02-19",
@@ -408,7 +408,7 @@
           "videos": 0,
           "client": "",
           "parts": [],
-          "selectedBy": "auto"
+          "imgSource": "挑选台"
         },
         {
           "id": "02-12",
@@ -437,7 +437,7 @@
           "videos": 0,
           "client": "",
           "parts": [],
-          "selectedBy": "auto"
+          "imgSource": "挑选台"
         },
         {
           "id": "02-20",
@@ -465,7 +465,7 @@
           "videos": 0,
           "client": "",
           "parts": [],
-          "selectedBy": "auto"
+          "imgSource": "挑选台"
         },
         {
           "id": "02-21",
@@ -493,7 +493,7 @@
           "videos": 0,
           "client": "",
           "parts": [],
-          "selectedBy": "auto"
+          "imgSource": "挑选台"
         },
         {
           "id": "02-16",
@@ -521,7 +521,7 @@
           "videos": 0,
           "client": "",
           "parts": [],
-          "selectedBy": "auto"
+          "imgSource": "挑选台"
         },
         {
           "id": "02-11",
@@ -550,7 +550,7 @@
           "videos": 0,
           "client": "",
           "parts": [],
-          "selectedBy": "auto"
+          "imgSource": "挑选台"
         },
         {
           "id": "02-18",
@@ -577,7 +577,7 @@
           "videos": 0,
           "client": "",
           "parts": [],
-          "selectedBy": "auto"
+          "imgSource": "挑选台"
         },
         {
           "id": "02-25",
@@ -603,7 +603,7 @@
           "videos": 0,
           "client": "",
           "parts": [],
-          "selectedBy": "auto"
+          "imgSource": "自动"
         }
       ]
     },
@@ -637,7 +637,7 @@
           "videos": 0,
           "client": "",
           "parts": [],
-          "selectedBy": "auto"
+          "imgSource": "挑选台"
         },
         {
           "id": "03-30",
@@ -665,7 +665,7 @@
           "videos": 0,
           "client": "",
           "parts": [],
-          "selectedBy": "auto"
+          "imgSource": "挑选台"
         },
         {
           "id": "03-31",
@@ -693,7 +693,7 @@
           "videos": 0,
           "client": "",
           "parts": [],
-          "selectedBy": "auto"
+          "imgSource": "挑选台"
         },
         {
           "id": "03-27",
@@ -720,7 +720,7 @@
           "videos": 0,
           "client": "",
           "parts": [],
-          "selectedBy": "auto"
+          "imgSource": "暂定手工"
         },
         {
           "id": "03-28",
@@ -747,7 +747,7 @@
           "videos": 0,
           "client": "",
           "parts": [],
-          "selectedBy": "auto"
+          "imgSource": "暂定手工"
         },
         {
           "id": "03-34",
@@ -772,7 +772,7 @@
           "videos": 0,
           "client": "",
           "parts": [],
-          "selectedBy": "auto"
+          "imgSource": "挑选台"
         }
       ]
     },
@@ -822,7 +822,7 @@
             "材质与静帧素材",
             "HUD 数据看板动效"
           ],
-          "selectedBy": "auto"
+          "imgSource": "挑选台"
         },
         {
           "id": "04-36",
@@ -850,7 +850,7 @@
           "videos": 18,
           "client": "",
           "parts": [],
-          "selectedBy": "auto"
+          "imgSource": "挑选台"
         },
         {
           "id": "04-39",
@@ -876,7 +876,7 @@
           "videos": 1,
           "client": "",
           "parts": [],
-          "selectedBy": "auto"
+          "imgSource": "暂定手工"
         }
       ]
     }

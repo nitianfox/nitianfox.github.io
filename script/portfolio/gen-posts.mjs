@@ -29,6 +29,7 @@ const PUBLIC_WORKS = path.join(PROJECT, 'public', 'works');
 const DATA_OUT = path.join(PROJECT, 'src', 'data', 'portfolio.json');
 const WEIGHTS = path.join(HERE, 'weights.json');
 const MERGES = path.join(HERE, 'merges.json');
+const MANUAL = path.join(HERE, 'manual-images.json');
 const SELECTION = 'D:\\agent\\image-selection.json';
 const DRY = process.argv.includes('--dry');
 const FORCE = process.argv.includes('--force');
@@ -49,7 +50,16 @@ const absorbed = new Set(groups.flatMap((g) => g.absorb));
 
 let selection = null;
 try { selection = JSON.parse(fs.readFileSync(SELECTION, 'utf8')); } catch { selection = null; }
-if (selection) console.log(`读到配图选择：${SELECTION}（${Object.keys(selection.items ?? {}).length} 篇）\n`);
+if (selection) console.log(`读到配图选择：${SELECTION}（${Object.keys(selection.items ?? {}).length} 篇）`);
+
+// 手工指定配图（桌面「暂定」文件夹），优先级最高
+let manual = { dir: '', items: {} };
+try {
+  const m = JSON.parse(fs.readFileSync(MANUAL, 'utf8'));
+  manual = { dir: m.dir, items: m.items ?? {} };
+  console.log(`读到手工配图：${MANUAL}（${Object.keys(manual.items).length} 篇，来自 ${manual.dir}）`);
+} catch { /* 没有就跳过 */ }
+if (selection || Object.keys(manual.items).length) console.log('');
 
 // 每级权重的正文结构与配图总数（含封面）
 const PLAN = {
@@ -135,6 +145,29 @@ function composition(files) {
   return parts.join(' · ');
 }
 
+// 只更新文章里的「## 预览」小节，让图片行与磁盘上实际存在的图一致（正文其余部分一个字不动）
+function syncPreviewSection(mdPath, title, previewNames) {
+  if (!fs.existsSync(mdPath)) return false;
+  const text = fs.readFileSync(mdPath, 'utf8');
+  const lines = previewNames.map((n) => `![${title}](./${n})`).join('\n');
+  const block = previewNames.length ? `## 预览\n\n${lines}\n\n` : '';
+  const re = /## 预览\n\n(?:!\[[^\]]*\]\(\.\/\d\d\.jpg\)\n)+\n?/;
+  let out;
+  if (re.test(text)) {
+    out = text.replace(re, block);
+  } else if (block) {
+    if (/## 素材\n/.test(text)) out = text.replace(/## 素材\n/, block + '## 素材\n');
+    else if (/## 过程与复盘\n/.test(text)) out = text.replace(/## 过程与复盘\n/, block + '## 过程与复盘\n');
+    else out = text.trimEnd() + '\n\n' + block;
+  } else {
+    return false;
+  }
+  out = out.replace(/\n{3,}/g, '\n\n');
+  if (out === text) return false;
+  fs.writeFileSync(mdPath, out, 'utf8');
+  return true;
+}
+
 // ---------- 组装条目（合并后的）+ 清理 ----------
 const removed = [];
 for (const w of works) {
@@ -195,37 +228,57 @@ for (const e of entries) {
   const writeImages = !DRY && (IMAGES_ONLY || !exists || FORCE);
   const skipPost = !writeMd;
 
-  // 配图：优先用挑选台保存的选择
+  // 配图优先级：手工指定（桌面「暂定」）> 挑选台保存的选择 > 自动规则
   const cands = candidatesOf(parts);
+  const man = manual.items?.[main.id];
   const sel = selection?.items?.[main.id];
-  let chosen = [];
-  if (sel?.selected?.length) {
-    const valid = new Set(cands.map((c) => c.thumb));
-    chosen = sel.selected.filter((t) => valid.has(t));
-    if (sel.cover && valid.has(sel.cover)) chosen = [sel.cover, ...chosen.filter((t) => t !== sel.cover)];
+  const picks = []; // { src, manual }
+  if (man?.files?.length) {
+    for (const rel of man.files) {
+      const abs = path.join(manual.dir, rel);
+      if (fs.existsSync(abs)) picks.push({ src: abs, manual: true });
+    }
   }
-  if (!chosen.length) chosen = pickByRule(cands, plan.images);
-  if (chosen.length > plan.images) chosen = chosen.slice(0, plan.images);
+  if (!picks.length) {
+    let chosen = [];
+    if (sel?.selected?.length) {
+      const valid = new Set(cands.map((c) => c.thumb));
+      chosen = sel.selected.filter((t) => valid.has(t));
+      if (sel.cover && valid.has(sel.cover)) chosen = [sel.cover, ...chosen.filter((t) => t !== sel.cover)];
+    }
+    if (!chosen.length) chosen = pickByRule(cands, plan.images);
+    if (chosen.length > plan.images) chosen = chosen.slice(0, plan.images);
+    for (const t of chosen) picks.push({ src: path.join(SRC, t), manual: false });
+  } else if (false) {
+    // 手工图不按权重裁剪：你在「暂定」里挑了几张就用几张，权重只管正文结构
+  }
 
   const copied = [];
   if (writeImages) {
     fs.mkdirSync(postDir, { recursive: true });
     for (const f of fs.readdirSync(postDir)) if (/\.(jpg|png|jpeg|webp)$/i.test(f)) fs.rmSync(path.join(postDir, f), { force: true });
   }
-  chosen.forEach((thumb, i) => {
-    const abs = path.join(SRC, thumb);
-    if (!fs.existsSync(abs)) return;
+  for (let i = 0; i < picks.length; i++) {
+    const p = picks[i];
+    if (!fs.existsSync(p.src)) continue;
     const name = i === 0 ? 'cover.jpg' : `${String(i).padStart(2, '0')}.jpg`;
     copied.push(name);
-    if (writeImages) fs.copyFileSync(abs, path.join(postDir, name));
-  });
+    if (!writeImages) continue;
+    const out = path.join(postDir, name);
+    if (p.manual) {
+      // 暂定里的原图很大（最大 28 MB），压到最长边 1600 再入库
+      await sharp(p.src).resize({ width: 1600, height: 1600, fit: 'inside', withoutEnlargement: true })
+        .jpeg({ quality: 85, progressive: true }).toFile(out);
+    } else {
+      fs.copyFileSync(p.src, out);
+    }
+  }
 
   // 作品集网格封面
-  const publicCover = chosen[0] ? `/works/${main.id}.jpg` : '';
-  if (chosen[0] && !DRY) {
-    const abs = path.join(SRC, chosen[0]);
-    if (fs.existsSync(abs)) {
-      await sharp(abs).resize({ width: 800, height: 800, fit: 'inside', withoutEnlargement: true })
+  const publicCover = picks.length ? `/works/${main.id}.jpg` : '';
+  if (picks.length && !DRY) {
+    if (fs.existsSync(picks[0].src)) {
+      await sharp(picks[0].src).resize({ width: 800, height: 800, fit: 'inside', withoutEnlargement: true })
         .jpeg({ quality: 82, progressive: true }).toFile(path.join(PUBLIC_WORKS, `${main.id}.jpg`));
     }
   }
@@ -307,6 +360,8 @@ pinTop: 0
 ${body.join('\n')}
 `;
   if (writeMd) fs.writeFileSync(mdPath, md, 'utf8');
+  // 配图变了就同步一次「## 预览」小节（正文不动）
+  if (writeImages && !writeMd) syncPreviewSection(mdPath, title, copied.slice(1));
 
   const item = {
     id: main.id,
@@ -326,11 +381,11 @@ ${body.join('\n')}
     videos: cVideos,
     client: group?.client || '',
     parts: group ? (group.parts ?? []).map((p) => p.name) : [],
-    selectedBy: sel?.selected?.length ? 'manual' : 'auto',
+    imgSource: man?.files?.length ? '暂定手工' : (sel?.selected?.length ? '挑选台' : '自动'),
   };
   if (!byCategory.has(category)) byCategory.set(category, []);
   byCategory.get(category).push(item);
-  report.push({ id: main.id, weight, doneDate, copied: copied.length, cat: category, title, skipped: skipPost, parts: parts.length, byManual: item.selectedBy === 'manual' });
+  report.push({ id: main.id, weight, doneDate, copied: copied.length, cat: category, title, skipped: skipPost, parts: parts.length, imgSource: item.imgSource });
 }
 
 const order = ['平面设计', '三维建模', '产品渲染', '场景动画'];
@@ -352,7 +407,7 @@ const skipped = report.filter((r) => r.skipped).length;
 console.log(`${DRY ? '[dry] 预览' : '已处理'} ${report.length} 个条目 -> ${path.relative(PROJECT, BLOG)}` +
   (skipped ? `（${skipped} 篇已存在、已跳过；要重建加 --force）` : ''));
 for (const r of report) {
-  console.log(`  ${r.id}  ${r.weight}分  ${r.doneDate}  ${r.copied}图  ${r.cat.padEnd(5)}  ${r.title}${r.parts > 1 ? `（合并 ${r.parts} 部分）` : ''}${r.byManual ? ' [手动配图]' : ''}${r.skipped ? ' [跳过]' : ''}`);
+  console.log(`  ${r.id}  ${r.weight}分  ${r.doneDate}  ${r.copied}图  ${r.cat.padEnd(5)}  ${r.title}${r.parts > 1 ? `（合并 ${r.parts} 部分）` : ''}  [配图:${r.imgSource}]${r.skipped ? ' [正文跳过]' : ''}`);
 }
 const dist = [5, 4, 3, 2, 1].map((k) => `${k}分 ${report.filter((r) => r.weight === k).length}`).join(' · ');
 console.log(`\n分布：${dist}  合计 ${report.length} 条`);
