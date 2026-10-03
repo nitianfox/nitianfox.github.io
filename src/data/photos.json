@@ -1,0 +1,120 @@
+{
+  "generated": "2026-10-03 16:24:07",
+  "groups": [
+    {
+      "slug": "photo-241221",
+      "title": "雪",
+      "date": "2024-12-21",
+      "images": [
+        {
+          "src": "/photos/photo-241221/01.jpg",
+          "caption": "雪中的楼与树"
+        },
+        {
+          "src": "/photos/photo-241221/02.jpg",
+          "caption": "雪中打伞的两个人"
+        },
+        {
+          "src": "/photos/photo-241221/03.jpg",
+          "caption": "雪地广场"
+        },
+        {
+          "src": "/photos/photo-241221/04.jpg",
+          "caption": "雪后小区"
+        }
+      ]
+    },
+    {
+      "slug": "photo-240816",
+      "title": "夜色",
+      "date": "2024-08-16",
+      "images": [
+        {
+          "src": "/photos/photo-240816/01.jpg",
+          "caption": "月夜城市"
+        },
+        {
+          "src": "/photos/photo-240816/02.jpg",
+          "caption": "月亮"
+        }
+      ]
+    },
+    {
+      "slug": "photo-240320",
+      "title": "虫与鸟",
+      "date": "2024-03-20",
+      "images": [
+        {
+          "src": "/photos/photo-240320/01.jpg",
+          "caption": "草丛中的蝶"
+        },
+        {
+          "src": "/photos/photo-240320/02.jpg",
+          "caption": "停在花上的蝶"
+        },
+        {
+          "src": "/photos/photo-240320/03.jpg",
+          "caption": "水中的白鹭"
+        },
+        {
+          "src": "/photos/photo-240320/04.jpg",
+          "caption": "起飞的鹭"
+        },
+        {
+          "src": "/photos/photo-240320/05.jpg",
+          "caption": "河边的鹭与鸽"
+        }
+      ]
+    },
+    {
+      "slug": "photo-230812",
+      "title": "荷塘",
+      "date": "2023-08-12",
+      "images": [
+        {
+          "src": "/photos/photo-230812/01.jpg",
+          "caption": "雨中荷花苞"
+        },
+        {
+          "src": "/photos/photo-230812/02.jpg",
+          "caption": "盛开的荷花"
+        },
+        {
+          "src": "/photos/photo-230812/03.jpg",
+          "caption": "睡莲两朵"
+        },
+        {
+          "src": "/photos/photo-230812/04.jpg",
+          "caption": "睡莲一朵"
+        },
+        {
+          "src": "/photos/photo-230812/05.jpg",
+          "caption": "荷叶与积水"
+        }
+      ]
+    },
+    {
+      "slug": "photo-230715",
+      "title": "花叶集",
+      "date": "2023-07-15",
+      "images": [
+        {
+          "src": "/photos/photo-230715/01.jpg",
+          "caption": "红枫"
+        },
+        {
+          "src": "/photos/photo-230715/02.jpg",
+          "caption": "木芙蓉"
+        },
+        {
+          "src": "/photos/photo-230715/03.jpg",
+          "caption": "槐花"
+        },
+        {
+          "src": "/photos/photo-230715/04.jpg",
+          "caption": "紫色小花"
+        }
+      ]
+    }
+  ]
+}

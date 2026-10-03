@@ -1,0 +1,80 @@
+---
+// 本地背景音乐 + 播放时的背景壁纸（从按钮位置圆形扩散铺满，暂停收回）
+const src = "/music/intro-another-line.mp3";
+---
+<div class="relative" id="bgm-wrap" data-src={src}>
+  <button id="bgm-button" type="button" aria-label="背景音乐"
+    class="flex items-center justify-center w-10 h-10 hover:bg-[var(--button-hover-color)] active:scale-90 rounded-lg hover:text-current border border-[var(--button-border-color)] transition duration-300">
+    <svg id="bgm-icon-off" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/><path d="M3.3 2.3 1.9 3.7l18.4 18.4 1.4-1.4z"/></svg>
+    <svg id="bgm-icon-on" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display:none"><path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/></svg>
+  </button>
+</div>
+
+<!-- 背景层：z-index -1，配合 html.bgm-on 让 body 背景透明后可见 -->
+<div id="bgm-bg" aria-hidden="true"></div>
+
+<style>
+  #bgm-bg {
+    position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background: url('/music/bg.jpg') center / cover no-repeat;
+    /* 从按钮位置开始的圆：默认半径为 0（看不见） */
+    clip-path: circle(0px at var(--bgm-x, 100%) var(--bgm-y, 40px));
+    transition: clip-path .95s cubic-bezier(.33, 0, .2, 1);
+  }
+  /* 随主题色的薄纱：浅色下压亮、深色下压暗，保证文字可读 */
+  #bgm-bg::after { content: ''; position: absolute; inset: 0; background: var(--bg-color); opacity: .74; }
+  :global(html.bgm-on body) {
+    background-color: transparent !important;
+    background-image: none !important;
+  }
+</style>
+
+<script>
+  const wrap = document.getElementById('bgm-wrap');
+  const btn = document.getElementById('bgm-button');
+  const off = document.getElementById('bgm-icon-off');
+  const on = document.getElementById('bgm-icon-on');
+  const bg = document.getElementById('bgm-bg');
+  if (wrap && btn && bg && !wrap.dataset.ready) {
+    wrap.dataset.ready = '1';
+    // 挪到 body 直系（页面有 isolate 堆叠上下文，留在 header 里会被挡住）
+    if (bg.parentElement !== document.body) document.body.prepend(bg);
+    const audio = new Audio(wrap.dataset.src || '');
+    audio.loop = true;
+    audio.volume = 0.25;      // 默认音量很小
+    audio.preload = 'none';
+
+    const setOrigin = () => {
+      const r = btn.getBoundingClientRect();
+      bg.style.setProperty('--bgm-x', (r.left + r.width / 2) + 'px');
+      bg.style.setProperty('--bgm-y', (r.top + r.height / 2) + 'px');
+    };
+    // 半径要够大：取屏幕对角线
+    const bigR = () => Math.round(Math.hypot(window.innerWidth, window.innerHeight) * 1.1);
+
+    btn.addEventListener('click', () => {
+      setOrigin();
+      if (audio.paused) audio.play().catch(() => {});
+      else audio.pause();
+    });
+
+    audio.addEventListener('play', () => {
+      setOrigin();
+      document.documentElement.classList.add('bgm-on');
+      // 下一帧再设半径，保证过渡动画生效
+      requestAnimationFrame(() => {
+        bg.style.clipPath = 'circle(' + bigR() + 'px at ' + bg.style.getPropertyValue('--bgm-x') + ' ' + bg.style.getPropertyValue('--bgm-y') + ')';
+      });
+      if (off) off.style.display = 'none';
+      if (on) on.style.display = '';
+    });
+
+    audio.addEventListener('pause', () => {
+      setOrigin();
+      bg.style.clipPath = 'circle(0px at ' + bg.style.getPropertyValue('--bgm-x') + ' ' + bg.style.getPropertyValue('--bgm-y') + ')';
+      setTimeout(() => document.documentElement.classList.remove('bgm-on'), 950);
+      if (off) off.style.display = '';
+      if (on) on.style.display = 'none';
+    });
+  }
+</script>

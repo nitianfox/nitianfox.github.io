@@ -1,0 +1,48 @@
+---
+import MainPageLayout from '@layouts/MainPageLayout.astro'
+import FabMenu from '@components/control/FabMenu.astro'
+import { siteConfig } from '@/config'
+import i18nit from '@i18n/translation'
+import { i18n } from "astro:config/client";
+import photos from '@/data/photos.json'
+
+const currentLang = Astro.currentLocale || i18n!.defaultLocale;
+const t = i18nit(currentLang);
+
+export async function getStaticPaths() {
+	return i18n?.locales.map(locale => ({ params: { locale: locale == i18n?.defaultLocale ? undefined : (locale as string) } }));
+}
+
+const label = currentLang === "en" ? "Photos" : "摄影";
+const groups = photos.groups;
+const total = groups.reduce((n, g) => n + g.images.length, 0);
+const pageTitle = label + " - " + siteConfig.title;
+const pageDescription = label + " · " + total + " 张";
+---
+
+<MainPageLayout title={pageTitle} lang={currentLang} description={pageDescription}>
+    <div class="mx-auto w-full max-w-[var(--page-width)] px-4 py-8">
+        <h1 class="text-2xl font-bold mb-1">{label}</h1>
+        <p class="text-sm opacity-60 mb-8">{total} 张 · {groups.length} 组</p>
+
+        {groups.map((g) => (
+            <section class="mb-12">
+                <div class="flex items-baseline justify-between mb-3 border-b border-[var(--button-border-color)] pb-2">
+                    <h2 class="text-lg font-semibold">{g.title}</h2>
+                    <span class="text-xs opacity-60">{g.date} · {g.images.length} 张</span>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                    {g.images.map((im) => (
+                        <a href={`/blog/${g.slug}/`} class="group block overflow-hidden rounded-lg border border-[var(--button-border-color)] bg-[var(--button-hover-color)]">
+                            <img src={im.src} alt={im.caption} loading="lazy"
+                                class="w-full h-48 md:h-56 object-cover transition duration-300 group-hover:scale-[1.03]" />
+                        </a>
+                    ))}
+                </div>
+            </section>
+        ))}
+    </div>
+    <div slot="overlay">
+        <FabMenu showBackBottom={true} />
+    </div>
+</MainPageLayout>

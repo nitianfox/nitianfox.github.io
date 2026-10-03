@@ -4,6 +4,7 @@ import { Icon } from "astro-icon/components"
 import { profileConfig, siteConfig } from "@/config"
 import ThemeIcon from "./control/ThemeIcon.astro"
 import { baseUrl } from "@utils/urlUtils"
+import MusicPlayer from '@components/MusicPlayer.astro'
 
 import { i18n } from "astro:config/client";
 import i18nit from '@i18n/translation'
@@ -43,6 +44,7 @@ const getLocalePath = (path: string, targetLocale: string) => {
 const indexPage = getRelativeLocaleUrl(currentLang, "/");
 const archivesPage = getRelativeLocaleUrl(currentLang, "/archives/");
 const worksPage = getRelativeLocaleUrl(currentLang, "/works/");
+const photosPage = getRelativeLocaleUrl(currentLang, "/photos/");
 const aboutPage = getRelativeLocaleUrl(currentLang, "/about/");
 
 // 顶栏在 swup 容器之外，换页 / 换语言都不会重建：文案与链接只能由脚本按当前语言重算
@@ -117,6 +119,7 @@ if (profileConfig.indexPage) {
         <!-- <a href="/rss.xml" target="_blank" class="flex items-center justify-center w-10 h-10 hover:bg-[var(--button-hover-color)] active:scale-90 rounded-lg hover:text-current border border-[var(--button-border-color)] transition duration-300">
             <Icon name="simple-icons:rss" class="w-4 h-4" />
         </a> -->
+        <MusicPlayer />
         <!-- Language Switcher -->
         {showLanguageSwitcher && <div class="relative">
             <button id="language-button" class="flex items-center justify-center w-10 h-10 hover:bg-[var(--button-hover-color)] active:scale-90 rounded-lg hover:text-current border border-[var(--button-border-color)] transition duration-300" aria-label="Language Switcher">
@@ -168,6 +171,9 @@ if (profileConfig.indexPage) {
           <a href={ worksPage } data-i18n-path="/works/" data-i18n-labels={JSON.stringify(i18nLabels("header.works"))} aria-current={isCurrentPage(worksPage) ? 'page' : undefined} class={navLinkClass}>
               <span data-i18n-text>{t("header.works")}</span>
           </a>
+<a href={ photosPage } data-i18n-path="/photos/" data-i18n-labels={JSON.stringify([currentLang === "en" ? "Photos" : "摄影"])} aria-current={isCurrentPage(photosPage) ? 'page' : undefined} class={navLinkClass}>
+              <span data-i18n-text>{currentLang === "en" ? "Photos" : "摄影"}</span>
+          </a>
           <!-- 关于链接 -->
           <a href={ aboutPage } data-i18n-path="/about/" data-i18n-labels={JSON.stringify(i18nLabels("header.about"))} aria-current={isCurrentPage(aboutPage) ? 'page' : undefined} class={navLinkClass}>
               <span data-i18n-text>{t("header.about")}</span>
@@ -205,6 +211,10 @@ if (profileConfig.indexPage) {
             <a href={ worksPage } data-i18n-path="/works/" data-i18n-labels={JSON.stringify(i18nLabels("header.works"))} class={mobileNavLinkClass(worksPage)}>
                 <Icon name="fa6-solid:images" class="w-4 h-4 opacity-70" />
                 <span data-i18n-text>{t("header.works")}</span>
+            </a>
+<a href={ photosPage } data-i18n-path="/photos/" data-i18n-labels={JSON.stringify([currentLang === "en" ? "Photos" : "摄影"])} class={mobileNavLinkClass(photosPage)}>
+                <Icon name="fa6-solid:images" class="w-4 h-4 opacity-70" />
+                <span data-i18n-text>{currentLang === "en" ? "Photos" : "摄影"}</span>
             </a>
             <a href={ aboutPage } data-i18n-path="/about/" data-i18n-labels={JSON.stringify(i18nLabels("header.about"))} class={mobileNavLinkClass(aboutPage)}>
                 <Icon name="fa6-solid:user" class="w-4 h-4 opacity-70" />

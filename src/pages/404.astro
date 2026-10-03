@@ -12,8 +12,6 @@ import i18nit from '@i18n/translation'
 const currentLang = Astro.currentLocale || i18n!.defaultLocale;
 const t = i18nit(currentLang);
 
-console.log("404 page loaded with locale:", currentLang);
-
 const pageTitle = "404 - " + siteConfig.title;
 const indexPage = getRelativeLocaleUrl(currentLang, "/");
 ---
