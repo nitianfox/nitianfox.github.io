@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-03 10:22:34",
+  "generated": "2026-10-03 10:23:44",
   "source": "D:\\工业设计作品集",
   "total": 40,
   "sectionOrder": [
@@ -250,32 +250,6 @@
           "imgSource": "条目自带"
         },
         {
-          "id": "daily-03",
-          "slug": "works/daily-03",
-          "title": "练习 · 智能厨房报警器",
-          "subtitle": "壁挂式智能厨房报警器",
-          "year": "2025",
-          "doneDate": "2025-05-15",
-          "span": "2025-05-15",
-          "tools": [
-            "Blender"
-          ],
-          "tags": [
-            "渲染",
-            "智能家居",
-            "练习"
-          ],
-          "cover": "/works/daily-03.jpg",
-          "weight": 1,
-          "files": 1,
-          "sizeMB": 0.1,
-          "images": 1,
-          "videos": 0,
-          "client": "",
-          "parts": [],
-          "imgSource": "条目自带"
-        },
-        {
           "id": "02-13",
           "slug": "works/02-13",
           "title": "智能浴霸设计",
@@ -498,34 +472,6 @@
           "imgSource": "挑选台"
         },
         {
-          "id": "02-21",
-          "slug": "works/02-21",
-          "title": "校园文创 · 书签「BIU_APT」",
-          "subtitle": "宝鸡文理学院校园文创产品设计",
-          "year": "2024-12",
-          "doneDate": "2024-12-04",
-          "span": "2024-12-01 ～ 2024-12-04",
-          "tools": [
-            "Blender",
-            "Photoshop"
-          ],
-          "tags": [
-            "文创",
-            "书签",
-            "建模",
-            "渲染"
-          ],
-          "cover": "/works/02-21.jpg",
-          "weight": 1,
-          "files": 11,
-          "sizeMB": 97.2,
-          "images": 11,
-          "videos": 0,
-          "client": "",
-          "parts": [],
-          "imgSource": "挑选台"
-        },
-        {
           "id": "02-16",
           "slug": "works/02-16",
           "title": "折叠清扫铲设计",
@@ -738,6 +684,60 @@
           "client": "",
           "parts": [],
           "imgSource": "自动"
+        },
+        {
+          "id": "02-21",
+          "slug": "works/02-21",
+          "title": "校园文创 · 书签「BIU_APT」",
+          "subtitle": "宝鸡文理学院校园文创产品设计",
+          "year": "2024-12",
+          "doneDate": "2023-11-08",
+          "span": "2024-12-01 ～ 2024-12-04",
+          "tools": [
+            "Blender",
+            "Photoshop"
+          ],
+          "tags": [
+            "文创",
+            "书签",
+            "建模",
+            "渲染"
+          ],
+          "cover": "/works/02-21.jpg",
+          "weight": 1,
+          "files": 11,
+          "sizeMB": 97.2,
+          "images": 11,
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "imgSource": "挑选台"
+        },
+        {
+          "id": "daily-03",
+          "slug": "works/daily-03",
+          "title": "练习 · 智能厨房报警器",
+          "subtitle": "壁挂式智能厨房报警器",
+          "year": "2023",
+          "doneDate": "2023-10-12",
+          "span": "2023-10-12",
+          "tools": [
+            "Blender"
+          ],
+          "tags": [
+            "渲染",
+            "智能家居",
+            "练习"
+          ],
+          "cover": "/works/daily-03.jpg",
+          "weight": 1,
+          "files": 1,
+          "sizeMB": 0.1,
+          "images": 1,
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "imgSource": "条目自带"
         }
       ]
     },
@@ -1024,43 +1024,6 @@
           "imgSource": "暂定手工"
         },
         {
-          "id": "01-08",
-          "slug": "works/01-08",
-          "title": "界面与交互设计（UI / APP）",
-          "subtitle": "《青铜密码》APP + 5 个非遗主题 APP 案例 + 校园健身助手",
-          "year": "2025-06",
-          "doneDate": "2025-06-17",
-          "span": "2020-05-24 ～ 2025-06-17",
-          "tools": [
-            "Axure",
-            "Photoshop",
-            "Figma",
-            "Premiere Pro"
-          ],
-          "tags": [
-            "UI",
-            "交互",
-            "APP",
-            "非遗",
-            "平面",
-            "视频",
-            "素材",
-            "纪录"
-          ],
-          "cover": "/works/01-08.jpg",
-          "weight": 1,
-          "files": 137,
-          "sizeMB": 1317.9,
-          "images": 96,
-          "videos": 19,
-          "client": "",
-          "parts": [
-            "界面与交互设计",
-            "APP 交互演示录屏"
-          ],
-          "imgSource": "挑选台"
-        },
-        {
           "id": "pack-2024",
           "slug": "works/pack-2024",
           "title": "包装练习（2024 年 12 月）",
@@ -1168,6 +1131,43 @@
           "client": "",
           "parts": [],
           "imgSource": "暂定手工"
+        },
+        {
+          "id": "01-08",
+          "slug": "works/01-08",
+          "title": "界面与交互设计（UI / APP）",
+          "subtitle": "《青铜密码》APP + 5 个非遗主题 APP 案例 + 校园健身助手",
+          "year": "2025-06",
+          "doneDate": "2023-09-20",
+          "span": "2020-05-24 ～ 2025-06-17",
+          "tools": [
+            "Axure",
+            "Photoshop",
+            "Figma",
+            "Premiere Pro"
+          ],
+          "tags": [
+            "UI",
+            "交互",
+            "APP",
+            "非遗",
+            "平面",
+            "视频",
+            "素材",
+            "纪录"
+          ],
+          "cover": "/works/01-08.jpg",
+          "weight": 1,
+          "files": 137,
+          "sizeMB": 1317.9,
+          "images": 96,
+          "videos": 19,
+          "client": "",
+          "parts": [
+            "界面与交互设计",
+            "APP 交互演示录屏"
+          ],
+          "imgSource": "挑选台"
         }
       ]
     }

@@ -1,6 +1,6 @@
 ---
 title: 界面与交互设计（UI / APP）
-pubDate: 2025-06-17
+pubDate: 2023-09-20
 description: 《青铜密码》APP + 5 个非遗主题 APP 案例 + 校园健身助手
 category: 平面
 image: "./cover.jpg"

@@ -49,6 +49,7 @@ const weights = JSON.parse(fs.readFileSync(WEIGHTS, 'utf8')).works;
 const merges = JSON.parse(fs.readFileSync(MERGES, 'utf8'));
 const groups = merges.groups ?? [];
 const renames = merges.renames ?? {};
+const dateOverrides = merges.dates ?? {};
 const groupOf = new Map(groups.map((g) => [g.id, g]));
 const absorbed = new Set(groups.flatMap((g) => g.absorb));
 
@@ -314,7 +315,7 @@ for (const e of entries) {
   const times = parts.flatMap(sourceTimes);
   const minMs = times.length ? Math.min(...times) : null;
   const maxMs = times.length ? Math.max(...times) : null;
-  const doneDate = main.__dateOverride ?? (maxMs ? iso(maxMs) : `${main.year || '2026'}-01-01`.slice(0, 10));
+  const doneDate = dateOverrides[main.id] ?? main.__dateOverride ?? (maxMs ? iso(maxMs) : `${main.year || '2026'}-01-01`.slice(0, 10));
   const span = main.__spanOverride ?? (minMs && maxMs ? `${iso(minMs)} ～ ${iso(maxMs)}` : (main.year || '—'));
 
   const postDir = path.join(BLOG, main.id);

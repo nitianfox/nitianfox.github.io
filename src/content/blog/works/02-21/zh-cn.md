@@ -1,6 +1,6 @@
 ---
 title: 校园文创 · 书签「BIU_APT」
-pubDate: 2024-12-04
+pubDate: 2023-11-08
 description: 宝鸡文理学院校园文创产品设计
 category: 建模渲染
 image: "./cover.jpg"
