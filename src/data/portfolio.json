@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-03 10:23:44",
+  "generated": "2026-10-03 10:24:27",
   "source": "D:\\工业设计作品集",
   "total": 40,
   "sectionOrder": [
@@ -502,7 +502,7 @@
         {
           "id": "03-34",
           "slug": "works/03-34",
-          "title": "其它渲染小稿",
+          "title": "练习 · 机械腕表",
           "subtitle": "设备模型 / 腕表等零散渲染",
           "year": "2024-07",
           "doneDate": "2024-07-17",
@@ -515,14 +515,14 @@
             "静物"
           ],
           "cover": "/works/03-34.jpg",
-          "weight": 2,
+          "weight": 1,
           "files": 4,
           "sizeMB": 4.7,
           "images": 8,
           "videos": 0,
           "client": "",
           "parts": [],
-          "imgSource": "挑选台"
+          "imgSource": "暂定手工"
         },
         {
           "id": "02-11",
