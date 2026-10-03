@@ -21,8 +21,7 @@ import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 
-const HERE = path.dirname(fileURLToPath(import.meta.url));
-const PROJECT = path.resolve(HERE, '..', '..');
+const HERE = path.dirname(fileURLToPath(import.meta.url));const PROJECT = path.resolve(HERE, '..', '..');
 const SRC = process.env.PORTFOLIO_SRC || 'D:\\工业设计作品集';
 const WEB = path.join(SRC, '_网页数据');
 const BLOG = path.join(PROJECT, 'src', 'content', 'blog', 'works');
@@ -87,6 +86,7 @@ try {
 if (selection || Object.keys(manual.items).length) console.log('');
 
 // 每级权重的正文结构与配图总数（含封面）
+const MIN_IMAGES = 3; // 每个条目至少放几张图（源图够的话），免得页面太空
 const PLAN = {
   5: { images: 8, previews: true, table: true, composition: true, span: true, process: true },
   4: { images: 6, previews: true, table: true, composition: true, span: true, process: false },
@@ -382,8 +382,9 @@ for (const e of entries) {
       for (const abs of resolveManual(fixedManual)) addPick(abs, true);
     }
   }
-  // 4) 收敛到权重预算（手工/额外清单不截；归回来的固定图不截，其余补足到预算）
-  if (!hasFixedList && picks.length > Math.max(plan.images, fixedCount)) picks.length = Math.max(plan.images, fixedCount);
+  // 4) 收敛到预算：权重预算与「每篇至少 MIN_IMAGES 张」取大者（手工/额外清单不截；归回的固定图不截）
+  const imgBudget = Math.max(plan.images, Math.min(MIN_IMAGES, cands.length));
+  if (!hasFixedList && picks.length > Math.max(imgBudget, fixedCount)) picks.length = Math.max(imgBudget, fixedCount);
 
   const copied = [];
   if (skipImages) {
