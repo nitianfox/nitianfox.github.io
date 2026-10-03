@@ -1,6 +1,6 @@
 ---
 title: 这个网站是怎么搭起来的
-pubDate: 2026-10-03
+pubDate: 2023-09-01
 description: 建站第一篇：这个站放什么、为什么用静态站、技术选型和背后的原理，以及部署到 GitHub 和 Cloudflare 的打算。
 category: 建站
 image: ""

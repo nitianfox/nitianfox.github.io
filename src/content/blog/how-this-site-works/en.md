@@ -1,6 +1,6 @@
 ---
 title: How This Site Is Built
-pubDate: 2026-10-03
+pubDate: 2023-09-01
 description: The first post — what this site is for, why it is static, the stack and the ideas behind it, and the plan to host it on GitHub and Cloudflare.
 category: Site
 image: ""
