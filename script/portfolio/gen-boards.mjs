@@ -67,6 +67,16 @@ fs.mkdirSync(OUT_DIR, { recursive: true });
 // 清掉旧文件
 for (const f of fs.readdirSync(OUT_DIR)) if (/\.jpg$/i.test(f)) fs.rmSync(path.join(OUT_DIR, f), { force: true });
 
+// 03-27 里的展板是按题材命名的，把它们归回各自的项目（点进去直接到那个作品）
+const BOARD_TARGET = {
+  '浴缸.png': '02-12',
+  '连杆吊灯.png': '02-17',
+  '碎纸机.png': '02-14',
+  '香薰.png': '02-15',
+  '螺丝刀.png': '02-11',
+  '头盔.jpg': '03-30',
+};
+
 const items = [];
 let n = 0;
 for (const r of rows) {
@@ -74,12 +84,15 @@ for (const r of rows) {
   const file = `${String(n).padStart(2, '0')}.jpg`;
   await sharp(r.abs).resize({ width: 1100, height: 1100, fit: 'inside', withoutEnlargement: true })
     .jpeg({ quality: 84, progressive: true }).toFile(path.join(OUT_DIR, file));
+  const targetId = BOARD_TARGET[r.name] ?? r.workId;
+  const target = byId.get(targetId);
   items.push({
     file: `/boards/${file}`,
     name: r.name,
-    workId: r.workId,
-    workTitle: r.workTitle,
-    workSlug: `works/${r.workId}`,
+    workId: targetId,
+    workTitle: target ? target.title : r.workTitle,
+    workSlug: `works/${targetId}`,
+    from: r.workId === targetId ? '' : r.workId,
   });
 }
 
