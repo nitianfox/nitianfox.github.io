@@ -1,9 +1,9 @@
 
 ## 关于本站
 
-这里是 **NTFOX** 的博客，用来放技术笔记、折腾记录和日常。
+这里是程的静态网页，用来放练习作品和日常折腾记录。
 
-站点用 [Astro](https://astro.build/) 构建，主题改造自 [Momo](https://github.com/Motues/Momo)（MIT 协议）。所有页面在构建期生成，直接托管静态文件即可，不需要服务器，也不需要数据库。
+站点采用 [Astro](https://astro.build/) 构建，主题改造自 [Momo](https://github.com/Motues/Momo)（MIT 协议）。
 
 ## 技术栈
 

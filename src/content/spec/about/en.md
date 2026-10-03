@@ -1,9 +1,9 @@
 
 ## About
 
-This is **NTFOX**'s blog — notes on code, tinkering and everyday life.
+This is Cheng's static site — a home for practice projects and everyday tinkering.
 
-The site is built with [Astro](https://astro.build/) on a theme adapted from [Momo](https://github.com/Motues/Momo) (MIT). Everything is generated at build time, so hosting is just static files: no server, no database.
+Built with [Astro](https://astro.build/) on a theme adapted from [Momo](https://github.com/Motues/Momo) (MIT).
 
 ## Stack
 
