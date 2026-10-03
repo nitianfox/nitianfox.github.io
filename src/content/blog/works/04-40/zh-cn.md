@@ -2,7 +2,7 @@
 title: 桌面雪花球场景渲染
 pubDate: 2026-09-18
 description: 产品 + 场景的合成展示
-category: 场景动画
+category: 动画
 image: "./cover.jpg"
 draft: false
 slugId: works/04-40

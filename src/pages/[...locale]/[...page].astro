@@ -1,75 +1,66 @@
 ---
 import MainPageLayout from '@layouts/MainPageLayout.astro';
 import Cover from '@components/Cover.astro';
-import PostPage from '@components/PostPage.astro';
-import Navi from '@components/control/Navi.astro';
+import PostCard from '@components/PostCard.astro';
 import FabMenu from '@components/control/FabMenu.astro';
+import ImageModule from '@components/misc/ImageModule.astro';
 
 import { getBlogEntrySort } from '@utils/contentUtils'
 import { getSiteTitle } from '@utils/siteTitle';
 import { siteConfig } from '@/config';
 import { i18n } from "astro:config/client";
-import type { CollectionEntry } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
-import { getRelativeLocaleUrl } from '@utils/urlUtils';
+import { getRelativeLocaleUrl, blogCoverUrl } from '@utils/urlUtils';
 import { photoCoverEnabled } from '@utils/photoCover';
+import portfolio from '@/data/portfolio.json';
 
 import i18nit from '@i18n/translation'
 
-// 所有分页数据都在 "page" 参数中传递
-const { page } = Astro.props;
 const { locale = i18n!.defaultLocale } = Astro.params;
 
 const currentLang = Astro.currentLocale || i18n!.defaultLocale;
 const t = i18nit(currentLang);
 
-export const getStaticPaths = (async ({ paginate }) => {
-
-  function createPinTopSort() {
-    return (a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => {
-      const pinTopA = a.data.pinTop ?? 0;
-      const pinTopB = b.data.pinTop ?? 0;
-      
-      if (pinTopA > 0 && pinTopB > 0) {
-        return pinTopB - pinTopA;
-      }
-      
-      if (pinTopA > 0) return -1;
-      if (pinTopB > 0) return 1;
-      
-      return b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
-    };
-  }
-
-  // 如果启用了国际化，为每个语言环境生成分页路径
-  const paths = [];
-  for (const locale of i18n.locales) {
+// 首页不再分页：每个语言只生成一个路径（zh-cn 是 /，其它语言是 /<locale>/）。
+export const getStaticPaths = (async () => {
+  return i18n.locales.map((locale) => {
     const localeCode = typeof locale === 'string' ? locale : locale.path;
-    const localeParam = localeCode === i18n.defaultLocale ? undefined : localeCode;
-    const blogEntries = await getBlogEntrySort(localeParam, undefined, createPinTopSort());
-    const paginatedPaths = paginate(blogEntries, { 
-      pageSize: siteConfig.pageSize,
-      params: { locale: localeParam }
-    });
-    
-    // 将生成的路径添加到总路径列表中
-    paths.push(...paginatedPaths);
-  }
-  
-  return paths;
+    return {
+      params: { locale: localeCode === i18n.defaultLocale ? undefined : localeCode }
+    };
+  });
 }) satisfies GetStaticPaths
 
+// 置顶文章（站点介绍）单独抽出来渲染在封面下面；其余文章走归档页。
+// getBlogEntrySort 会按语言挑对应的翻译版本，缺翻译时回退默认语言。
+const localeParam = locale === i18n!.defaultLocale ? undefined : locale;
+const pinnedEntry = (await getBlogEntrySort(localeParam)).find(
+    (entry) => (entry.data.pinTop ?? 0) > 0
+);
 
+// 每个分区内部：weight 从大到小，同权重按 doneDate 从大到小。
+// 排序在构建时做完，页面不需要任何客户端脚本。
+function sortWorks(works: typeof portfolio.categories[number]['works']) {
+    return [...works].sort((a, b) => {
+        if (b.weight !== a.weight) return b.weight - a.weight;
+        return String(b.doneDate).localeCompare(String(a.doneDate));
+    });
+}
 
-const indexPage = getRelativeLocaleUrl(locale, '/');
-// 副标题为空时标签栏只显示主标题；分页页追加页码，避免第 2 页起的标题完全重复
-const pageTitle = page.currentPage > 1
-    ? `${getSiteTitle()} (${page.currentPage})`
-    : getSiteTitle();
+const sections = portfolio.categories.map((cat) => ({
+    name: cat.name,
+    count: cat.count,
+    works: sortWorks(cat.works),
+}));
 
-// 照片封面只在首页第 1 页启用：翻页时再闪一次全屏大图反而吵。
+const total = portfolio.total;
+const worksUrl = getRelativeLocaleUrl(currentLang, '/works/');
+
+const pageTitle = getSiteTitle();
+
+// 照片封面只在首页启用：翻页被移除后，首页永远是「第 1 页」。
 // 内页也会有一层很淡的照片背景，但那是 MainPageLayout 里 PhotoCover 的默认状态。
-const usePhotoCover = page.currentPage === 1 && photoCoverEnabled();
+const usePhotoCover = photoCoverEnabled();
 // 社交分享图用这张照片；放在 src/ 下的图片构建后地址不可知，只在站内 / 绝对地址时生效
 const coverImage = siteConfig.theme.photoCover.image;
 const shareImage = usePhotoCover && (coverImage.startsWith('/') || /^https?:\/\//.test(coverImage))
@@ -80,10 +71,89 @@ const shareImage = usePhotoCover && (coverImage.startsWith('/') || /^https?:\/\/
 
 <MainPageLayout title={pageTitle} lang={currentLang} image={shareImage} photoCover={usePhotoCover}>
     <Cover title={t("cover.title.home")} subTitle={t("cover.subTitle.home")} photo={usePhotoCover} />
-    <PostPage page={page} />
-    <Navi page={page} />
+
+    <div class="mx-auto w-full max-w-[var(--page-width)]">
+        <!-- 置顶文章：站点介绍，仍然用文章卡片渲染 -->
+        {pinnedEntry && (
+            <PostCard
+                entry={pinnedEntry}
+                title={pinnedEntry.data.title}
+                description={pinnedEntry.data.description}
+                image={blogCoverUrl(pinnedEntry.data.image, pinnedEntry.id)}
+                pubDate={pinnedEntry.data.pubDate}
+                url={pinnedEntry.id}
+                fallback={pinnedEntry.isFallback}
+                priority={true}
+            />
+        )}
+
+        <!-- 作品集分区：按 portfolio.json 的 categories 顺序一节一节排 -->
+        {sections.map((section) => (
+            <section class="mb-14">
+                <h2 id={`sec-${section.name}`} class="text-2xl font-bold text-[var(--text-color)] border-b border-[var(--button-border-color)] pb-2 mb-6 scroll-mt-24">
+                    {section.name}
+                    <span class="ml-2 text-base font-normal text-[var(--text-color-70)]">{section.count}</span>
+                </h2>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    {section.works.map((work) => (
+                        <a
+                            href={getRelativeLocaleUrl(currentLang, `/blog/${work.slug}/`)}
+                            class="work-card group block rounded-xl overflow-hidden border border-[var(--button-border-color)] shadow hover:border-[var(--link-color)] transition-colors duration-300"
+                        >
+                            <div class="relative h-40 bg-[var(--button-hover-color)] overflow-hidden">
+                                {work.cover && (
+                                    <ImageModule
+                                        src={work.cover}
+                                        alt={work.title}
+                                        class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                    />
+                                )}
+                                {work.weight >= 5 && <span class="pick-badge">代表作</span>}
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-semibold text-[var(--text-color)] group-hover:text-[var(--link-color)] transition-colors leading-snug">
+                                    {work.title}
+                                </h3>
+                                {work.subtitle && (
+                                    <p class="mt-1 text-sm text-[var(--text-color-70)] leading-relaxed line-clamp-2">{work.subtitle}</p>
+                                )}
+                                <div class="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-[var(--text-color-70)]">
+                                    <span>{work.doneDate}</span>
+                                    <span>{work.tools.join(' / ')}</span>
+                                </div>
+                            </div>
+                        </a>
+                    ))}
+                </div>
+            </section>
+        ))}
+
+        <p class="text-center text-sm text-[var(--text-color-70)] mb-10">
+            共 {total} 件作品 · <a href={worksUrl} class="text-[var(--link-color)] hover:underline">看完整作品集 →</a>
+        </p>
+    </div>
+
     <!-- fixed 浮层：留在 swup 容器内，但在淡入淡出元素之外（见 MainPageLayout 的说明） -->
     <div slot="overlay">
         <FabMenu showBackBottom={true} />
     </div>
 </MainPageLayout>
+
+<style>
+    .pick-badge {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        /* ⚠️ 必须高于 1：LQIP 会给卡片图片加 position:relative + z-index:1，
+           不抬高层级的话这个角标会被图片整个盖住（实测命中测试里 IMG 在 SPAN 之上） */
+        z-index: 2;
+        font-size: 11px;
+        line-height: 1;
+        padding: 5px 9px;
+        border-radius: 999px;
+        background: var(--link-color);
+        color: #fff;
+        letter-spacing: 0.5px;
+    }
+</style>

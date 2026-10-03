@@ -2,7 +2,7 @@
 title: 茶艺香薰机设计
 pubDate: 2025-03-22
 description: 把「云雾茶山」装进玻璃罩的香薰机
-category: 三维建模
+category: 建模渲染
 image: "./cover.jpg"
 draft: false
 slugId: works/02-15

@@ -2,7 +2,7 @@
 title: 展板 · 智能骑行穿戴头盔《Vision Rider》
 pubDate: 2025-12-05
 description: 骑行安全方向的智能穿戴产品
-category: 产品渲染
+category: 展板
 image: "./cover.jpg"
 draft: false
 slugId: works/03-30
@@ -26,6 +26,11 @@ pinTop: 0
 - 使用场景：骑行过程中的安全与信息提示。
 - 形态与结构：以头盔为主体，结构按模块化处理。
 - 板上包含的内容：HUD 显示、模块化结构与安全提示三组卖点，加上副标题与批次信息；工程是一份 PSD 源文件，成品导出为 PNG。
+
+## 预览
+
+![展板 · 智能骑行穿戴头盔《Vision Rider》](./01.jpg)
+![展板 · 智能骑行穿戴头盔《Vision Rider》](./02.jpg)
 
 ## 素材
 

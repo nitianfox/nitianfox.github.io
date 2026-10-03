@@ -2,7 +2,7 @@
 title: 电动折叠桌 / 智能升降桌面办公椅
 pubDate: 2024-12-11
 description: 结构主导的家具产品设计
-category: 三维建模
+category: 建模渲染
 image: "./cover.jpg"
 draft: false
 slugId: works/02-20

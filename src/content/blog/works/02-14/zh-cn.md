@@ -2,7 +2,7 @@
 title: 绿色碎纸机设计
 pubDate: 2025-06-03
 description: 桌面碎纸机外观与结构
-category: 三维建模
+category: 建模渲染
 image: "./cover.jpg"
 draft: false
 slugId: works/02-14

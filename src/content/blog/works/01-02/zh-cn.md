@@ -2,7 +2,7 @@
 title: 国潮海报《非常可乐》
 pubDate: 2023-12-21
 description: 娃哈哈非常可乐 · 国潮限定包装与海报
-category: 平面设计
+category: 平面
 image: "./cover.jpg"
 draft: false
 slugId: works/01-02

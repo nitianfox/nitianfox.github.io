@@ -2,7 +2,7 @@
 title: 适老化浴缸设计《C-CUP》
 pubDate: 2024-12-26
 description: 基于产品系统设计理论的老年人浴缸
-category: 三维建模
+category: 建模渲染
 image: "./cover.jpg"
 draft: false
 slugId: works/02-12

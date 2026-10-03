@@ -1,8 +1,8 @@
 ---
-title: 毕业设计 · 白酒包装设计
+title: 基于宝鸡地域文化的白酒包装设计
 pubDate: 2026-02-10
 description: 宝鸡地域文化 × 宝鸡文理学院校园文化的白酒包装设计
-category: 平面设计
+category: 平面
 image: "./cover.jpg"
 draft: false
 slugId: works/01-09

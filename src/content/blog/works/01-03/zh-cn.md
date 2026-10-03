@@ -2,7 +2,7 @@
 title: 品牌形象设计 · 毕加索广告策划有限公司
 pubDate: 2024-11-26
 description: VI 基础系统：标志 / 标准色 / 辅助图形 / 标准字体
-category: 平面设计
+category: 平面
 image: "./cover.jpg"
 draft: false
 slugId: works/01-03

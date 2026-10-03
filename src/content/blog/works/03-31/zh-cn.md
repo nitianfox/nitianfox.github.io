@@ -2,7 +2,7 @@
 title: 展板 · 公路隧道消防巡检机器人
 pubDate: 2025-12-05
 description: 隧道环境下的消防巡检机器人
-category: 产品渲染
+category: 展板
 image: "./cover.jpg"
 draft: false
 slugId: works/03-31

@@ -2,7 +2,7 @@
 title: 项目展板合集
 pubDate: 2025-10-17
 description: 各产品设计项目的最终展板（A3 竖版）
-category: 产品渲染
+category: 展板
 image: "./cover.jpg"
 draft: false
 slugId: works/03-27

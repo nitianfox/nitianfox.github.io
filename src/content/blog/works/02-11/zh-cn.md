@@ -2,7 +2,7 @@
 title: 电动工具设计 · 角磨机 / 电钻
 pubDate: 2024-06-29
 description: 手绘草图 → 结构建模 → 展板
-category: 三维建模
+category: 建模渲染
 image: "./cover.jpg"
 draft: false
 slugId: works/02-11

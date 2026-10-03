@@ -2,7 +2,7 @@
 title: 相机镜头爆炸图
 pubDate: 2025-01-06
 description: Canon 5D Mark IV 与镜头的结构爆炸表达
-category: 三维建模
+category: 建模渲染
 image: "./cover.jpg"
 draft: false
 slugId: works/02-19
@@ -35,6 +35,8 @@ pinTop: 0
 ![相机镜头爆炸图](./01.jpg)
 ![相机镜头爆炸图](./02.jpg)
 ![相机镜头爆炸图](./03.jpg)
+![相机镜头爆炸图](./04.jpg)
+![相机镜头爆炸图](./05.jpg)
 
 ## 素材
 

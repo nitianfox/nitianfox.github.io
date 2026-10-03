@@ -21,15 +21,29 @@ const t = i18nit(currentLang);
 const pageTitle = t("header.works") + " - " + siteConfig.title;
 const pageDescription = `${t("cover.title.works")} - ${t("cover.subTitle.works")}`;
 const total = portfolio.total;
+const defaultSort = portfolio.defaultSort ?? 'weight';
+
+// 作品集页默认按权重排（由 script/portfolio/sections.json 的 defaultSort 决定），
+// 服务端就按这个顺序渲染，避免首屏先按时间排再被脚本重排造成的跳动。
+const categories = portfolio.categories.map((cat) => ({
+    ...cat,
+    works: [...cat.works].sort((a, b) => {
+        if (defaultSort === 'weight') {
+            const dw = (b.weight ?? 0) - (a.weight ?? 0);
+            if (dw) return dw;
+        }
+        return String(b.doneDate ?? '').localeCompare(String(a.doneDate ?? ''));
+    }),
+}));
 ---
 
 <MainPageLayout title={pageTitle} lang={currentLang} description={pageDescription}>
-    <div class="mx-auto w-full max-w-[var(--page-width)]">
+    <div class="mx-auto w-full max-w-[var(--page-width)]" data-default-sort={defaultSort}>
         <Cover title={t("cover.title.works")} subTitle={t("cover.subTitle.works")} />
 
         <!-- 分类锚点 + 排序切换 -->
         <div class="flex flex-wrap items-center justify-center gap-2 mb-10 -mt-4">
-            {portfolio.categories.map((cat) => (
+            {categories.map((cat) => (
                 <a
                     href={`#cat-${cat.name}`}
                     class="inline-flex items-center gap-2 px-3 py-1.5 text-sm rounded-md border border-[var(--button-border-color)] text-[var(--text-color)] transition duration-200 hover:border-[var(--link-color)] hover:bg-[var(--button-hover-color)]"
@@ -69,7 +83,7 @@ const total = portfolio.total;
             </div>
         </section>
 
-        {portfolio.categories.map((cat) => (
+        {categories.map((cat) => (
             <section class="mb-14">
                 <h2 id={`cat-${cat.name}`} class="text-2xl font-bold text-[var(--text-color)] border-b border-[var(--button-border-color)] pb-2 mb-6 scroll-mt-24">
                     {cat.name}
@@ -169,7 +183,10 @@ const total = portfolio.total;
         var KEY = 'ntfox-works-sort';
 
         function readMode() {
-            try { return localStorage.getItem(KEY) || 'time'; } catch (e) { return 'time'; }
+            try {
+                var el = document.querySelector('[data-default-sort]');
+                return localStorage.getItem(KEY) || (el && el.dataset.defaultSort) || 'time';
+            } catch (e) { return 'time'; }
         }
 
         function applySort(mode) {

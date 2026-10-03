@@ -2,7 +2,7 @@
 title: 喷涂线动画
 pubDate: 2026-09-16
 description: 喷粉 / 喷淋 / 烘干 / 总装线分段动画
-category: 场景动画
+category: 动画
 image: "./cover.jpg"
 draft: false
 slugId: works/04-36

@@ -2,7 +2,7 @@
 title: 连杆吊灯《CHANDELIER》
 pubDate: 2025-01-06
 description: 机械感多臂吊灯造型设计
-category: 三维建模
+category: 建模渲染
 image: "./cover.jpg"
 draft: false
 slugId: works/02-17

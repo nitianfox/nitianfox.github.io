@@ -2,7 +2,7 @@
 title: 智能浴霸设计
 pubDate: 2025-05-13
 description: 吊顶式智能浴室暖风机
-category: 三维建模
+category: 建模渲染
 image: "./cover.jpg"
 draft: false
 slugId: works/02-13

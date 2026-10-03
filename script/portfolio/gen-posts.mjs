@@ -31,6 +31,8 @@ const DATA_OUT = path.join(PROJECT, 'src', 'data', 'portfolio.json');
 const WEIGHTS = path.join(HERE, 'weights.json');
 const MERGES = path.join(HERE, 'merges.json');
 const MANUAL = path.join(HERE, 'manual-images.json');
+const SECTIONS = path.join(HERE, 'sections.json');
+const EXTRA_IMAGES = path.join(HERE, 'extra-images.json');
 const SELECTION = 'D:\\agent\\image-selection.json';
 const DRY = process.argv.includes('--dry');
 const FORCE = process.argv.includes('--force');
@@ -55,6 +57,19 @@ let extraEntries = [];
 try {
   extraEntries = JSON.parse(fs.readFileSync(path.join(HERE, 'extra-entries.json'), 'utf8')).entries ?? [];
 } catch { extraEntries = []; }
+
+// 分区（建模渲染 / 动画 / 展板 / 平面）与「某些图其实属于别的项目」的固定配图
+const sections = (() => {
+  try { return JSON.parse(fs.readFileSync(SECTIONS, 'utf8')); } catch { return { order: [], map: {}, entryOverrides: {} }; }
+})();
+const extraImages = (() => {
+  try { return JSON.parse(fs.readFileSync(EXTRA_IMAGES, 'utf8')).items ?? {}; } catch { return {}; }
+})();
+const sectionOf = (id, category) => sections.entryOverrides?.[id] ?? sections.map?.[category] ?? category;
+const sectionRank = (name) => {
+  const i = (sections.order ?? []).indexOf(name);
+  return i === -1 ? 99 : i;
+};
 
 let selection = null;
 try { selection = JSON.parse(fs.readFileSync(SELECTION, 'utf8')); } catch { selection = null; }
@@ -247,9 +262,9 @@ for (const w of works) {
   const g = groupOf.get(w.id);
   if (g) {
     const parts = (g.parts ?? []).map((p) => byId.get(p.id)).filter(Boolean);
-    entries.push({ main: w, weight: g.weight ?? weight, title: renames[w.id] ?? g.title ?? w.title, category: g.category ?? w.category, group: g, parts });
+    entries.push({ main: w, weight: g.weight ?? weight, title: renames[w.id] ?? g.title ?? w.title, category: sectionOf(w.id, g.category ?? w.category), group: g, parts });
   } else {
-    entries.push({ main: w, weight, title: renames[w.id] ?? w.title, category: w.category, group: null, parts: [w] });
+    entries.push({ main: w, weight, title: renames[w.id] ?? w.title, category: sectionOf(w.id, w.category), group: null, parts: [w] });
   }
 }
 
@@ -260,6 +275,13 @@ fs.mkdirSync(path.dirname(DATA_OUT), { recursive: true });
 // 追加「额外条目」（按时间拆分出来的那种）：自己带图片清单，不走 works.json
 for (const e of extraEntries) {
   const imgs = (e.images ?? []).map((t) => ({ thumb: t, name: path.basename(t).replace(/\.jpg$/i, ''), rel: t }));
+  // 体积：配置里没写就从图片文件本身算
+  let bytes = Math.round((e.sizeMB ?? 0) * 1048576);
+  if (!bytes) {
+    for (const t of e.images ?? []) {
+      try { bytes += fs.statSync(path.join(SRC, t)).size; } catch { /* ignore */ }
+    }
+  }
   const main = {
     id: e.id,
     title: e.title,
@@ -271,13 +293,14 @@ for (const e of extraEntries) {
     images: imgs,
     videos: [],
     files: [],
-    counts: { files: e.files ?? imgs.length, bytes: Math.round((e.sizeMB ?? 0) * 1048576), images: imgs.length, videos: 0 },
+    counts: { files: e.files ?? imgs.length, bytes, images: imgs.length, videos: 0 },
     __dateOverride: e.date,
     __spanOverride: e.span,
     __explicitImages: e.images ?? [],
+    __manualFiles: e.manualFiles ?? [],
     __parent: e.parent ?? '',
   };
-  entries.push({ main, weight: e.weight ?? 3, title: e.title, category: e.category ?? '产品渲染', group: null, parts: [main] });
+  entries.push({ main, weight: e.weight ?? 3, title: e.title, category: sectionOf(e.id, e.category ?? '产品渲染'), group: null, parts: [main] });
 }
 
 const byCategory = new Map();
@@ -310,27 +333,51 @@ for (const e of entries) {
   // 候选图先剔掉「也出现在别的条目里」的串图（精选合集与手工配图不受限）
   const cands = candidatesOf(parts).filter((c) => !isForeign(c.thumb, main.id));
   const picks = []; // { src, manual }
+  const fixedThumbs = extraImages[main.id]?.thumbs ?? []; // 「其实属于这个项目」的图，固定要用
+  const seenSrc = new Set();
+  const addPick = (abs, isManual) => {
+    if (!abs || seenSrc.has(abs)) return;
+    seenSrc.add(abs);
+    picks.push({ src: abs, manual: !!isManual });
+  };
+  const resolveManual = (list) => list
+    .map((rel) => manual.dirs.map((d) => path.join(d, rel)).find((p) => fs.existsSync(p)))
+    .filter(Boolean);
+
+  // 1) 额外条目自带的图片清单（thumbs 或暂定文件）
+  let hasFixedList = false;
   if (main.__explicitImages?.length) {
-    // 额外条目：图片清单写死在配置里，全部用上、不按权重裁剪
-    for (const t of main.__explicitImages) picks.push({ src: path.join(SRC, t), manual: false });
+    hasFixedList = true;
+    for (const t of main.__explicitImages) addPick(path.join(SRC, t), false);
+  } else if (main.__manualFiles?.length) {
+    hasFixedList = true;
+    for (const abs of resolveManual(main.__manualFiles)) addPick(abs, true);
   } else if (man?.files?.length) {
-    for (const rel of man.files) {
-      const abs = manual.dirs.map((d) => path.join(d, rel)).find((p) => fs.existsSync(p));
-      if (abs) picks.push({ src: abs, manual: true });
-    }
+    hasFixedList = true;
+    for (const abs of resolveManual(man.files)) addPick(abs, true);
   }
-  // 手工图不按权重裁剪：你在「暂定」里挑了几张就用几张，权重只管正文结构
-  if (!skipImages && !picks.length) {
+  // 2) 从别的作品归回来的固定配图（放在前面，优先保留）
+  const fixedCount = fixedThumbs.filter((t) => fs.existsSync(path.join(SRC, t))).length;
+  for (const t of fixedThumbs) addPick(path.join(SRC, t), false);
+
+  // 3) 没有固定清单时，按挑选台选择或自动规则补足到权重预算
+  if (!skipImages && !hasFixedList) {
+    const inPicks = new Set(picks.map((p) => p.src));
     let chosen = [];
     if (sel?.selected?.length) {
       const valid = new Set(cands.map((c) => c.thumb));
-      chosen = sel.selected.filter((t) => valid.has(t));
-      if (sel.cover && valid.has(sel.cover)) chosen = [sel.cover, ...chosen.filter((t) => t !== sel.cover)];
+      chosen = sel.selected.filter((t) => valid.has(t) && !inPicks.has(path.join(SRC, t)));
+      if (sel.cover && valid.has(sel.cover)) {
+        const absCover = path.join(SRC, sel.cover);
+        chosen = [sel.cover, ...chosen.filter((t) => t !== sel.cover)];
+        if (inPicks.has(absCover)) chosen = chosen.filter((t) => t !== sel.cover);
+      }
     }
     if (!chosen.length) chosen = pickByRule(cands, plan.images);
-    if (chosen.length > plan.images) chosen = chosen.slice(0, plan.images);
-    for (const t of chosen) picks.push({ src: path.join(SRC, t), manual: false });
+    for (const t of chosen) addPick(path.join(SRC, t), false);
   }
+  // 4) 收敛到权重预算（手工/额外清单不截；归回来的固定图不截，其余补足到预算）
+  if (!hasFixedList && picks.length > Math.max(plan.images, fixedCount)) picks.length = Math.max(plan.images, fixedCount);
 
   const copied = [];
   if (skipImages) {
@@ -474,15 +521,15 @@ ${body.join('\n')}
     videos: cVideos,
     client: group?.client || '',
     parts: group ? (group.parts ?? []).map((p) => p.name) : [],
-    imgSource: man?.files?.length ? '暂定手工' : (sel?.selected?.length ? '挑选台' : '自动'),
+    imgSource: main.__explicitImages?.length ? '条目自带' : (main.__manualFiles?.length ? '条目自带' : (man?.files?.length ? '暂定手工' : (sel?.selected?.length ? '挑选台' : '自动'))),
   };
   if (!byCategory.has(category)) byCategory.set(category, []);
   byCategory.get(category).push(item);
   report.push({ id: main.id, weight, doneDate, copied: copied.length, cat: category, title, skipped: skipPost, parts: parts.length, imgSource: item.imgSource });
 }
 
-const order = ['平面设计', '三维建模', '产品渲染', '场景动画'];
-const categories = [...byCategory.keys()].sort((a, b) => order.indexOf(a) - order.indexOf(b))
+const categories = [...byCategory.keys()]
+  .sort((a, b) => sectionRank(a) - sectionRank(b) || a.localeCompare(b))
   .map((k) => ({ name: k, count: byCategory.get(k).length, works: byCategory.get(k).sort((a, b) => b.doneDate.localeCompare(a.doneDate)) }));
 
 if (!DRY) {
@@ -490,6 +537,8 @@ if (!DRY) {
     generated: new Date().toISOString().slice(0, 19).replace('T', ' '),
     source: SRC,
     total: report.length,
+    sectionOrder: sections.order ?? [],
+    defaultSort: sections.defaultSort ?? 'weight',
     relatedClients: merges.relatedClients ?? [],
     categories,
   }, null, 2), 'utf8');

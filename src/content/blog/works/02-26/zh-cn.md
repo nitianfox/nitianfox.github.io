@@ -2,7 +2,7 @@
 title: 其它建模小项目
 pubDate: 2025-05-06
 description: 调料盒 / 园艺灯 / 哑铃 / 树木 / 游戏道具
-category: 三维建模
+category: 建模渲染
 image: "./cover.jpg"
 draft: false
 slugId: works/02-26

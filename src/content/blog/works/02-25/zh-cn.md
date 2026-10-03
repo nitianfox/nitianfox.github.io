@@ -2,7 +2,7 @@
 title: Rhino 建模练习
 pubDate: 2024-01-17
 description: 吹风机 / 米家恒温电水壶等
-category: 三维建模
+category: 建模渲染
 image: ""
 draft: false
 slugId: works/02-25

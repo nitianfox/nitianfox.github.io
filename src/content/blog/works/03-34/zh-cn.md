@@ -2,7 +2,7 @@
 title: 其它渲染小稿
 pubDate: 2024-07-17
 description: 设备模型 / 腕表等零散渲染
-category: 产品渲染
+category: 建模渲染
 image: "./cover.jpg"
 draft: false
 slugId: works/03-34

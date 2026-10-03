@@ -2,7 +2,7 @@
 title: 节气海报《大寒》
 pubDate: 2024-01-08
 description: 二十四节气系列 · 水墨与雪山意象
-category: 平面设计
+category: 平面
 image: "./cover.jpg"
 draft: false
 slugId: works/01-01

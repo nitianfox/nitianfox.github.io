@@ -2,7 +2,7 @@
 title: 开关面板设计
 pubDate: 2024-03-22
 description: 墙面开关 / 插座面板系列
-category: 三维建模
+category: 建模渲染
 image: "./cover.jpg"
 draft: false
 slugId: works/02-18

@@ -2,7 +2,7 @@
 title: 场景渲染静帧
 pubDate: 2025-10-17
 description: 雪山 / 水晶 / 蓝面角色等场景练习
-category: 场景动画
+category: 动画
 image: "./cover.jpg"
 draft: false
 slugId: works/04-39

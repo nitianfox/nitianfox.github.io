@@ -2,7 +2,7 @@
 title: 机械手套与外壳工程
 pubDate: 2026-09-18
 description: 外骨骼手套结构 + DNA 外壳与 SolidWorks 外壳工程
-category: 三维建模
+category: 建模渲染
 image: "./cover.jpg"
 draft: false
 slugId: works/02-22
@@ -34,6 +34,7 @@ pinTop: 0
 ## 预览
 
 ![机械手套与外壳工程](./01.jpg)
+![机械手套与外壳工程](./02.jpg)
 
 ## 素材
 

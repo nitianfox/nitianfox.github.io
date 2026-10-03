@@ -2,7 +2,7 @@
 title: 色彩设计与版式练习
 pubDate: 2025-10-16
 description: 色彩构成 / 品牌设计小稿
-category: 平面设计
+category: 平面
 image: "./cover.jpg"
 draft: false
 slugId: works/01-07
