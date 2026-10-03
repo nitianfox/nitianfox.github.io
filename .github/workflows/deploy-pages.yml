@@ -30,27 +30,32 @@ jobs:
       - name: 安装依赖
         run: pnpm install --frozen-lockfile
 
-      # 站点地址与 base 由仓库名自动判断：
+      # 站点地址与 base 由仓库名自动判断，并且在同一步骤里算好再构建（避免跨步骤传参出问题）：
       #   仓库名 = <用户名>.github.io  ->  https://<用户名>.github.io            base=/
       #   其它仓库名（项目站点）        ->  https://<用户名>.github.io/<仓库名>    base=/<仓库名>
-      - name: 计算站点地址
-        id: site
+      - name: 构建（astro build + 子路径适配 + Pagefind 索引）
         run: |
           repo="${GITHUB_REPOSITORY#*/}"
           owner="${GITHUB_REPOSITORY_OWNER}"
           if [ "$repo" = "${owner}.github.io" ]; then
-            echo "url=https://${owner}.github.io" >> "$GITHUB_OUTPUT"
-            echo "base=/" >> "$GITHUB_OUTPUT"
+            export SITE_URL="https://${owner}.github.io"
+            export BASE_PATH="/"
           else
-            echo "url=https://${owner}.github.io/${repo}" >> "$GITHUB_OUTPUT"
-            echo "base=/${repo}" >> "$GITHUB_OUTPUT"
+            export SITE_URL="https://${owner}.github.io/${repo}"
+            export BASE_PATH="/${repo}"
           fi
+          echo "::notice::SITE_URL=$SITE_URL  BASE_PATH=$BASE_PATH"
+          echo "SITE_URL=$SITE_URL" >> "$GITHUB_ENV"
+          echo "BASE_PATH=$BASE_PATH" >> "$GITHUB_ENV"
+          pnpm build
 
-      - name: 构建（astro build + 子路径适配 + Pagefind 索引）
-        run: pnpm build
-        env:
-          SITE_URL: ${{ steps.site.outputs.url }}
-          BASE_PATH: ${{ steps.site.outputs.base }}
+      - name: 自检（产物里的绝对地址是否是线上域名）
+        run: |
+          if grep -q "localhost:4321" dist/sitemap.xml; then
+            echo "::error::sitemap 里仍是 localhost，SITE_URL 没生效"
+            exit 1
+          fi
+          echo "sitemap 首条：$(grep -o '<loc>[^<]*' dist/sitemap.xml | head -1)"
 
       - uses: actions/configure-pages@v5
         with:
