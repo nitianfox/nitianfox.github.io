@@ -17,7 +17,7 @@ pinTop: 0
 
 ## 说明
 
-面向量产的产品外壳工程文件：SolidWorks 的零件（.SLDPRT）与总装（.SLDASM）、钣金总装 .STEP、空心铰链结构、外壳改型（.stp/.blend/.obj/.plasticity）、9-10BACK 版本的 Rhino 三维模型，以及整套「总-视觉版本3」图纸。体积较大的装配体原件未复制，已在待补清单中列出原路径。
+面向量产的产品外壳工程文件：SolidWorks 的零件（.SLDPRT）与总装（.SLDASM）、钣金总装 .STEP、空心铰链结构、外壳改型（.stp/.blend/.obj/.plasticity）、9-10BACK 版本的 Rhino 三维模型，以及整套「总-视觉版本3」图纸。
 
 ## 预览
 

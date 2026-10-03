@@ -3,6 +3,8 @@ import MainPageLayout from '@layouts/MainPageLayout.astro'
 import Cover from '@components/Cover.astro'
 import FabMenu from '@components/control/FabMenu.astro'
 import ImageModule from '@components/misc/ImageModule.astro'
+import WorkGrid from '@components/misc/WorkGrid.astro'
+import BoardGrid from '@components/misc/BoardGrid.astro'
 
 import { siteConfig } from '@/config'
 import i18nit from '@i18n/translation'
@@ -22,6 +24,11 @@ const pageTitle = t("header.works") + " - " + siteConfig.title;
 const pageDescription = `${t("cover.title.works")} - ${t("cover.subTitle.works")}`;
 const total = portfolio.total;
 const defaultSort = portfolio.defaultSort ?? 'weight';
+
+// 精选每类取前几件（用户 2026-10-03：展板 4 / 动画 2 / 渲染 4 / 平面 4）
+const FEATURED: [string, number][] = [['展板', 4], ['动画', 2], ['建模渲染', 4], ['平面', 4]];
+// 下方「全部作品」的分区顺序
+const ALL_ORDER = ['展板', '动画', '平面', '建模渲染'];
 
 // 作品集页默认按权重排（由 script/portfolio/sections.json 的 defaultSort 决定），
 // 服务端就按这个顺序渲染，避免首屏先按时间排再被脚本重排造成的跳动。
@@ -57,70 +64,42 @@ const categories = portfolio.categories.map((cat) => ({
             <button type="button" data-sort-btn="weight" class="sort-btn">按权重</button>
         </div>
 
-        {categories.map((cat) => (
-            <section class="mb-14">
-                <h2 id={`cat-${cat.name}`} class="text-2xl font-bold text-[var(--text-color)] border-b border-[var(--button-border-color)] pb-2 mb-6 scroll-mt-24">
-                    {cat.name}
-                    <span class="ml-2 text-base font-normal text-[var(--text-color-70)]">{cat.count}</span>
-                </h2>
+        <!-- ① 精选：每类按权重取前几件（展板 4 / 动画 2 / 渲染 4 / 平面 4） -->
+        {FEATURED.map(([name, n]) => {
+            const cat = categories.find((c) => c.name === name);
+            if (!cat) return null;
+            const list = cat.works.slice(0, n);
+            return (
+                <section class="mb-14">
+                    <h2 id={`cat-${cat.name}`} class="text-2xl font-bold text-[var(--text-color)] border-b border-[var(--button-border-color)] pb-2 mb-6 scroll-mt-24">
+                        {cat.name}
+                        <span class="ml-2 text-base font-normal text-[var(--text-color-70)]">精选 {list.length} / {cat.count}</span>
+                    </h2>
+                    <WorkGrid works={list} lang={currentLang} />
+                </section>
+            );
+        })}
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6" data-sort-grid>
-                    {cat.works.map((work) => (
-                        <a
-                            href={getRelativeLocaleUrl(currentLang, `/blog/${work.slug}/`)}
-                            data-w={work.weight}
-                            data-d={work.doneDate}
-                            class="work-card group block rounded-xl overflow-hidden border border-[var(--button-border-color)] shadow hover:border-[var(--link-color)] transition-colors duration-300"
-                        >
-                            <div class="relative h-40 bg-[var(--button-hover-color)] overflow-hidden">
-                                {work.cover && (
-                                    <ImageModule
-                                        src={work.cover}
-                                        alt={work.title}
-                                        class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                                    />
-                                )}
-                                {work.weight >= 5 && <span class="pick-badge">代表作</span>}
-                            </div>
-                            <div class="p-4">
-                                <h3 class="font-semibold text-[var(--text-color)] group-hover:text-[var(--link-color)] transition-colors leading-snug">
-                                    {work.title}
-                                </h3>
-                                {work.subtitle && (
-                                    <p class="mt-1 text-sm text-[var(--text-color-70)] leading-relaxed line-clamp-2">{work.subtitle}</p>
-                                )}
-                                <div class="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-[var(--text-color-70)]">
-                                    <span>{work.doneDate}</span>
-                                    <span>{work.tools.join(' / ')}</span>
-                                </div>
-                            </div>
-                        </a>
-                    ))}
-                </div>
+        <!-- ② 全部：展板（总览）/ 动画 / 平面 / 渲染 的完整列表 -->
+        <h2 class="text-2xl font-bold text-[var(--text-color)] border-b-2 border-[var(--link-color)] pb-2 mb-10 mt-20 scroll-mt-24" id="all">
+            全部作品
+            <span class="ml-2 text-base font-normal text-[var(--text-color-70)]">{total}</span>
+        </h2>
 
-                {/* 展板分区里附上「各项目的最终展板」总览（数据由 script/portfolio/gen-boards.mjs 生成） */}
-                {cat.name === '展板' && (
-                    <div class="mt-10">
-                        <h3 class="text-lg font-semibold text-[var(--text-color)] mb-2">各项目的最终展板</h3>
-                        <p class="text-sm text-[var(--text-color-70)] mb-5">上面是展板类条目，这里是所有项目的展板本身，点图进对应作品。</p>
-                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                            {boards.items.map((b) => (
-                                <a
-                                    href={getRelativeLocaleUrl(currentLang, `/blog/${b.workSlug}/`)}
-                                    class="group block rounded-lg overflow-hidden border border-[var(--button-border-color)] bg-white hover:border-[var(--link-color)] transition-colors duration-300"
-                                    title={b.name}
-                                >
-                                    <ImageModule src={b.file} alt={b.name} class="w-full aspect-[3/4] object-contain" />
-                                    <div class="px-2 py-1.5 text-xs text-[var(--text-color-70)] border-t border-[var(--button-border-color)] truncate group-hover:text-[var(--link-color)]">
-                                        {b.workTitle}
-                                    </div>
-                                </a>
-                            ))}
-                        </div>
-                    </div>
-                )}
-            </section>
-        ))}
+        {ALL_ORDER.map((name) => {
+            const cat = categories.find((c) => c.name === name);
+            if (!cat) return null;
+            return (
+                <section class="mb-14">
+                    <h3 id={`all-${cat.name}`} class="text-xl font-semibold text-[var(--text-color)] border-b border-[var(--button-border-color)] pb-2 mb-6 scroll-mt-24">
+                        所有{cat.name}
+                        <span class="ml-2 text-sm font-normal text-[var(--text-color-70)]">{cat.count}</span>
+                    </h3>
+                    {cat.name === '展板' && <BoardGrid lang={currentLang} />}
+                    <WorkGrid works={cat.works} lang={currentLang} sortable />
+                </section>
+            );
+        })}
 
         <p class="text-center text-sm text-[var(--text-color-70)] mb-10">
             共 {total} 件作品 · 点卡片看详情
