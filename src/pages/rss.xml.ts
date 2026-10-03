@@ -9,7 +9,7 @@ export async function GET(context: APIContext) {
     return rss({
         title: getSiteTitle(),
         description: profileConfig.description,
-        site: context.site ?? "https://momo.motues.top",
+        site: context.site ?? "http://localhost:4321",
         // 订阅源只包含默认语言的文章，显式声明语言便于阅读器正确处理
         customData: `<language>${i18nConfig.defaultLanguage}</language>`,
         items: blog.slice(0, 20).map((post) => ({

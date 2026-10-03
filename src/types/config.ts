@@ -18,6 +18,11 @@ export type SiteConfig = {
         platform: string;
         backendUrl: string;
     };
+    // 站点统计（umami）。不填 / enable: false 时不会向任何第三方域名发起请求
+    analytics?: {
+        enable: boolean;
+        script: string;
+    };
     theme: {
         AOS: boolean;
         LQIP: boolean;

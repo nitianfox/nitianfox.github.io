@@ -81,7 +81,9 @@ const schemas = [
 const jsonLd = JSON.stringify(schemas).replace(/</g, '\\u003c');
 
 // ---- 第三方域名预热（统计脚本 / 评论后端）----
-const umamiScript = 'https://umami.motues.top/script.js';
+// 统计脚本改由 src/config.ts 的 siteConfig.analytics 决定：不启用时这里为空字符串，
+// 下面既不会预热域名，也不会注入任何 <script>，全站对第三方零请求。
+const umamiScript = siteConfig.analytics?.enable ? (siteConfig.analytics.script ?? '') : '';
 function originOf(value?: string) {
   if (!value) return '';
   try {
@@ -208,14 +210,15 @@ const photoCoverOn = photoCoverEnabled();
     {markdownFont && <noscript><link rel="stylesheet" href={lxgwBrightCss}></noscript>}
 
     <!-- 第三方域名连接预热：统计域名随时可能用到，评论后端只在文章页预热 -->
-    <link rel="dns-prefetch" href={originOf(umamiScript)}>
-    <link rel="preconnect" href={originOf(umamiScript)} crossorigin>
+    {umamiScript && <link rel="dns-prefetch" href={originOf(umamiScript)}>}
+    {umamiScript && <link rel="preconnect" href={originOf(umamiScript)} crossorigin>}
     {commentOrigin && <link rel="dns-prefetch" href={commentOrigin}>}
     {commentOrigin && <link rel="preconnect" href={commentOrigin} crossorigin>}
 
     <!-- data-swup-ignore-script：umami 的采集脚本只加载一次；
-         换页的 PV 由下面的内联脚本在 astro:page-load 时手动上报 -->
-    <script defer src={umamiScript} data-hash is:inline data-swup-ignore-script></script>
+         换页的 PV 由下面的内联脚本在 astro:page-load 时手动上报。
+         没配 siteConfig.analytics 时整段不输出（下面的 window.umami?.track?.() 会自然空转） -->
+    {umamiScript && <script defer src={umamiScript} data-hash is:inline data-swup-ignore-script></script>}
     <title>{pageTitle}</title>
     <script type="application/ld+json" set:html={jsonLd}></script>
     <script is:inline data-swup-ignore-script>
@@ -332,12 +335,14 @@ const photoCoverOn = photoCoverEnabled();
             }));
         });
 
-        // 4. 统计：swup 不会整页刷新，umami 的自动 PV 统计不会触发，这里补一次。
+        // 4. 统计：swup 不会整页刷新，统计脚本的自动 PV 统计不会触发，这里补一次。
         //    astro:page-load 只在真实访问时派发（首屏不派发），所以首屏不会重复计数。
+        //    没在 src/config.ts 里启用 analytics 时页面上没有统计脚本，window.umami 是 undefined，
+        //    这一行靠可选链自然空转，不报错。
         document.addEventListener('astro:page-load', () => {
             const url = window.location.pathname + window.location.search;
-            if (window.__momoUmamiUrl === url) return;
-            window.__momoUmamiUrl = url;
+            if (window.__ntfoxAnalyticsUrl === url) return;
+            window.__ntfoxAnalyticsUrl = url;
             window.umami?.track?.();
         });
     </script>

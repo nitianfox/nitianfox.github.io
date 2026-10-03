@@ -2,6 +2,11 @@ import { h } from 'hastscript';
 import type { Element, ElementContent, Properties } from 'hast';
 
 /** 网易云音乐卡片（::music{id="songId"}），数据由卡片内的脚本异步获取 */
+
+// 歌曲信息接口。模板默认指向主题作者的公共服务 open.motues.top；
+// 这个请求发生在**访客浏览器**里，介意的话换成你自己的网易云 API 代理，或干脆别用 ::music 卡片。
+const MUSIC_API = 'https://open.motues.top/music';
+
 export function MusicCardComponent(
   properties: Properties,
   children: ElementContent[],
@@ -34,7 +39,7 @@ export function MusicCardComponent(
                 const card = document.getElementById('${cardUuid}-card');
                 if (!card || card.dataset.loaded === "true") return;
 
-                fetch('https://open.motues.top/music?server=netease&type=details&id=${songId}', { referrerPolicy: "no-referrer" })
+                fetch('${MUSIC_API}?server=netease&type=details&id=${songId}', { referrerPolicy: "no-referrer" })
                     .then(response => response.json())
                     .then(data => {
                         if (data && data.id) {
@@ -49,7 +54,7 @@ export function MusicCardComponent(
 
                             const coverEl = document.getElementById('${cardUuid}-cover');
                             if (coverEl) {
-                                fetch('https://open.motues.top/music?server=netease&type=cover&id=${songId}', { referrerPolicy: "no-referrer" })
+                                fetch('${MUSIC_API}?server=netease&type=cover&id=${songId}', { referrerPolicy: "no-referrer" })
                                     .then(res => res.json())
                                     .then(coverData => {
                                         // 封面是第二跳请求，回来时卡片更可能已经被换掉了
