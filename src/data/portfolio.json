@@ -1,7 +1,7 @@
 {
-  "generated": "2026-10-03 10:20:33",
+  "generated": "2026-10-03 10:22:34",
   "source": "D:\\工业设计作品集",
-  "total": 41,
+  "total": 40,
   "sectionOrder": [
     "建模渲染",
     "动画",
@@ -22,7 +22,7 @@
   "categories": [
     {
       "name": "建模渲染",
-      "count": 27,
+      "count": 26,
       "works": [
         {
           "id": "02-22",
@@ -227,7 +227,7 @@
           "id": "daily-04",
           "slug": "works/daily-04",
           "title": "练习 · 球形桨叶飞行器",
-          "subtitle": "球形飞行器 / 水下无人机",
+          "subtitle": "球形飞行器 / 水下无人机（前视 + 俯视）",
           "year": "2025",
           "doneDate": "2025-05-29",
           "span": "2025-05-29",
@@ -241,35 +241,9 @@
           ],
           "cover": "/works/daily-04.jpg",
           "weight": 1,
-          "files": 1,
-          "sizeMB": 0.2,
-          "images": 1,
-          "videos": 0,
-          "client": "",
-          "parts": [],
-          "imgSource": "条目自带"
-        },
-        {
-          "id": "daily-05",
-          "slug": "works/daily-05",
-          "title": "练习 · 球形飞行器俯视",
-          "subtitle": "同款球形飞行器俯视图",
-          "year": "2025",
-          "doneDate": "2025-05-29",
-          "span": "2025-05-29",
-          "tools": [
-            "Blender"
-          ],
-          "tags": [
-            "渲染",
-            "飞行器",
-            "练习"
-          ],
-          "cover": "/works/daily-05.jpg",
-          "weight": 1,
-          "files": 1,
-          "sizeMB": 0.5,
-          "images": 1,
+          "files": 2,
+          "sizeMB": 0.8,
+          "images": 2,
           "videos": 0,
           "client": "",
           "parts": [],
