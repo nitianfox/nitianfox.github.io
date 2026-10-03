@@ -1,7 +1,17 @@
 {
-  "generated": "2026-10-03 08:14:36",
+  "generated": "2026-10-03 08:38:39",
   "source": "D:\\工业设计作品集",
-  "total": 35,
+  "total": 29,
+  "relatedClients": [
+    {
+      "client": "康帕斯",
+      "note": "同一客户的不同产线：电泳线（04-35 合并条目）与喷涂线（04-36）各自独立成篇",
+      "ids": [
+        "04-35",
+        "04-36"
+      ]
+    }
+  ],
   "categories": [
     {
       "name": "平面设计",
@@ -33,7 +43,10 @@
           "files": 54,
           "sizeMB": 385.3,
           "images": 7,
-          "videos": 0
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "selectedBy": "auto"
         },
         {
           "id": "01-07",
@@ -56,7 +69,10 @@
           "files": 4,
           "sizeMB": 12.1,
           "images": 4,
-          "videos": 0
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "selectedBy": "auto"
         },
         {
           "id": "01-08",
@@ -65,25 +81,35 @@
           "subtitle": "《青铜密码》APP + 5 个非遗主题 APP 案例 + 校园健身助手",
           "year": "2025-06",
           "doneDate": "2025-06-17",
-          "span": "2025-04-28 ～ 2025-06-17",
+          "span": "2020-05-24 ～ 2025-06-17",
           "tools": [
             "Axure",
             "Photoshop",
-            "Figma"
+            "Figma",
+            "Premiere Pro"
           ],
           "tags": [
             "UI",
             "交互",
             "APP",
             "非遗",
-            "平面"
+            "平面",
+            "视频",
+            "素材",
+            "纪录"
           ],
           "cover": "/works/01-08.jpg",
           "weight": 1,
-          "files": 59,
-          "sizeMB": 270.5,
-          "images": 47,
-          "videos": 3
+          "files": 137,
+          "sizeMB": 1317.9,
+          "images": 96,
+          "videos": 19,
+          "client": "",
+          "parts": [
+            "界面与交互设计",
+            "APP 交互演示录屏"
+          ],
+          "selectedBy": "auto"
         },
         {
           "id": "01-03",
@@ -108,7 +134,10 @@
           "files": 22,
           "sizeMB": 14.4,
           "images": 20,
-          "videos": 0
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "selectedBy": "auto"
         },
         {
           "id": "01-01",
@@ -132,7 +161,10 @@
           "files": 5,
           "sizeMB": 16.7,
           "images": 4,
-          "videos": 0
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "selectedBy": "auto"
         },
         {
           "id": "01-02",
@@ -156,91 +188,60 @@
           "files": 18,
           "sizeMB": 8.7,
           "images": 16,
-          "videos": 0
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "selectedBy": "auto"
         }
       ]
     },
     {
       "name": "三维建模",
-      "count": 16,
+      "count": 14,
       "works": [
         {
           "id": "02-22",
           "slug": "works/02-22",
-          "title": "机械手套与桌面雪花球",
+          "title": "机械手套与外壳工程（含桌面雪花球）",
           "subtitle": "外骨骼手套结构 + 桌面景观雪花球",
           "year": "2026-08",
           "doneDate": "2026-09-18",
-          "span": "2026-09-16 ～ 2026-09-18",
+          "span": "2021-03-25 ～ 2026-09-18",
           "tools": [
             "Blender",
             "SolidWorks",
-            "Plasticity"
+            "Plasticity",
+            "Photoshop",
+            "Rhino"
           ],
           "tags": [
             "机械",
             "手套",
             "雪花球",
-            "建模"
+            "建模",
+            "DNA",
+            "外壳",
+            "视觉",
+            "工程",
+            "钣金",
+            "场景",
+            "产品",
+            "渲染"
           ],
           "cover": "/works/02-22.jpg",
           "weight": 3,
-          "files": 27,
-          "sizeMB": 137.7,
-          "images": 25,
-          "videos": 0
-        },
-        {
-          "id": "02-24",
-          "slug": "works/02-24",
-          "title": "产品外壳工程 · SolidWorks / Plasticity",
-          "subtitle": "钣金总装 · 外壳改型 · 铰链结构",
-          "year": "2026-08",
-          "doneDate": "2026-09-16",
-          "span": "2023-10-08 ～ 2026-09-16",
-          "tools": [
-            "SolidWorks",
-            "Plasticity",
-            "Rhino",
-            "Blender"
+          "files": 254,
+          "sizeMB": 556.4,
+          "images": 103,
+          "videos": 0,
+          "client": "",
+          "parts": [
+            "机械手套与桌面雪花球建模",
+            "DNA 外壳设计",
+            "产品外壳工程（SolidWorks / Plasticity）",
+            "桌面雪花球场景渲染"
           ],
-          "tags": [
-            "工程",
-            "钣金",
-            "外壳",
-            "建模"
-          ],
-          "cover": "/works/02-24.jpg",
-          "weight": 2,
-          "files": 167,
-          "sizeMB": 283,
-          "images": 32,
-          "videos": 0
-        },
-        {
-          "id": "02-23",
-          "slug": "works/02-23",
-          "title": "DNA 外壳设计",
-          "subtitle": "以 DNA 双螺旋为视觉母题的产品外壳",
-          "year": "2026-08",
-          "doneDate": "2026-09-08",
-          "span": "2021-03-25 ～ 2026-09-08",
-          "tools": [
-            "Blender",
-            "Photoshop"
-          ],
-          "tags": [
-            "DNA",
-            "外壳",
-            "建模",
-            "视觉"
-          ],
-          "cover": "/works/02-23.jpg",
-          "weight": 3,
-          "files": 54,
-          "sizeMB": 121.6,
-          "images": 40,
-          "videos": 0
+          "selectedBy": "auto"
         },
         {
           "id": "02-14",
@@ -265,7 +266,10 @@
           "files": 31,
           "sizeMB": 147.6,
           "images": 33,
-          "videos": 0
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "selectedBy": "auto"
         },
         {
           "id": "02-13",
@@ -290,7 +294,10 @@
           "files": 31,
           "sizeMB": 136.9,
           "images": 35,
-          "videos": 0
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "selectedBy": "auto"
         },
         {
           "id": "02-26",
@@ -313,7 +320,10 @@
           "files": 8,
           "sizeMB": 5.5,
           "images": 12,
-          "videos": 0
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "selectedBy": "auto"
         },
         {
           "id": "02-15",
@@ -338,7 +348,10 @@
           "files": 29,
           "sizeMB": 133.6,
           "images": 31,
-          "videos": 0
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "selectedBy": "auto"
         },
         {
           "id": "02-17",
@@ -364,7 +377,10 @@
           "files": 22,
           "sizeMB": 167.7,
           "images": 24,
-          "videos": 0
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "selectedBy": "auto"
         },
         {
           "id": "02-19",
@@ -389,7 +405,10 @@
           "files": 28,
           "sizeMB": 96.8,
           "images": 29,
-          "videos": 0
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "selectedBy": "auto"
         },
         {
           "id": "02-12",
@@ -415,7 +434,10 @@
           "files": 42,
           "sizeMB": 243.2,
           "images": 42,
-          "videos": 0
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "selectedBy": "auto"
         },
         {
           "id": "02-20",
@@ -440,7 +462,10 @@
           "files": 5,
           "sizeMB": 103.3,
           "images": 6,
-          "videos": 0
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "selectedBy": "auto"
         },
         {
           "id": "02-21",
@@ -465,7 +490,10 @@
           "files": 11,
           "sizeMB": 97.2,
           "images": 11,
-          "videos": 0
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "selectedBy": "auto"
         },
         {
           "id": "02-16",
@@ -490,7 +518,10 @@
           "files": 24,
           "sizeMB": 305.9,
           "images": 25,
-          "videos": 0
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "selectedBy": "auto"
         },
         {
           "id": "02-11",
@@ -516,7 +547,10 @@
           "files": 78,
           "sizeMB": 497.8,
           "images": 68,
-          "videos": 0
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "selectedBy": "auto"
         },
         {
           "id": "02-18",
@@ -540,7 +574,10 @@
           "files": 11,
           "sizeMB": 81.5,
           "images": 14,
-          "videos": 0
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "selectedBy": "auto"
         },
         {
           "id": "02-25",
@@ -563,39 +600,17 @@
           "files": 15,
           "sizeMB": 14,
           "images": 3,
-          "videos": 0
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "selectedBy": "auto"
         }
       ]
     },
     {
       "name": "产品渲染",
-      "count": 7,
+      "count": 6,
       "works": [
-        {
-          "id": "03-33",
-          "slug": "works/03-33",
-          "title": "康帕斯 · 材质与静帧素材",
-          "subtitle": "产线动画用到的贴图与静帧",
-          "year": "2026-09",
-          "doneDate": "2026-09-29",
-          "span": "2026-09-16 ～ 2026-09-29",
-          "tools": [
-            "Blender",
-            "Substance Painter"
-          ],
-          "tags": [
-            "材质",
-            "贴图",
-            "PBR",
-            "静帧"
-          ],
-          "cover": "/works/03-33.jpg",
-          "weight": 3,
-          "files": 160,
-          "sizeMB": 181,
-          "images": 8,
-          "videos": 0
-        },
         {
           "id": "03-29",
           "slug": "works/03-29",
@@ -619,7 +634,10 @@
           "files": 1,
           "sizeMB": 12.2,
           "images": 2,
-          "videos": 0
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "selectedBy": "auto"
         },
         {
           "id": "03-30",
@@ -644,7 +662,10 @@
           "files": 1,
           "sizeMB": 13.1,
           "images": 2,
-          "videos": 0
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "selectedBy": "auto"
         },
         {
           "id": "03-31",
@@ -669,7 +690,10 @@
           "files": 1,
           "sizeMB": 9.6,
           "images": 2,
-          "videos": 0
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "selectedBy": "auto"
         },
         {
           "id": "03-27",
@@ -693,7 +717,10 @@
           "files": 7,
           "sizeMB": 50.1,
           "images": 7,
-          "videos": 0
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "selectedBy": "auto"
         },
         {
           "id": "03-28",
@@ -717,7 +744,10 @@
           "files": 19,
           "sizeMB": 238.6,
           "images": 19,
-          "videos": 0
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "selectedBy": "auto"
         },
         {
           "id": "03-34",
@@ -739,18 +769,21 @@
           "files": 4,
           "sizeMB": 4.7,
           "images": 8,
-          "videos": 0
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "selectedBy": "auto"
         }
       ]
     },
     {
       "name": "场景动画",
-      "count": 6,
+      "count": 3,
       "works": [
         {
           "id": "04-35",
           "slug": "works/04-35",
-          "title": "康帕斯 · 电泳线产线动画",
+          "title": "康帕斯 · 电泳线产线动画（含材质静帧与 HUD）",
           "subtitle": "工业产线三维动画（成片 143 秒 / 2560×1440）",
           "year": "2026-09",
           "doneDate": "2026-09-30",
@@ -759,69 +792,37 @@
             "Blender",
             "Premiere Pro",
             "After Effects",
-            "SolidWorks"
+            "SolidWorks",
+            "Substance Painter",
+            "HTML/CSS/JS"
           ],
           "tags": [
             "产线动画",
             "工业",
             "三维动画",
-            "场景"
-          ],
-          "cover": "/works/04-35.jpg",
-          "weight": 5,
-          "files": 260,
-          "sizeMB": 2025.3,
-          "images": 17,
-          "videos": 9
-        },
-        {
-          "id": "04-37",
-          "slug": "works/04-37",
-          "title": "产线 HUD 界面动效设计",
-          "subtitle": "电泳线数据看板 · 透明叠加层动画",
-          "year": "2026-09",
-          "doneDate": "2026-09-29",
-          "span": "2026-09-24 ～ 2026-09-29",
-          "tools": [
-            "HTML/CSS/JS",
-            "After Effects",
-            "Premiere Pro"
-          ],
-          "tags": [
+            "场景",
+            "材质",
+            "贴图",
+            "PBR",
+            "静帧",
             "UI",
             "动效",
             "HUD",
             "数据可视化"
           ],
-          "cover": "/works/04-37.jpg",
-          "weight": 4,
-          "files": 12,
-          "sizeMB": 25.1,
-          "images": 0,
-          "videos": 1
-        },
-        {
-          "id": "04-40",
-          "slug": "works/04-40",
-          "title": "桌面雪花球场景渲染",
-          "subtitle": "产品 + 场景的合成展示",
-          "year": "2026-09",
-          "doneDate": "2026-09-18",
-          "span": "2026-09-17 ～ 2026-09-18",
-          "tools": [
-            "Blender"
+          "cover": "/works/04-35.jpg",
+          "weight": 5,
+          "files": 432,
+          "sizeMB": 2231.5,
+          "images": 25,
+          "videos": 10,
+          "client": "康帕斯",
+          "parts": [
+            "产线动画正片",
+            "材质与静帧素材",
+            "HUD 数据看板动效"
           ],
-          "tags": [
-            "场景",
-            "产品",
-            "渲染"
-          ],
-          "cover": "/works/04-40.jpg",
-          "weight": 2,
-          "files": 6,
-          "sizeMB": 14,
-          "images": 6,
-          "videos": 0
+          "selectedBy": "auto"
         },
         {
           "id": "04-36",
@@ -846,7 +847,10 @@
           "files": 75,
           "sizeMB": 991.1,
           "images": 0,
-          "videos": 18
+          "videos": 18,
+          "client": "",
+          "parts": [],
+          "selectedBy": "auto"
         },
         {
           "id": "04-39",
@@ -869,30 +873,10 @@
           "files": 10,
           "sizeMB": 39.5,
           "images": 9,
-          "videos": 1
-        },
-        {
-          "id": "04-41",
-          "slug": "works/04-41",
-          "title": "其它视频素材",
-          "subtitle": "手工制作纪录 / 实拍雨景 / 交互演示",
-          "year": "2020-2025",
-          "doneDate": "2025-06-17",
-          "span": "2020-05-24 ～ 2025-06-17",
-          "tools": [
-            "Premiere Pro"
-          ],
-          "tags": [
-            "视频",
-            "素材",
-            "纪录"
-          ],
-          "cover": "/works/04-41.jpg",
-          "weight": 1,
-          "files": 78,
-          "sizeMB": 1047.5,
-          "images": 49,
-          "videos": 16
+          "videos": 1,
+          "client": "",
+          "parts": [],
+          "selectedBy": "auto"
         }
       ]
     }
