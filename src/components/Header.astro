@@ -21,8 +21,10 @@ const categories = [...new Set(blogPosts.map(post => post.data.category || 'unde
 
 // 获取当前页面在不同语言下的路径
 const getLocalePath = (path: string, targetLocale: string) => {
-  const currentPath = Astro.url.pathname;
+  const rawPath = Astro.url.pathname;
   const defaultLocale = i18n?.defaultLocale || "zh-cn";
+  // 404 页没有多语言版本（只有一个 404.html），切语言就回首页，否则会再吃一次 404
+  const currentPath = /\/404\/?$/.test(rawPath) ? "/" : rawPath;
   
   // 移除当前语言前缀
   let basePath = currentPath;

@@ -1,30 +1,19 @@
-# Cloudflare Pages / Netlify 通用的缓存规则（放在 public/ 下，构建时会进 dist 根目录）
+# Cloudflare Pages 缓存与安全规则（放在 public/ 下，构建时进 dist 根目录）
+# 语法注意：Cloudflare Pages 只保证支持「路径前缀 + /*」和「/*」两种写法，
+# 不要写 /*.html 这类中间通配，会被静默忽略。
 
-# 带内容哈希的静态资源：永久缓存
+# 带内容哈希的构建产物：永久缓存（文件名变了才会变）
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable
 
-# 作品集封面缩略图、展板缩略图、动画短视频：一周缓存
-/works/*
-  Cache-Control: public, max-age=604800
-/boards/*
-  Cache-Control: public, max-age=604800
-/clips/*
-  Cache-Control: public, max-age=604800
-
-# 页面本身不设长缓存（每次访问拿最新的）
-/*.html
-  Cache-Control: public, max-age=0, must-revalidate
-
-# 搜索索引跟着构建走
+# 搜索索引：一天
 /pagefind/*
   Cache-Control: public, max-age=86400
 
-# 其它静态文件
-/favicon/*
-  Cache-Control: public, max-age=604800
+# 图片/视频这类文件名固定的资源：交给 Cloudflare 默认策略（每次都带 ETag 校验，不会拿到旧图）
+# /works/*、/boards/*、/clips/* 故意不写长缓存，改了图立刻生效
 
-# 安全相关的小加固
+# 兜底：nosniff + 隐私友好的 Referrer
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
