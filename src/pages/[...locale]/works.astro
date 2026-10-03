@@ -1,0 +1,91 @@
+---
+import MainPageLayout from '@layouts/MainPageLayout.astro'
+import Cover from '@components/Cover.astro'
+import FabMenu from '@components/control/FabMenu.astro'
+import ImageModule from '@components/misc/ImageModule.astro'
+
+import { siteConfig } from '@/config'
+import i18nit from '@i18n/translation'
+import { i18n } from "astro:config/client";
+import { getRelativeLocaleUrl } from '@utils/urlUtils'
+import portfolio from '@/data/portfolio.json'
+
+export async function getStaticPaths() {
+	return i18n?.locales.map(locale => ({ params: { locale: locale == i18n?.defaultLocale ? undefined : (locale as string) } }));
+}
+
+const currentLang = Astro.currentLocale || i18n!.defaultLocale;
+const t = i18nit(currentLang);
+
+const pageTitle = t("header.works") + " - " + siteConfig.title;
+const pageDescription = `${t("cover.title.works")} - ${t("cover.subTitle.works")}`;
+const total = portfolio.total;
+---
+
+<MainPageLayout title={pageTitle} lang={currentLang} description={pageDescription}>
+    <div class="mx-auto w-full max-w-[var(--page-width)]">
+        <Cover title={t("cover.title.works")} subTitle={t("cover.subTitle.works")} />
+
+        <!-- 分类锚点：点一下跳到下面某一类 -->
+        <nav class="flex flex-wrap items-center justify-center gap-2 mb-10 -mt-4">
+            {portfolio.categories.map((cat) => (
+                <a
+                    href={`#cat-${cat.name}`}
+                    class="inline-flex items-center gap-2 px-3 py-1.5 text-sm rounded-md border border-[var(--button-border-color)] text-[var(--text-color)] transition duration-200 hover:border-[var(--link-color)] hover:bg-[var(--button-hover-color)]"
+                >
+                    {cat.name}
+                    <span class="text-[var(--text-color-70)]">{cat.count}</span>
+                </a>
+            ))}
+        </nav>
+
+        {portfolio.categories.map((cat) => (
+            <section class="mb-14">
+                <h2 id={`cat-${cat.name}`} class="text-2xl font-bold text-[var(--text-color)] border-b border-[var(--button-border-color)] pb-2 mb-6 scroll-mt-24">
+                    {cat.name}
+                    <span class="ml-2 text-base font-normal text-[var(--text-color-70)]">{cat.count}</span>
+                </h2>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    {cat.works.map((work) => (
+                        <a
+                            href={getRelativeLocaleUrl(currentLang, `/blog/${work.slug}/`)}
+                            class="group block rounded-xl overflow-hidden border border-[var(--button-border-color)] shadow hover:border-[var(--link-color)] transition-colors duration-300"
+                        >
+                            <div class="h-40 bg-[var(--button-hover-color)] overflow-hidden">
+                                {work.cover && (
+                                    <ImageModule
+                                        src={work.cover}
+                                        alt={work.title}
+                                        class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                    />
+                                )}
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-semibold text-[var(--text-color)] group-hover:text-[var(--link-color)] transition-colors leading-snug">
+                                    {work.title}
+                                </h3>
+                                {work.subtitle && (
+                                    <p class="mt-1 text-sm text-[var(--text-color-70)] leading-relaxed line-clamp-2">{work.subtitle}</p>
+                                )}
+                                <div class="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-[var(--text-color-70)]">
+                                    <span>{work.doneDate}</span>
+                                    <span>{work.tools.join(' / ')}</span>
+                                </div>
+                            </div>
+                        </a>
+                    ))}
+                </div>
+            </section>
+        ))}
+
+        <p class="text-center text-sm text-[var(--text-color-70)] mb-10">
+            共 {total} 件作品 · 数据来自 <code>src/data/portfolio.json</code>
+        </p>
+    </div>
+
+    <!-- fixed 浮层：留在 swup 容器内，但在淡入淡出元素之外（见 MainPageLayout 的说明） -->
+    <div slot="overlay">
+        <FabMenu showBackBottom={true} />
+    </div>
+</MainPageLayout>

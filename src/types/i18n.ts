@@ -4,12 +4,14 @@ export type CoverConfig = {
         archive: string;
         about: string;
         friends: string;
+        works: string;
     };
     subTitle: {
         home: string;
         archive: string;
         about: string;
         friends: string;
+        works: string;
     };
 }
 

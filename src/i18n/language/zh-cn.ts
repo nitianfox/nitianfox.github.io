@@ -7,6 +7,7 @@ const translation: Translation = {
         archive: "归档",
         about: "关于",
         friends: "友链",
+        works: "作品集",
     },
     cover: i18nConfig.translations["zh-cn"].Cover,
     toc: "目录",

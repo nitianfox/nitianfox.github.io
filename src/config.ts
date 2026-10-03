@@ -94,12 +94,14 @@ export const i18nConfig: I18nConfig = {
                     archive: "文章归档",
                     about: "关于",
                     friends: "友链",
+                    works: "作品集",
                 },
                 subTitle: {
                     home: "记录技术、折腾与生活",
                     archive: "共 {count} 篇文章", // {count} will be replaced with the total number of articles
                     about: "关于这个站点",
                     friends: "有趣的灵魂",
+                    works: "工业设计作品 · 平面 / 建模 / 渲染 / 动画",
                 }
             }
         },
@@ -110,12 +112,14 @@ export const i18nConfig: I18nConfig = {
                     archive: "Archive",
                     about: "About",
                     friends: "Friends",
+                    works: "Works",
                 },
                 subTitle: {
                     home: "Notes on code, tinkering and life",
                     archive: "Total of {count} articles",
                     about: "About this site",
                     friends: "Interesting Souls",
+                    works: "Industrial design works · graphics / 3D / rendering / animation",
                 }
             }
         }

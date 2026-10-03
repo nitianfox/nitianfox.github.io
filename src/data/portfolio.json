@@ -1,0 +1,1008 @@
+{
+  "generated": "2026-10-03 08:02:21",
+  "source": "D:\\工业设计作品集",
+  "total": 41,
+  "categories": [
+    {
+      "name": "平面设计",
+      "count": 10,
+      "works": [
+        {
+          "id": "01-09",
+          "slug": "works/01-09",
+          "title": "毕业设计 · 白酒包装《陈仓学酿》",
+          "subtitle": "宝鸡地域文化 × 宝鸡文理学院校园文化的白酒包装设计",
+          "year": "2026-01",
+          "doneDate": "2026-02-10",
+          "span": "2025-12-21 ～ 2026-02-10",
+          "tools": [
+            "Photoshop",
+            "Illustrator",
+            "Blender",
+            "Word"
+          ],
+          "tags": [
+            "毕业设计",
+            "包装",
+            "白酒",
+            "文化",
+            "平面"
+          ],
+          "cover": "/works/01-09.jpg",
+          "files": 54,
+          "sizeMB": 385.3,
+          "images": 7,
+          "videos": 0
+        },
+        {
+          "id": "01-10",
+          "slug": "works/01-10",
+          "title": "设计管理结课作业 · 智能助眠唤醒灯",
+          "subtitle": "产品设计提案（设计管理思维与工具）",
+          "year": "2025-11",
+          "doneDate": "2025-11-05",
+          "span": "2025-11-03 ～ 2025-11-05",
+          "tools": [
+            "PowerPoint",
+            "Word"
+          ],
+          "tags": [
+            "设计管理",
+            "提案",
+            "平面"
+          ],
+          "cover": "/works/01-10.jpg",
+          "files": 9,
+          "sizeMB": 9.8,
+          "images": 5,
+          "videos": 0
+        },
+        {
+          "id": "01-07",
+          "slug": "works/01-07",
+          "title": "色彩设计与版式练习",
+          "subtitle": "色彩构成 / 品牌设计小稿",
+          "year": "2024-2025",
+          "doneDate": "2025-10-16",
+          "span": "2024-01-08 ～ 2025-10-16",
+          "tools": [
+            "Photoshop"
+          ],
+          "tags": [
+            "色彩",
+            "版式",
+            "平面"
+          ],
+          "cover": "/works/01-07.jpg",
+          "files": 4,
+          "sizeMB": 12.1,
+          "images": 4,
+          "videos": 0
+        },
+        {
+          "id": "01-06",
+          "slug": "works/01-06",
+          "title": "书法作品与「忠 / 反」卡牌",
+          "subtitle": "毛笔字练习 · 卡牌纹样设计",
+          "year": "2025-05",
+          "doneDate": "2025-09-07",
+          "span": "2025-05-17 ～ 2025-09-07",
+          "tools": [
+            "Photoshop",
+            "Blender"
+          ],
+          "tags": [
+            "书法",
+            "传统",
+            "卡牌",
+            "平面"
+          ],
+          "cover": "/works/01-06.jpg",
+          "files": 52,
+          "sizeMB": 27.4,
+          "images": 57,
+          "videos": 0
+        },
+        {
+          "id": "01-08",
+          "slug": "works/01-08",
+          "title": "界面与交互设计（UI / APP）",
+          "subtitle": "《青铜密码》APP + 5 个非遗主题 APP 案例 + 校园健身助手",
+          "year": "2025-06",
+          "doneDate": "2025-06-17",
+          "span": "2025-04-28 ～ 2025-06-17",
+          "tools": [
+            "Axure",
+            "Photoshop",
+            "Figma"
+          ],
+          "tags": [
+            "UI",
+            "交互",
+            "APP",
+            "非遗",
+            "平面"
+          ],
+          "cover": "/works/01-08.jpg",
+          "files": 59,
+          "sizeMB": 270.5,
+          "images": 47,
+          "videos": 3
+        },
+        {
+          "id": "01-04",
+          "slug": "works/01-04",
+          "title": "包装结构设计 · 真无线耳机包装",
+          "subtitle": "盒型展开图 / 刀模 / 实物打样照片",
+          "year": "2024-12",
+          "doneDate": "2024-12-29",
+          "span": "2024-12-08 ～ 2024-12-29",
+          "tools": [
+            "Photoshop",
+            "Illustrator"
+          ],
+          "tags": [
+            "包装",
+            "结构",
+            "刀模",
+            "平面"
+          ],
+          "cover": "/works/01-04.jpg",
+          "files": 115,
+          "sizeMB": 499,
+          "images": 116,
+          "videos": 0
+        },
+        {
+          "id": "01-03",
+          "slug": "works/01-03",
+          "title": "品牌形象设计 · 毕加索广告策划有限公司",
+          "subtitle": "VI 基础系统：标志 / 标准色 / 辅助图形 / 标准字体",
+          "year": "2024-10",
+          "doneDate": "2024-11-26",
+          "span": "2024-10-08 ～ 2024-11-26",
+          "tools": [
+            "Illustrator",
+            "PowerPoint"
+          ],
+          "tags": [
+            "VI",
+            "品牌",
+            "标志",
+            "平面"
+          ],
+          "cover": "/works/01-03.jpg",
+          "files": 22,
+          "sizeMB": 14.4,
+          "images": 20,
+          "videos": 0
+        },
+        {
+          "id": "01-01",
+          "slug": "works/01-01",
+          "title": "节气海报《大寒》",
+          "subtitle": "二十四节气系列 · 水墨与雪山意象",
+          "year": "2024-01",
+          "doneDate": "2024-01-08",
+          "span": "2024-01-08 ～ 2024-01-08",
+          "tools": [
+            "Photoshop"
+          ],
+          "tags": [
+            "海报",
+            "水墨",
+            "节气",
+            "平面"
+          ],
+          "cover": "/works/01-01.jpg",
+          "files": 5,
+          "sizeMB": 16.7,
+          "images": 4,
+          "videos": 0
+        },
+        {
+          "id": "01-02",
+          "slug": "works/01-02",
+          "title": "国潮海报《非常可乐》",
+          "subtitle": "娃哈哈非常可乐 · 国潮限定包装与海报",
+          "year": "2023-12",
+          "doneDate": "2023-12-21",
+          "span": "2023-12-07 ～ 2023-12-21",
+          "tools": [
+            "Photoshop"
+          ],
+          "tags": [
+            "海报",
+            "国潮",
+            "包装",
+            "平面"
+          ],
+          "cover": "/works/01-02.jpg",
+          "files": 18,
+          "sizeMB": 8.7,
+          "images": 16,
+          "videos": 0
+        },
+        {
+          "id": "01-05",
+          "slug": "works/01-05",
+          "title": "名片设计",
+          "subtitle": "个人 / 商业名片排版练习",
+          "year": "2023-11",
+          "doneDate": "2023-11-07",
+          "span": "2023-11-03 ～ 2023-11-07",
+          "tools": [
+            "Photoshop",
+            "Illustrator"
+          ],
+          "tags": [
+            "名片",
+            "排版",
+            "平面"
+          ],
+          "cover": "/works/01-05.jpg",
+          "files": 7,
+          "sizeMB": 3.7,
+          "images": 7,
+          "videos": 0
+        }
+      ]
+    },
+    {
+      "name": "三维建模",
+      "count": 16,
+      "works": [
+        {
+          "id": "02-22",
+          "slug": "works/02-22",
+          "title": "机械手套与桌面雪花球",
+          "subtitle": "外骨骼手套结构 + 桌面景观雪花球",
+          "year": "2026-08",
+          "doneDate": "2026-09-18",
+          "span": "2026-09-16 ～ 2026-09-18",
+          "tools": [
+            "Blender",
+            "SolidWorks",
+            "Plasticity"
+          ],
+          "tags": [
+            "机械",
+            "手套",
+            "雪花球",
+            "建模"
+          ],
+          "cover": "/works/02-22.jpg",
+          "files": 27,
+          "sizeMB": 137.7,
+          "images": 25,
+          "videos": 0
+        },
+        {
+          "id": "02-24",
+          "slug": "works/02-24",
+          "title": "产品外壳工程 · SolidWorks / Plasticity",
+          "subtitle": "钣金总装 · 外壳改型 · 铰链结构",
+          "year": "2026-08",
+          "doneDate": "2026-09-16",
+          "span": "2023-10-08 ～ 2026-09-16",
+          "tools": [
+            "SolidWorks",
+            "Plasticity",
+            "Rhino",
+            "Blender"
+          ],
+          "tags": [
+            "工程",
+            "钣金",
+            "外壳",
+            "建模"
+          ],
+          "cover": "/works/02-24.jpg",
+          "files": 167,
+          "sizeMB": 283,
+          "images": 32,
+          "videos": 0
+        },
+        {
+          "id": "02-23",
+          "slug": "works/02-23",
+          "title": "DNA 外壳设计",
+          "subtitle": "以 DNA 双螺旋为视觉母题的产品外壳",
+          "year": "2026-08",
+          "doneDate": "2026-09-08",
+          "span": "2021-03-25 ～ 2026-09-08",
+          "tools": [
+            "Blender",
+            "Photoshop"
+          ],
+          "tags": [
+            "DNA",
+            "外壳",
+            "建模",
+            "视觉"
+          ],
+          "cover": "/works/02-23.jpg",
+          "files": 54,
+          "sizeMB": 121.6,
+          "images": 40,
+          "videos": 0
+        },
+        {
+          "id": "02-14",
+          "slug": "works/02-14",
+          "title": "绿色碎纸机设计",
+          "subtitle": "桌面碎纸机外观与结构",
+          "year": "2025-04",
+          "doneDate": "2025-06-03",
+          "span": "2025-04-06 ～ 2025-06-03",
+          "tools": [
+            "Blender",
+            "Photoshop"
+          ],
+          "tags": [
+            "产品设计",
+            "办公用品",
+            "建模",
+            "渲染"
+          ],
+          "cover": "/works/02-14.jpg",
+          "files": 31,
+          "sizeMB": 147.6,
+          "images": 33,
+          "videos": 0
+        },
+        {
+          "id": "02-13",
+          "slug": "works/02-13",
+          "title": "智能浴霸设计",
+          "subtitle": "吊顶式智能浴室暖风机",
+          "year": "2025-04",
+          "doneDate": "2025-05-13",
+          "span": "2025-04-29 ～ 2025-05-13",
+          "tools": [
+            "Blender",
+            "Photoshop"
+          ],
+          "tags": [
+            "产品设计",
+            "家电",
+            "建模",
+            "渲染"
+          ],
+          "cover": "/works/02-13.jpg",
+          "files": 31,
+          "sizeMB": 136.9,
+          "images": 35,
+          "videos": 0
+        },
+        {
+          "id": "02-26",
+          "slug": "works/02-26",
+          "title": "其它建模小项目",
+          "subtitle": "调料盒 / 园艺灯 / 哑铃 / 树木 / 游戏道具",
+          "year": "2023-2025",
+          "doneDate": "2025-05-06",
+          "span": "2023-11-28 ～ 2025-05-06",
+          "tools": [
+            "Blender"
+          ],
+          "tags": [
+            "建模",
+            "练习",
+            "杂项"
+          ],
+          "cover": "/works/02-26.jpg",
+          "files": 8,
+          "sizeMB": 5.5,
+          "images": 12,
+          "videos": 0
+        },
+        {
+          "id": "02-15",
+          "slug": "works/02-15",
+          "title": "茶艺香薰机设计",
+          "subtitle": "把「云雾茶山」装进玻璃罩的香薰机",
+          "year": "2025-03",
+          "doneDate": "2025-03-22",
+          "span": "2025-03-18 ～ 2025-03-22",
+          "tools": [
+            "Blender",
+            "Photoshop"
+          ],
+          "tags": [
+            "产品设计",
+            "家居",
+            "香薰",
+            "建模"
+          ],
+          "cover": "/works/02-15.jpg",
+          "files": 29,
+          "sizeMB": 133.6,
+          "images": 31,
+          "videos": 0
+        },
+        {
+          "id": "02-17",
+          "slug": "works/02-17",
+          "title": "连杆吊灯《CHANDELIER》",
+          "subtitle": "机械感多臂吊灯造型设计",
+          "year": "2025-01",
+          "doneDate": "2025-01-06",
+          "span": "2024-12-29 ～ 2025-01-06",
+          "tools": [
+            "Blender",
+            "Rhino",
+            "Photoshop"
+          ],
+          "tags": [
+            "产品设计",
+            "灯具",
+            "建模",
+            "渲染"
+          ],
+          "cover": "/works/02-17.jpg",
+          "files": 22,
+          "sizeMB": 167.7,
+          "images": 24,
+          "videos": 0
+        },
+        {
+          "id": "02-19",
+          "slug": "works/02-19",
+          "title": "相机镜头爆炸图",
+          "subtitle": "Canon 5D Mark IV 与镜头的结构爆炸表达",
+          "year": "2024-11",
+          "doneDate": "2025-01-06",
+          "span": "2024-11-18 ～ 2025-01-06",
+          "tools": [
+            "Blender",
+            "Photoshop"
+          ],
+          "tags": [
+            "爆炸图",
+            "结构",
+            "相机",
+            "建模"
+          ],
+          "cover": "/works/02-19.jpg",
+          "files": 28,
+          "sizeMB": 96.8,
+          "images": 29,
+          "videos": 0
+        },
+        {
+          "id": "02-12",
+          "slug": "works/02-12",
+          "title": "适老化浴缸设计《C-CUP》",
+          "subtitle": "基于产品系统设计理论的老年人浴缸",
+          "year": "2024-12",
+          "doneDate": "2024-12-26",
+          "span": "2024-12-16 ～ 2024-12-26",
+          "tools": [
+            "Blender",
+            "Rhino",
+            "Photoshop"
+          ],
+          "tags": [
+            "产品设计",
+            "适老化",
+            "浴缸",
+            "建模"
+          ],
+          "cover": "/works/02-12.jpg",
+          "files": 42,
+          "sizeMB": 243.2,
+          "images": 42,
+          "videos": 0
+        },
+        {
+          "id": "02-20",
+          "slug": "works/02-20",
+          "title": "电动折叠桌 / 智能升降桌面办公椅",
+          "subtitle": "结构主导的家具产品设计",
+          "year": "2024-12",
+          "doneDate": "2024-12-11",
+          "span": "2024-12-08 ～ 2024-12-11",
+          "tools": [
+            "Blender",
+            "PowerPoint"
+          ],
+          "tags": [
+            "家具",
+            "结构",
+            "建模",
+            "产品设计"
+          ],
+          "cover": "/works/02-20.jpg",
+          "files": 5,
+          "sizeMB": 103.3,
+          "images": 6,
+          "videos": 0
+        },
+        {
+          "id": "02-21",
+          "slug": "works/02-21",
+          "title": "校园文创 · 书签「BIU_APT」",
+          "subtitle": "宝鸡文理学院校园文创产品设计",
+          "year": "2024-12",
+          "doneDate": "2024-12-04",
+          "span": "2024-12-01 ～ 2024-12-04",
+          "tools": [
+            "Blender",
+            "Photoshop"
+          ],
+          "tags": [
+            "文创",
+            "书签",
+            "建模",
+            "渲染"
+          ],
+          "cover": "/works/02-21.jpg",
+          "files": 11,
+          "sizeMB": 97.2,
+          "images": 11,
+          "videos": 0
+        },
+        {
+          "id": "02-16",
+          "slug": "works/02-16",
+          "title": "折叠清扫铲设计",
+          "subtitle": "可折叠的雪铲 / 刮板类清洁工具",
+          "year": "2024-08",
+          "doneDate": "2024-08-12",
+          "span": "2024-07-19 ～ 2024-08-12",
+          "tools": [
+            "Blender",
+            "Photoshop"
+          ],
+          "tags": [
+            "产品设计",
+            "五金",
+            "工具",
+            "建模"
+          ],
+          "cover": "/works/02-16.jpg",
+          "files": 24,
+          "sizeMB": 305.9,
+          "images": 25,
+          "videos": 0
+        },
+        {
+          "id": "02-11",
+          "slug": "works/02-11",
+          "title": "电动工具设计 · 角磨机 / 电钻",
+          "subtitle": "手绘草图 → 结构建模 → 展板",
+          "year": "2024-06",
+          "doneDate": "2024-06-29",
+          "span": "2024-06-09 ～ 2024-06-29",
+          "tools": [
+            "Blender",
+            "Rhino",
+            "Photoshop"
+          ],
+          "tags": [
+            "产品设计",
+            "电动工具",
+            "建模",
+            "草图"
+          ],
+          "cover": "/works/02-11.jpg",
+          "files": 78,
+          "sizeMB": 497.8,
+          "images": 68,
+          "videos": 0
+        },
+        {
+          "id": "02-18",
+          "slug": "works/02-18",
+          "title": "开关面板设计",
+          "subtitle": "墙面开关 / 插座面板系列",
+          "year": "2024-03",
+          "doneDate": "2024-03-22",
+          "span": "2024-03-07 ～ 2024-03-22",
+          "tools": [
+            "Blender"
+          ],
+          "tags": [
+            "产品设计",
+            "家居",
+            "开关",
+            "建模"
+          ],
+          "cover": "/works/02-18.jpg",
+          "files": 11,
+          "sizeMB": 81.5,
+          "images": 14,
+          "videos": 0
+        },
+        {
+          "id": "02-25",
+          "slug": "works/02-25",
+          "title": "Rhino 建模练习",
+          "subtitle": "吹风机 / 米家恒温电水壶等",
+          "year": "2023-11",
+          "doneDate": "2024-01-17",
+          "span": "2023-09-25 ～ 2024-01-17",
+          "tools": [
+            "Rhino"
+          ],
+          "tags": [
+            "Rhino",
+            "建模",
+            "练习"
+          ],
+          "cover": "/works/02-25.jpg",
+          "files": 15,
+          "sizeMB": 14,
+          "images": 3,
+          "videos": 0
+        }
+      ]
+    },
+    {
+      "name": "产品渲染",
+      "count": 8,
+      "works": [
+        {
+          "id": "03-33",
+          "slug": "works/03-33",
+          "title": "康帕斯 · 材质与静帧素材",
+          "subtitle": "产线动画用到的贴图与静帧",
+          "year": "2026-09",
+          "doneDate": "2026-09-29",
+          "span": "2026-09-16 ～ 2026-09-29",
+          "tools": [
+            "Blender",
+            "Substance Painter"
+          ],
+          "tags": [
+            "材质",
+            "贴图",
+            "PBR",
+            "静帧"
+          ],
+          "cover": "/works/03-33.jpg",
+          "files": 160,
+          "sizeMB": 181,
+          "images": 8,
+          "videos": 0
+        },
+        {
+          "id": "03-32",
+          "slug": "works/03-32",
+          "title": "视觉设计师能力测试 · ORICO C10",
+          "subtitle": "白模 → 光影 → 场景合成 的三段式考核",
+          "year": "2026-07",
+          "doneDate": "2026-08-10",
+          "span": "2025-11-11 ～ 2026-08-10",
+          "tools": [
+            "Blender",
+            "Octane",
+            "Photoshop"
+          ],
+          "tags": [
+            "渲染",
+            "测试",
+            "产品",
+            "场景"
+          ],
+          "cover": "/works/03-32.jpg",
+          "files": 17,
+          "sizeMB": 118.7,
+          "images": 16,
+          "videos": 0
+        },
+        {
+          "id": "03-29",
+          "slug": "works/03-29",
+          "title": "展板 · 震后救援侦察无人机",
+          "subtitle": "灾后搜救场景的无人机概念设计",
+          "year": "2025-12",
+          "doneDate": "2025-12-05",
+          "span": "2025-12-05 ～ 2025-12-05",
+          "tools": [
+            "Photoshop",
+            "Blender"
+          ],
+          "tags": [
+            "展板",
+            "无人机",
+            "救援",
+            "产品设计"
+          ],
+          "cover": "/works/03-29.jpg",
+          "files": 1,
+          "sizeMB": 12.2,
+          "images": 2,
+          "videos": 0
+        },
+        {
+          "id": "03-30",
+          "slug": "works/03-30",
+          "title": "展板 · 智能骑行穿戴头盔《Vision Rider》",
+          "subtitle": "骑行安全方向的智能穿戴产品",
+          "year": "2025-12",
+          "doneDate": "2025-12-05",
+          "span": "2025-12-05 ～ 2025-12-05",
+          "tools": [
+            "Photoshop",
+            "Blender"
+          ],
+          "tags": [
+            "展板",
+            "头盔",
+            "穿戴",
+            "产品设计"
+          ],
+          "cover": "/works/03-30.jpg",
+          "files": 1,
+          "sizeMB": 13.1,
+          "images": 2,
+          "videos": 0
+        },
+        {
+          "id": "03-31",
+          "slug": "works/03-31",
+          "title": "展板 · 公路隧道消防巡检机器人",
+          "subtitle": "隧道环境下的消防巡检机器人",
+          "year": "2025-12",
+          "doneDate": "2025-12-05",
+          "span": "2025-12-05 ～ 2025-12-05",
+          "tools": [
+            "Photoshop",
+            "Blender"
+          ],
+          "tags": [
+            "展板",
+            "机器人",
+            "消防",
+            "产品设计"
+          ],
+          "cover": "/works/03-31.jpg",
+          "files": 1,
+          "sizeMB": 9.6,
+          "images": 2,
+          "videos": 0
+        },
+        {
+          "id": "03-27",
+          "slug": "works/03-27",
+          "title": "项目展板合集",
+          "subtitle": "各产品设计项目的最终展板（A3 竖版）",
+          "year": "2024-2025",
+          "doneDate": "2025-10-17",
+          "span": "2024-06-09 ～ 2025-10-17",
+          "tools": [
+            "Photoshop",
+            "Illustrator"
+          ],
+          "tags": [
+            "展板",
+            "排版",
+            "渲染"
+          ],
+          "cover": "/works/03-27.jpg",
+          "files": 7,
+          "sizeMB": 50.1,
+          "images": 7,
+          "videos": 0
+        },
+        {
+          "id": "03-28",
+          "slug": "works/03-28",
+          "title": "单渲染作品集",
+          "subtitle": "17 件产品的单体渲染图",
+          "year": "2024-2025",
+          "doneDate": "2025-10-17",
+          "span": "2024-03-25 ～ 2025-10-17",
+          "tools": [
+            "Blender",
+            "Octane"
+          ],
+          "tags": [
+            "渲染",
+            "产品",
+            "静物"
+          ],
+          "cover": "/works/03-28.jpg",
+          "files": 19,
+          "sizeMB": 238.6,
+          "images": 19,
+          "videos": 0
+        },
+        {
+          "id": "03-34",
+          "slug": "works/03-34",
+          "title": "其它渲染小稿",
+          "subtitle": "设备模型 / 腕表等零散渲染",
+          "year": "2024-07",
+          "doneDate": "2024-07-17",
+          "span": "2024-04-20 ～ 2024-07-17",
+          "tools": [
+            "Blender"
+          ],
+          "tags": [
+            "渲染",
+            "静物"
+          ],
+          "cover": "/works/03-34.jpg",
+          "files": 4,
+          "sizeMB": 4.7,
+          "images": 8,
+          "videos": 0
+        }
+      ]
+    },
+    {
+      "name": "场景动画",
+      "count": 7,
+      "works": [
+        {
+          "id": "04-35",
+          "slug": "works/04-35",
+          "title": "康帕斯 · 电泳线产线动画",
+          "subtitle": "工业产线三维动画（成片 143 秒 / 2560×1440）",
+          "year": "2026-09",
+          "doneDate": "2026-09-30",
+          "span": "2026-09-01 ～ 2026-09-30",
+          "tools": [
+            "Blender",
+            "Premiere Pro",
+            "After Effects",
+            "SolidWorks"
+          ],
+          "tags": [
+            "产线动画",
+            "工业",
+            "三维动画",
+            "场景"
+          ],
+          "cover": "/works/04-35.jpg",
+          "files": 260,
+          "sizeMB": 2025.3,
+          "images": 17,
+          "videos": 9
+        },
+        {
+          "id": "04-37",
+          "slug": "works/04-37",
+          "title": "产线 HUD 界面动效设计",
+          "subtitle": "电泳线数据看板 · 透明叠加层动画",
+          "year": "2026-09",
+          "doneDate": "2026-09-29",
+          "span": "2026-09-24 ～ 2026-09-29",
+          "tools": [
+            "HTML/CSS/JS",
+            "After Effects",
+            "Premiere Pro"
+          ],
+          "tags": [
+            "UI",
+            "动效",
+            "HUD",
+            "数据可视化"
+          ],
+          "cover": "/works/04-37.jpg",
+          "files": 12,
+          "sizeMB": 25.1,
+          "images": 0,
+          "videos": 1
+        },
+        {
+          "id": "04-40",
+          "slug": "works/04-40",
+          "title": "桌面雪花球场景渲染",
+          "subtitle": "产品 + 场景的合成展示",
+          "year": "2026-09",
+          "doneDate": "2026-09-18",
+          "span": "2026-09-17 ～ 2026-09-18",
+          "tools": [
+            "Blender"
+          ],
+          "tags": [
+            "场景",
+            "产品",
+            "渲染"
+          ],
+          "cover": "/works/04-40.jpg",
+          "files": 6,
+          "sizeMB": 14,
+          "images": 6,
+          "videos": 0
+        },
+        {
+          "id": "04-36",
+          "slug": "works/04-36",
+          "title": "喷涂线动画",
+          "subtitle": "喷粉 / 喷淋 / 烘干 / 总装线分段动画",
+          "year": "2026-08",
+          "doneDate": "2026-09-16",
+          "span": "2026-09-01 ～ 2026-09-16",
+          "tools": [
+            "Blender",
+            "Premiere Pro"
+          ],
+          "tags": [
+            "产线动画",
+            "工业",
+            "三维动画",
+            "场景"
+          ],
+          "cover": "/works/04-36.jpg",
+          "files": 75,
+          "sizeMB": 991.1,
+          "images": 0,
+          "videos": 18
+        },
+        {
+          "id": "04-39",
+          "slug": "works/04-39",
+          "title": "场景渲染静帧",
+          "subtitle": "雪山 / 水晶 / 蓝面角色等场景练习",
+          "year": "2024-2025",
+          "doneDate": "2025-10-17",
+          "span": "2024-05-03 ～ 2025-10-17",
+          "tools": [
+            "Blender"
+          ],
+          "tags": [
+            "场景",
+            "渲染",
+            "静帧"
+          ],
+          "cover": "/works/04-39.jpg",
+          "files": 10,
+          "sizeMB": 39.5,
+          "images": 9,
+          "videos": 1
+        },
+        {
+          "id": "04-41",
+          "slug": "works/04-41",
+          "title": "其它视频素材",
+          "subtitle": "手工制作纪录 / 实拍雨景 / 交互演示",
+          "year": "2020-2025",
+          "doneDate": "2025-06-17",
+          "span": "2020-05-24 ～ 2025-06-17",
+          "tools": [
+            "Premiere Pro"
+          ],
+          "tags": [
+            "视频",
+            "素材",
+            "纪录"
+          ],
+          "cover": "/works/04-41.jpg",
+          "files": 78,
+          "sizeMB": 1047.5,
+          "images": 49,
+          "videos": 16
+        },
+        {
+          "id": "04-38",
+          "slug": "works/04-38",
+          "title": "风格化卡通场景与《Mita》开场动画",
+          "subtitle": "Blender 卡通渲染 + MMD 角色开场动画",
+          "year": "2024-12",
+          "doneDate": "2025-01-01",
+          "span": "2024-04-07 ～ 2025-01-01",
+          "tools": [
+            "Blender",
+            "MMD"
+          ],
+          "tags": [
+            "场景",
+            "卡通",
+            "动画",
+            "角色"
+          ],
+          "cover": "/works/04-38.jpg",
+          "files": 15,
+          "sizeMB": 188.9,
+          "images": 18,
+          "videos": 1
+        }
+      ]
+    }
+  ]
+}

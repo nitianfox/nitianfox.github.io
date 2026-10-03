@@ -7,6 +7,7 @@ const translation: Translation = {
         archive: "Archive",
         about: "About",
         friends: "Friends",
+        works: "Works",
     },
     cover: i18nConfig.translations["en"].Cover,
     toc: "Contents",

@@ -27,11 +27,20 @@ pnpm momo new 文章路径   # 新建一篇文章
 | `自定义指南.md` | **改造指南**：每一项配置改哪个文件 |
 | `src/config.ts` | 配置总入口：站名、域名、主题开关、头像、联系方式、多语言文案 |
 | `src/content/blog/` | 文章，一篇一个文件夹（`zh-cn.md` / `en.md`） |
+| `src/content/blog/works/` | 41 篇作品文章（由 `script/portfolio/gen-posts.mjs` 生成） |
 | `src/content/spec/about/` | 「关于」页面的正文 |
+| `src/data/portfolio.json` | 作品集页读的数据 |
+| `public/works/` | 作品集网格封面 |
+| `script/portfolio/gen-posts.mjs` | 从 `D:\工业设计作品集` 全量重建作品文章与作品集数据 |
 | `public/avatar.jpg` | 头像 |
 | `public/favicon/favicon.ico` | 站点图标 |
 | `public/cover.jpg` | 首页整屏封面（`theme.photoCover.enable` 打开后才生效） |
 | `dist/` | 构建产物，整个目录丢给任意静态托管即可 |
+
+## 作品集
+
+`/works/` 是按分类分组的作品网格，点进去是每个作品的详情文章（`/blog/works/<编号>/`）。
+原数据在 `D:\工业设计作品集`，改动后跑 `node script/portfolio/gen-posts.mjs` 重新生成。
 
 ## 联系方式
 

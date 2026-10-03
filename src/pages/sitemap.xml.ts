@@ -63,7 +63,7 @@ export async function GET(_context: APIContext) {
     for (let page = 2; page <= totalPages; page++) push(`/${page}/`);
 
     // 独立页面
-    for (const page of ['/archives/', '/about/']) push(page);
+    for (const page of ['/archives/', '/about/', '/works/']) push(page);
 
     // 文章（404 不在站点地图里）
     for (const post of posts) push(`/blog/${post.id}/`, isoDate(post.data.pubDate));
