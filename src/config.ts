@@ -9,7 +9,7 @@ export const siteConfig: SiteConfig = {
     title: "NTFOX", // Title of the site, used in the tab in the browser and in SEO
     subTitle: "Blog", // Subtitle of the site
     // ⚠️ 上线前把这里改成你的真实域名：SEO/OG 绝对地址、sitemap.xml、rss.xml 都用它
-    rootSiteUrl: "https://nitianfox.github.io", // Root URL of the site, used for generating absolute URLs for SEO and social sharing（部署时也可用环境变量 SITE_URL 覆盖）
+    rootSiteUrl: "https://204041.xyz", // Root URL of the site（正式域名；临时可用环境变量 SITE_URL 覆盖）
 
     favicon: "/favicon/favicon.ico", // Path of the favicon, relative to the /public directory
 

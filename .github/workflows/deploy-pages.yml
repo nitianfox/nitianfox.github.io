@@ -38,14 +38,11 @@ jobs:
           repo="${GITHUB_REPOSITORY#*/}"
           owner="${GITHUB_REPOSITORY_OWNER}"
           if [ "$repo" = "${owner}.github.io" ]; then
-            export SITE_URL="https://${owner}.github.io"
             export BASE_PATH="/"
           else
-            export SITE_URL="https://${owner}.github.io/${repo}"
             export BASE_PATH="/${repo}"
           fi
-          echo "::notice::SITE_URL=$SITE_URL  BASE_PATH=$BASE_PATH"
-          echo "SITE_URL=$SITE_URL" >> "$GITHUB_ENV"
+          echo "::notice::BASE_PATH=$BASE_PATH（站点地址由 src/config.ts 的 rootSiteUrl 决定）"
           echo "BASE_PATH=$BASE_PATH" >> "$GITHUB_ENV"
           pnpm build
 
