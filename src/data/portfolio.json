@@ -1,11 +1,11 @@
 {
-  "generated": "2026-10-03 10:28:39",
+  "generated": "2026-10-03 10:44:12",
   "source": "D:\\工业设计作品集",
-  "total": 40,
+  "total": 42,
   "sectionOrder": [
-    "建模渲染",
-    "动画",
     "展板",
+    "动画",
+    "建模渲染",
     "平面"
   ],
   "defaultSort": "weight",
@@ -21,8 +21,203 @@
   ],
   "categories": [
     {
+      "name": "展板",
+      "count": 4,
+      "works": [
+        {
+          "id": "03-29",
+          "slug": "works/03-29",
+          "title": "展板 · 震后救援侦察无人机",
+          "subtitle": "灾后搜救场景的无人机概念设计",
+          "year": "2025-12",
+          "doneDate": "2025-12-05",
+          "span": "2025-12-05 ～ 2025-12-05",
+          "tools": [
+            "Photoshop",
+            "Blender"
+          ],
+          "tags": [
+            "展板",
+            "无人机",
+            "救援",
+            "产品设计"
+          ],
+          "cover": "/works/03-29.jpg",
+          "weight": 4,
+          "files": 1,
+          "sizeMB": 12.2,
+          "images": 2,
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "imgSource": "挑选台"
+        },
+        {
+          "id": "03-30",
+          "slug": "works/03-30",
+          "title": "展板 · 智能骑行穿戴头盔《Vision Rider》",
+          "subtitle": "骑行安全方向的智能穿戴产品",
+          "year": "2025-12",
+          "doneDate": "2025-12-05",
+          "span": "2025-12-05 ～ 2025-12-05",
+          "tools": [
+            "Photoshop",
+            "Blender"
+          ],
+          "tags": [
+            "展板",
+            "头盔",
+            "穿戴",
+            "产品设计"
+          ],
+          "cover": "/works/03-30.jpg",
+          "weight": 5,
+          "files": 1,
+          "sizeMB": 13.1,
+          "images": 2,
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "imgSource": "挑选台"
+        },
+        {
+          "id": "03-31",
+          "slug": "works/03-31",
+          "title": "展板 · 公路隧道消防巡检机器人",
+          "subtitle": "隧道环境下的消防巡检机器人",
+          "year": "2025-12",
+          "doneDate": "2025-12-05",
+          "span": "2025-12-05 ～ 2025-12-05",
+          "tools": [
+            "Photoshop",
+            "Blender"
+          ],
+          "tags": [
+            "展板",
+            "机器人",
+            "消防",
+            "产品设计"
+          ],
+          "cover": "/works/03-31.jpg",
+          "weight": 4,
+          "files": 1,
+          "sizeMB": 9.6,
+          "images": 2,
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "imgSource": "挑选台"
+        },
+        {
+          "id": "03-27",
+          "slug": "works/03-27",
+          "title": "项目展板合集",
+          "subtitle": "各产品设计项目的最终展板（A3 竖版）",
+          "year": "2024-2025",
+          "doneDate": "2025-10-17",
+          "span": "2024-06-09 ～ 2025-10-17",
+          "tools": [
+            "Photoshop",
+            "Illustrator"
+          ],
+          "tags": [
+            "展板",
+            "排版",
+            "渲染"
+          ],
+          "cover": "/works/03-27.jpg",
+          "weight": 5,
+          "files": 7,
+          "sizeMB": 50.1,
+          "images": 7,
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "imgSource": "暂定手工"
+        }
+      ]
+    },
+    {
+      "name": "动画",
+      "count": 2,
+      "works": [
+        {
+          "id": "04-35",
+          "slug": "works/04-35",
+          "title": "康帕斯 · 电泳线产线动画（含材质静帧与 HUD）",
+          "subtitle": "工业产线三维动画（成片 143 秒 / 2560×1440）",
+          "year": "2026-09",
+          "doneDate": "2026-09-30",
+          "span": "2026-09-01 ～ 2026-09-30",
+          "tools": [
+            "Blender",
+            "Premiere Pro",
+            "After Effects",
+            "SolidWorks",
+            "Substance Painter",
+            "HTML/CSS/JS"
+          ],
+          "tags": [
+            "产线动画",
+            "工业",
+            "三维动画",
+            "场景",
+            "材质",
+            "贴图",
+            "PBR",
+            "静帧",
+            "UI",
+            "动效",
+            "HUD",
+            "数据可视化"
+          ],
+          "cover": "/works/04-35.jpg",
+          "weight": 5,
+          "files": 432,
+          "sizeMB": 2231.5,
+          "images": 25,
+          "videos": 10,
+          "client": "康帕斯",
+          "parts": [
+            "产线动画正片",
+            "材质与静帧素材",
+            "HUD 数据看板动效"
+          ],
+          "imgSource": "挑选台"
+        },
+        {
+          "id": "04-36",
+          "slug": "works/04-36",
+          "title": "喷涂线动画",
+          "subtitle": "喷粉 / 喷淋 / 烘干 / 总装线分段动画",
+          "year": "2026-08",
+          "doneDate": "2026-09-16",
+          "span": "2026-09-01 ～ 2026-09-16",
+          "tools": [
+            "Blender",
+            "Premiere Pro"
+          ],
+          "tags": [
+            "产线动画",
+            "工业",
+            "三维动画",
+            "场景"
+          ],
+          "cover": "/works/04-36.jpg",
+          "weight": 5,
+          "files": 75,
+          "sizeMB": 991.1,
+          "images": 0,
+          "videos": 18,
+          "client": "",
+          "parts": [],
+          "imgSource": "暂定手工"
+        }
+      ]
+    },
+    {
       "name": "建模渲染",
-      "count": 26,
+      "count": 29,
       "works": [
         {
           "id": "02-22",
@@ -31,12 +226,11 @@
           "subtitle": "外骨骼手套结构 + 桌面景观雪花球",
           "year": "2026-08",
           "doneDate": "2026-09-18",
-          "span": "2021-03-25 ～ 2026-09-18",
+          "span": "2023-10-08 ～ 2026-09-18",
           "tools": [
             "Blender",
             "SolidWorks",
             "Plasticity",
-            "Photoshop",
             "Rhino"
           ],
           "tags": [
@@ -44,24 +238,75 @@
             "手套",
             "雪花球",
             "建模",
-            "DNA",
-            "外壳",
-            "视觉",
             "工程",
-            "钣金"
+            "钣金",
+            "外壳"
           ],
           "cover": "/works/02-22.jpg",
           "weight": 3,
-          "files": 248,
-          "sizeMB": 542.3,
-          "images": 97,
+          "files": 194,
+          "sizeMB": 420.8,
+          "images": 57,
           "videos": 0,
           "client": "",
           "parts": [
             "机械手套建模",
-            "DNA 外壳设计",
             "产品外壳工程（SolidWorks / Plasticity）"
           ],
+          "imgSource": "暂定手工"
+        },
+        {
+          "id": "04-40",
+          "slug": "works/04-40",
+          "title": "桌面雪花球场景渲染",
+          "subtitle": "产品 + 场景的合成展示",
+          "year": "2026-09",
+          "doneDate": "2026-09-18",
+          "span": "2026-09-17 ～ 2026-09-18",
+          "tools": [
+            "Blender"
+          ],
+          "tags": [
+            "场景",
+            "产品",
+            "渲染"
+          ],
+          "cover": "/works/04-40.jpg",
+          "weight": 5,
+          "files": 6,
+          "sizeMB": 14,
+          "images": 6,
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "imgSource": "挑选台"
+        },
+        {
+          "id": "02-23",
+          "slug": "works/02-23",
+          "title": "DNA 科普教具外壳设计",
+          "subtitle": "以 DNA 双螺旋为视觉母题的产品外壳",
+          "year": "2026-08",
+          "doneDate": "2026-09-08",
+          "span": "2021-03-25 ～ 2026-09-08",
+          "tools": [
+            "Blender",
+            "Photoshop"
+          ],
+          "tags": [
+            "DNA",
+            "外壳",
+            "建模",
+            "视觉"
+          ],
+          "cover": "/works/02-23.jpg",
+          "weight": 4,
+          "files": 54,
+          "sizeMB": 121.6,
+          "images": 40,
+          "videos": 0,
+          "client": "",
+          "parts": [],
           "imgSource": "暂定手工"
         },
         {
@@ -188,7 +433,7 @@
             "渲染"
           ],
           "cover": "/works/02-14.jpg",
-          "weight": 2,
+          "weight": 4,
           "files": 31,
           "sizeMB": 147.6,
           "images": 33,
@@ -348,7 +593,7 @@
             "建模"
           ],
           "cover": "/works/02-15.jpg",
-          "weight": 3,
+          "weight": 5,
           "files": 29,
           "sizeMB": 133.6,
           "images": 31,
@@ -377,7 +622,7 @@
             "渲染"
           ],
           "cover": "/works/02-17.jpg",
-          "weight": 3,
+          "weight": 5,
           "files": 22,
           "sizeMB": 167.7,
           "images": 24,
@@ -434,7 +679,7 @@
             "建模"
           ],
           "cover": "/works/02-12.jpg",
-          "weight": 3,
+          "weight": 5,
           "files": 42,
           "sizeMB": 243.2,
           "images": 42,
@@ -544,7 +789,7 @@
             "草图"
           ],
           "cover": "/works/02-11.jpg",
-          "weight": 1,
+          "weight": 3,
           "files": 78,
           "sizeMB": 497.8,
           "images": 68,
@@ -633,59 +878,6 @@
           "imgSource": "条目自带"
         },
         {
-          "id": "02-18",
-          "slug": "works/02-18",
-          "title": "开关面板设计",
-          "subtitle": "墙面开关 / 插座面板系列",
-          "year": "2024-03",
-          "doneDate": "2024-03-22",
-          "span": "2024-03-07 ～ 2024-03-22",
-          "tools": [
-            "Blender"
-          ],
-          "tags": [
-            "产品设计",
-            "家居",
-            "开关",
-            "建模"
-          ],
-          "cover": "/works/02-18.jpg",
-          "weight": 1,
-          "files": 11,
-          "sizeMB": 81.5,
-          "images": 14,
-          "videos": 0,
-          "client": "",
-          "parts": [],
-          "imgSource": "挑选台"
-        },
-        {
-          "id": "02-25",
-          "slug": "works/02-25",
-          "title": "Rhino 建模练习",
-          "subtitle": "吹风机 / 米家恒温电水壶等",
-          "year": "2023-11",
-          "doneDate": "2024-01-17",
-          "span": "2023-09-25 ～ 2024-01-17",
-          "tools": [
-            "Rhino"
-          ],
-          "tags": [
-            "Rhino",
-            "建模",
-            "练习"
-          ],
-          "cover": "",
-          "weight": 1,
-          "files": 15,
-          "sizeMB": 14,
-          "images": 3,
-          "videos": 0,
-          "client": "",
-          "parts": [],
-          "imgSource": "自动"
-        },
-        {
           "id": "02-21",
           "slug": "works/02-21",
           "title": "校园文创 · 书签「BIU_APT」",
@@ -738,227 +930,86 @@
           "client": "",
           "parts": [],
           "imgSource": "条目自带"
-        }
-      ]
-    },
-    {
-      "name": "动画",
-      "count": 3,
-      "works": [
-        {
-          "id": "04-35",
-          "slug": "works/04-35",
-          "title": "康帕斯 · 电泳线产线动画（含材质静帧与 HUD）",
-          "subtitle": "工业产线三维动画（成片 143 秒 / 2560×1440）",
-          "year": "2026-09",
-          "doneDate": "2026-09-30",
-          "span": "2026-09-01 ～ 2026-09-30",
-          "tools": [
-            "Blender",
-            "Premiere Pro",
-            "After Effects",
-            "SolidWorks",
-            "Substance Painter",
-            "HTML/CSS/JS"
-          ],
-          "tags": [
-            "产线动画",
-            "工业",
-            "三维动画",
-            "场景",
-            "材质",
-            "贴图",
-            "PBR",
-            "静帧",
-            "UI",
-            "动效",
-            "HUD",
-            "数据可视化"
-          ],
-          "cover": "/works/04-35.jpg",
-          "weight": 5,
-          "files": 432,
-          "sizeMB": 2231.5,
-          "images": 25,
-          "videos": 10,
-          "client": "康帕斯",
-          "parts": [
-            "产线动画正片",
-            "材质与静帧素材",
-            "HUD 数据看板动效"
-          ],
-          "imgSource": "挑选台"
         },
         {
-          "id": "04-40",
-          "slug": "works/04-40",
-          "title": "桌面雪花球场景渲染",
-          "subtitle": "产品 + 场景的合成展示",
-          "year": "2026-09",
-          "doneDate": "2026-09-18",
-          "span": "2026-09-17 ～ 2026-09-18",
+          "id": "02-18",
+          "slug": "works/02-18",
+          "title": "开关面板设计",
+          "subtitle": "墙面开关 / 插座面板系列",
+          "year": "2024-03",
+          "doneDate": "2023-08-15",
+          "span": "2024-03-07 ～ 2024-03-22",
           "tools": [
             "Blender"
           ],
           "tags": [
-            "场景",
+            "产品设计",
+            "家居",
+            "开关",
+            "建模"
+          ],
+          "cover": "/works/02-18.jpg",
+          "weight": 1,
+          "files": 11,
+          "sizeMB": 81.5,
+          "images": 14,
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "imgSource": "暂定手工"
+        },
+        {
+          "id": "spice-box",
+          "slug": "works/spice-box",
+          "title": "调味盒设计",
+          "subtitle": "从开关面板那条里拆出来的调味盒",
+          "year": "2023",
+          "doneDate": "2023-07-20",
+          "span": "2023-07-20",
+          "tools": [
+            "Rhino",
+            "KeyShot"
+          ],
+          "tags": [
+            "渲染",
             "产品",
-            "渲染"
+            "练习"
           ],
-          "cover": "/works/04-40.jpg",
-          "weight": 5,
-          "files": 6,
+          "cover": "/works/spice-box.jpg",
+          "weight": 1,
+          "files": 1,
+          "sizeMB": 0,
+          "images": 1,
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "imgSource": "条目自带"
+        },
+        {
+          "id": "02-25",
+          "slug": "works/02-25",
+          "title": "Rhino 建模练习",
+          "subtitle": "吹风机 / 米家恒温电水壶等",
+          "year": "2023-11",
+          "doneDate": "2023-06-10",
+          "span": "2023-09-25 ～ 2024-01-17",
+          "tools": [
+            "Rhino"
+          ],
+          "tags": [
+            "Rhino",
+            "建模",
+            "练习"
+          ],
+          "cover": "",
+          "weight": 1,
+          "files": 15,
           "sizeMB": 14,
-          "images": 6,
+          "images": 3,
           "videos": 0,
           "client": "",
           "parts": [],
-          "imgSource": "挑选台"
-        },
-        {
-          "id": "04-36",
-          "slug": "works/04-36",
-          "title": "喷涂线动画",
-          "subtitle": "喷粉 / 喷淋 / 烘干 / 总装线分段动画",
-          "year": "2026-08",
-          "doneDate": "2026-09-16",
-          "span": "2026-09-01 ～ 2026-09-16",
-          "tools": [
-            "Blender",
-            "Premiere Pro"
-          ],
-          "tags": [
-            "产线动画",
-            "工业",
-            "三维动画",
-            "场景"
-          ],
-          "cover": "/works/04-36.jpg",
-          "weight": 4,
-          "files": 75,
-          "sizeMB": 991.1,
-          "images": 0,
-          "videos": 18,
-          "client": "",
-          "parts": [],
-          "imgSource": "暂定手工"
-        }
-      ]
-    },
-    {
-      "name": "展板",
-      "count": 4,
-      "works": [
-        {
-          "id": "03-29",
-          "slug": "works/03-29",
-          "title": "展板 · 震后救援侦察无人机",
-          "subtitle": "灾后搜救场景的无人机概念设计",
-          "year": "2025-12",
-          "doneDate": "2025-12-05",
-          "span": "2025-12-05 ～ 2025-12-05",
-          "tools": [
-            "Photoshop",
-            "Blender"
-          ],
-          "tags": [
-            "展板",
-            "无人机",
-            "救援",
-            "产品设计"
-          ],
-          "cover": "/works/03-29.jpg",
-          "weight": 4,
-          "files": 1,
-          "sizeMB": 12.2,
-          "images": 2,
-          "videos": 0,
-          "client": "",
-          "parts": [],
-          "imgSource": "挑选台"
-        },
-        {
-          "id": "03-30",
-          "slug": "works/03-30",
-          "title": "展板 · 智能骑行穿戴头盔《Vision Rider》",
-          "subtitle": "骑行安全方向的智能穿戴产品",
-          "year": "2025-12",
-          "doneDate": "2025-12-05",
-          "span": "2025-12-05 ～ 2025-12-05",
-          "tools": [
-            "Photoshop",
-            "Blender"
-          ],
-          "tags": [
-            "展板",
-            "头盔",
-            "穿戴",
-            "产品设计"
-          ],
-          "cover": "/works/03-30.jpg",
-          "weight": 4,
-          "files": 1,
-          "sizeMB": 13.1,
-          "images": 2,
-          "videos": 0,
-          "client": "",
-          "parts": [],
-          "imgSource": "挑选台"
-        },
-        {
-          "id": "03-31",
-          "slug": "works/03-31",
-          "title": "展板 · 公路隧道消防巡检机器人",
-          "subtitle": "隧道环境下的消防巡检机器人",
-          "year": "2025-12",
-          "doneDate": "2025-12-05",
-          "span": "2025-12-05 ～ 2025-12-05",
-          "tools": [
-            "Photoshop",
-            "Blender"
-          ],
-          "tags": [
-            "展板",
-            "机器人",
-            "消防",
-            "产品设计"
-          ],
-          "cover": "/works/03-31.jpg",
-          "weight": 4,
-          "files": 1,
-          "sizeMB": 9.6,
-          "images": 2,
-          "videos": 0,
-          "client": "",
-          "parts": [],
-          "imgSource": "挑选台"
-        },
-        {
-          "id": "03-27",
-          "slug": "works/03-27",
-          "title": "项目展板合集",
-          "subtitle": "各产品设计项目的最终展板（A3 竖版）",
-          "year": "2024-2025",
-          "doneDate": "2025-10-17",
-          "span": "2024-06-09 ～ 2025-10-17",
-          "tools": [
-            "Photoshop",
-            "Illustrator"
-          ],
-          "tags": [
-            "展板",
-            "排版",
-            "渲染"
-          ],
-          "cover": "/works/03-27.jpg",
-          "weight": 5,
-          "files": 7,
-          "sizeMB": 50.1,
-          "images": 7,
-          "videos": 0,
-          "client": "",
-          "parts": [],
-          "imgSource": "暂定手工"
+          "imgSource": "自动"
         }
       ]
     },
@@ -995,7 +1046,7 @@
           "videos": 0,
           "client": "",
           "parts": [],
-          "imgSource": "挑选台"
+          "imgSource": "暂定手工"
         },
         {
           "id": "01-07",
@@ -1014,7 +1065,7 @@
             "平面"
           ],
           "cover": "/works/01-07.jpg",
-          "weight": 1,
+          "weight": 3,
           "files": 4,
           "sizeMB": 12.1,
           "images": 4,
@@ -1041,7 +1092,7 @@
             "平面"
           ],
           "cover": "/works/pack-2024.jpg",
-          "weight": 2,
+          "weight": 4,
           "files": 0,
           "sizeMB": 0,
           "images": 0,
@@ -1069,7 +1120,7 @@
             "平面"
           ],
           "cover": "/works/01-03.jpg",
-          "weight": 3,
+          "weight": 4,
           "files": 22,
           "sizeMB": 14.4,
           "images": 20,
@@ -1096,7 +1147,7 @@
             "平面"
           ],
           "cover": "/works/01-01.jpg",
-          "weight": 2,
+          "weight": 3,
           "files": 5,
           "sizeMB": 16.7,
           "images": 4,
@@ -1123,7 +1174,7 @@
             "平面"
           ],
           "cover": "/works/01-02.jpg",
-          "weight": 2,
+          "weight": 3,
           "files": 18,
           "sizeMB": 8.7,
           "images": 16,

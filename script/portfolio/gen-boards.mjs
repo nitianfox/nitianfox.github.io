@@ -29,9 +29,23 @@ const rows = [];
 // 「预览_xxx」是整理作品集时按原图生成的预览副本，有原图就不要它
 const isGeneratedPreview = (s) => /^预览_/.test(path.basename(s));
 
+// 每块展板归回它真正所属的项目（点进去直达那个作品）
+const BOARD_TARGET = {
+  '03-27|浴缸.png': '02-12',
+  '03-27|连杆吊灯.png': '02-17',
+  '03-27|碎纸机.png': '02-14',
+  '03-27|香薰.png': '02-15',
+  '03-27|螺丝刀.png': '02-11',
+  '03-27|头盔.jpg': '03-30',
+  '03-27|展板.png': '02-11',
+};
+// 用户 2026-10-03：展板总览去重 —— 删掉第一块适老化浴缸（02-12 那份底部还印着咖啡杯模板）与第一块头盔板
+const SKIP = new Set(['02-12|展板.png', '03-27|头盔.jpg']);
+
 function addItem(workId, name, rel) {
   const w = byId.get(workId);
   if (!w) return;
+  if (SKIP.has(`${workId}|${name}`)) return;
   const abs = path.join(SRC, rel);
   if (!fs.existsSync(abs)) return;
   const h = crypto.createHash('sha256').update(fs.readFileSync(abs)).digest('hex');
@@ -67,15 +81,7 @@ fs.mkdirSync(OUT_DIR, { recursive: true });
 // 清掉旧文件
 for (const f of fs.readdirSync(OUT_DIR)) if (/\.jpg$/i.test(f)) fs.rmSync(path.join(OUT_DIR, f), { force: true });
 
-// 03-27 里的展板是按题材命名的，把它们归回各自的项目（点进去直接到那个作品）
-const BOARD_TARGET = {
-  '浴缸.png': '02-12',
-  '连杆吊灯.png': '02-17',
-  '碎纸机.png': '02-14',
-  '香薰.png': '02-15',
-  '螺丝刀.png': '02-11',
-  '头盔.jpg': '03-30',
-};
+
 
 const items = [];
 let n = 0;
@@ -84,7 +90,7 @@ for (const r of rows) {
   const file = `${String(n).padStart(2, '0')}.jpg`;
   await sharp(r.abs).resize({ width: 1100, height: 1100, fit: 'inside', withoutEnlargement: true })
     .jpeg({ quality: 84, progressive: true }).toFile(path.join(OUT_DIR, file));
-  const targetId = BOARD_TARGET[r.name] ?? r.workId;
+  const targetId = BOARD_TARGET[`${r.workId}|${r.name}`] ?? BOARD_TARGET[r.name] ?? r.workId;
   const target = byId.get(targetId);
   items.push({
     file: `/boards/${file}`,

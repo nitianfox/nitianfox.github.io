@@ -375,11 +375,19 @@ for (const e of entries) {
     const valid = new Set(cands.map((c) => c.thumb));
     const selPicked = (sel?.selected ?? []).filter((t) => valid.has(t));
     const selCover = sel?.cover && valid.has(sel.cover) ? sel.cover : null;
-    if (selPicked.length) {
-      if (selCover) addPick(path.join(SRC, selCover), false);
-      for (const t of fixedThumbs) addPick(path.join(SRC, t), false);
-      for (const abs of (fixedManualAbs ?? resolveManual(fixedManual))) addPick(abs, true);
-      for (const t of selPicked) addPick(path.join(SRC, t), false);
+    if (selPicked.length || fixedCount) {
+      if (fixedSpec.first) {
+        // 固定图当封面（例如「用展板当封面」）
+        for (const t of fixedThumbs) addPick(path.join(SRC, t), false);
+        for (const abs of (fixedManualAbs ?? resolveManual(fixedManual))) addPick(abs, true);
+        if (selCover) addPick(path.join(SRC, selCover), false);
+        for (const t of selPicked) addPick(path.join(SRC, t), false);
+      } else {
+        if (selCover) addPick(path.join(SRC, selCover), false);
+        for (const t of fixedThumbs) addPick(path.join(SRC, t), false);
+        for (const abs of (fixedManualAbs ?? resolveManual(fixedManual))) addPick(abs, true);
+        for (const t of selPicked) addPick(path.join(SRC, t), false);
+      }
     } else {
       for (const t of pickByRule(cands, plan.images)) addPick(path.join(SRC, t), false);
       for (const t of fixedThumbs) addPick(path.join(SRC, t), false);
