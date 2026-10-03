@@ -49,13 +49,15 @@ jobs:
           echo "BASE_PATH=$BASE_PATH" >> "$GITHUB_ENV"
           pnpm build
 
-      - name: 自检（产物里的绝对地址是否是线上域名）
+      - name: 自检（产物里的绝对地址必须是线上域名）
         run: |
-          if grep -q "localhost:4321" dist/sitemap.xml; then
-            echo "::error::sitemap 里仍是 localhost，SITE_URL 没生效"
+          test -f dist/sitemap.xml || { echo "::error::没生成 sitemap.xml"; exit 1; }
+          first="$(grep -o '<loc>[^<]*' dist/sitemap.xml | head -1)"
+          echo "sitemap 首条：$first"
+          if echo "$first" | grep -q 'localhost'; then
+            echo "::error::sitemap 里还是 localhost，站点地址没生效"
             exit 1
           fi
-          echo "sitemap 首条：$(grep -o '<loc>[^<]*' dist/sitemap.xml | head -1)"
 
       - uses: actions/configure-pages@v5
         with:
