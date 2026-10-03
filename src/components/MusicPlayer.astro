@@ -44,6 +44,26 @@ const src = "/music/intro-another-line.mp3";
     audio.volume = 0.25;      // 默认音量很小
     audio.preload = 'none';
 
+    let userPaused = false;   // 用户在本页手动暂停过就不再自动播放
+    let lastPath = location.pathname;
+
+    // 进入「摄影」栏目时自动尝试播放（浏览器若拦截则静默失败，点按钮仍可播放）
+    const inPhotos = () => /\/photos\//.test(location.pathname);
+    const maybeAutoPlay = () => {
+      const p = location.pathname;
+      if (p === lastPath) return;
+      const wasPhotos = /\/photos\//.test(lastPath);
+      lastPath = p;
+      if (wasPhotos) userPaused = false;          // 离开摄影栏目后重置
+      if (inPhotos() && !userPaused && audio.paused) {
+        setOrigin();
+        audio.play().catch(() => {});
+      }
+    };
+    setInterval(maybeAutoPlay, 1000);
+    // 延迟到 setOrigin 定义之后再执行，避免 TDZ 报错
+    setTimeout(() => { if (inPhotos()) { setOrigin(); audio.play().catch(() => {}); } }, 0);
+
     const setOrigin = () => {
       const r = btn.getBoundingClientRect();
       bg.style.setProperty('--bgm-x', (r.left + r.width / 2) + 'px');
@@ -55,7 +75,7 @@ const src = "/music/intro-another-line.mp3";
     btn.addEventListener('click', () => {
       setOrigin();
       if (audio.paused) audio.play().catch(() => {});
-      else audio.pause();
+      else { userPaused = true; audio.pause(); }
     });
 
     audio.addEventListener('play', () => {
