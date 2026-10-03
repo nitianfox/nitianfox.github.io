@@ -1,6 +1,7 @@
 // 把工业设计作品集（D:\工业设计作品集）的每个作品生成为一篇博客文章，并产出作品集页面数据。
 //
-//   node script/portfolio/gen-posts.mjs            # 生成
+//   node script/portfolio/gen-posts.mjs            # 生成（已存在的文章默认跳过，不覆盖手改内容）
+//   node script/portfolio/gen-posts.mjs --force    # 连已存在的文章一起重建
 //   node script/portfolio/gen-posts.mjs --dry      # 只看清单，不写文件
 //   $env:PORTFOLIO_SRC='D:\别的目录'; node script/portfolio/gen-posts.mjs
 //
@@ -24,6 +25,7 @@ const BLOG = path.join(PROJECT, 'src', 'content', 'blog', 'works');
 const PUBLIC_WORKS = path.join(PROJECT, 'public', 'works');
 const DATA_OUT = path.join(PROJECT, 'src', 'data', 'portfolio.json');
 const DRY = process.argv.includes('--dry');
+const FORCE = process.argv.includes('--force');
 const CUT = new Date('2026-10-03T00:00:00').getTime(); // 作品集整理当天
 
 if (!fs.existsSync(path.join(WEB, 'works.json'))) {
@@ -91,10 +93,13 @@ for (const w of works) {
   const span = minMs && maxMs ? `${iso(minMs)} ～ ${iso(maxMs)}` : (w.year || '—');
 
   const postDir = path.join(BLOG, w.id);
+  // 默认不覆盖已经存在的文章：手改过的正文、加过的图都不会被冲掉（要重建加 --force）
+  const mdPath = path.join(postDir, 'zh-cn.md');
+  const skipPost = fs.existsSync(mdPath) && !FORCE;
   const imgs = pickImages(w);
   const copied = [];
 
-  if (!DRY) {
+  if (!DRY && !skipPost) {
     fs.mkdirSync(postDir, { recursive: true });
     for (const f of fs.readdirSync(postDir)) {
       if (/\.(jpg|png|jpeg|webp)$/i.test(f)) fs.rmSync(path.join(postDir, f), { force: true });
@@ -106,7 +111,7 @@ for (const w of works) {
     if (!fs.existsSync(srcAbs)) continue;
     const name = i === 0 ? 'cover.jpg' : `${String(i).padStart(2, '0')}.jpg`;
     copied.push(name);
-    if (!DRY) fs.copyFileSync(srcAbs, path.join(postDir, name));
+    if (!DRY && !skipPost) fs.copyFileSync(srcAbs, path.join(postDir, name));
   }
 
   // 作品集网格封面：压到 800px，省流量
@@ -163,7 +168,7 @@ ${bodyImgs || '（这个作品留下的主要是视频，预览图待补）'}
 制作时间跨度：${span}
 `;
 
-  if (!DRY) fs.writeFileSync(path.join(postDir, 'zh-cn.md'), md, 'utf8');
+  if (!DRY && !skipPost) fs.writeFileSync(mdPath, md, 'utf8');
 
   const item = {
     id: w.id,
@@ -183,7 +188,7 @@ ${bodyImgs || '（这个作品留下的主要是视频，预览图待补）'}
   };
   if (!byCategory.has(w.category)) byCategory.set(w.category, []);
   byCategory.get(w.category).push(item);
-  report.push({ id: w.id, doneDate, span, copied: copied.length, cat: w.category, title: w.title });
+  report.push({ id: w.id, doneDate, span, copied: copied.length, cat: w.category, title: w.title, skipped: skipPost });
 }
 
 const order = ['平面设计', '三维建模', '产品渲染', '场景动画'];
@@ -205,7 +210,11 @@ if (!DRY) {
 }
 
 report.sort((a, b) => a.doneDate.localeCompare(b.doneDate));
-console.log(`${DRY ? '[dry] 预览' : '已生成'} ${report.length} 篇文章 -> ${path.relative(PROJECT, BLOG)}`);
-for (const r of report) console.log(`  ${r.id}  ${r.doneDate}  ${r.copied}图  ${r.cat.padEnd(5)}  ${r.title}`);
+const skipped = report.filter((r) => r.skipped).length;
+console.log(`${DRY ? '[dry] 预览' : '已处理'} ${report.length} 篇文章 -> ${path.relative(PROJECT, BLOG)}` +
+  (skipped ? `（其中 ${skipped} 篇已存在、已跳过；要重建加 --force）` : ''));
+for (const r of report) {
+  console.log(`  ${r.id}  ${r.doneDate}  ${r.copied}图  ${r.cat.padEnd(5)}  ${r.title}${r.skipped ? '  [跳过]' : ''}`);
+}
 console.log(`\n作品集数据 -> ${path.relative(PROJECT, DATA_OUT)}（${categories.map((c) => `${c.name} ${c.count}`).join(' / ')}）`);
 console.log(`作品集封面 -> ${path.relative(PROJECT, PUBLIC_WORKS)}（${fs.readdirSync(PUBLIC_WORKS).length} 个文件）`);
