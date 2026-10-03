@@ -1,7 +1,7 @@
 {
-  "generated": "2026-10-03 10:46:23",
+  "generated": "2026-10-03 10:58:42",
   "source": "D:\\工业设计作品集",
-  "total": 42,
+  "total": 43,
   "sectionOrder": [
     "展板",
     "动画",
@@ -217,7 +217,7 @@
     },
     {
       "name": "建模渲染",
-      "count": 29,
+      "count": 30,
       "works": [
         {
           "id": "02-22",
@@ -226,33 +226,26 @@
           "subtitle": "外骨骼手套结构 + 桌面景观雪花球",
           "year": "2026-08",
           "doneDate": "2026-09-18",
-          "span": "2023-10-08 ～ 2026-09-18",
+          "span": "2026-09-16 ～ 2026-09-18",
           "tools": [
             "Blender",
             "SolidWorks",
-            "Plasticity",
-            "Rhino"
+            "Plasticity"
           ],
           "tags": [
             "机械",
             "手套",
             "雪花球",
-            "建模",
-            "工程",
-            "钣金",
-            "外壳"
+            "建模"
           ],
           "cover": "/works/02-22.jpg",
-          "weight": 3,
-          "files": 194,
-          "sizeMB": 420.8,
-          "images": 57,
+          "weight": 4,
+          "files": 27,
+          "sizeMB": 137.7,
+          "images": 25,
           "videos": 0,
           "client": "",
-          "parts": [
-            "机械手套建模",
-            "产品外壳工程（SolidWorks / Plasticity）"
-          ],
+          "parts": [],
           "imgSource": "暂定手工"
         },
         {
@@ -280,6 +273,36 @@
           "client": "",
           "parts": [],
           "imgSource": "挑选台"
+        },
+        {
+          "id": "02-24",
+          "slug": "works/02-24",
+          "title": "外壳设计",
+          "subtitle": "钣金总装 · 外壳改型 · 铰链结构",
+          "year": "2026-08",
+          "doneDate": "2026-09-12",
+          "span": "2023-10-08 ～ 2026-09-16",
+          "tools": [
+            "SolidWorks",
+            "Plasticity",
+            "Rhino",
+            "Blender"
+          ],
+          "tags": [
+            "工程",
+            "钣金",
+            "外壳",
+            "建模"
+          ],
+          "cover": "/works/02-24.jpg",
+          "weight": 4,
+          "files": 167,
+          "sizeMB": 283,
+          "images": 32,
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "imgSource": "暂定手工"
         },
         {
           "id": "02-23",
