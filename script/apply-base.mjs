@@ -53,4 +53,18 @@ if (!fs.existsSync(DIST)) {
   process.exit(1);
 }
 walk(DIST);
+
+// 写一份构建体检文件：部署后访问 /build-info.json 就能知道这次构建拿到了什么环境变量
+const info = {
+  builtAt: new Date().toISOString(),
+  siteUrl: process.env.SITE_URL || '',
+  basePath: raw,
+  baseApplied: base || '(根目录)',
+  repo: process.env.GITHUB_REPOSITORY || '(本地构建)',
+  commit: process.env.GITHUB_SHA || '',
+  runId: process.env.GITHUB_RUN_ID || '',
+};
+fs.writeFileSync(path.join(DIST, 'build-info.json'), JSON.stringify(info, null, 2), 'utf8');
+console.log('[apply-base] 构建信息 -> /build-info.json', JSON.stringify(info));
+
 console.log(`[apply-base] 改写了 ${nHtml} 个 HTML、${nCss} 个 CSS`);
