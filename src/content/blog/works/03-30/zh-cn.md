@@ -31,6 +31,7 @@ pinTop: 0
 
 ![展板 · 智能骑行穿戴头盔《Vision Rider》](./01.jpg)
 ![展板 · 智能骑行穿戴头盔《Vision Rider》](./02.jpg)
+![展板 · 智能骑行穿戴头盔《Vision Rider》](./03.jpg)
 
 ## 素材
 

@@ -362,7 +362,11 @@ for (const e of entries) {
   const fixedSpec = hasFixedList ? {} : (extraImages[main.id] ?? {});
   const fixedThumbs = fixedSpec.thumbs ?? [];
   const fixedManual = fixedSpec.files ?? [];
-  const fixedCount = fixedThumbs.filter((t) => fs.existsSync(path.join(SRC, t))).length + fixedManual.length;
+  const fixedDir = fixedSpec.dir ?? '';
+  const fixedManualAbs = fixedDir
+    ? fixedManual.map((rel) => path.join(fixedDir, rel)).filter((p) => fs.existsSync(p))
+    : null;
+  const fixedCount = fixedThumbs.filter((t) => fs.existsSync(path.join(SRC, t))).length + (fixedManualAbs ? fixedManualAbs.length : fixedManual.length);
 
   // 3) 没有固定清单时：封面优先 → 归回来的固定图 → 其余选择/自动规则
   if (skipImages || hasFixedList) {
@@ -374,12 +378,12 @@ for (const e of entries) {
     if (selPicked.length) {
       if (selCover) addPick(path.join(SRC, selCover), false);
       for (const t of fixedThumbs) addPick(path.join(SRC, t), false);
-      for (const abs of resolveManual(fixedManual)) addPick(abs, true);
+      for (const abs of (fixedManualAbs ?? resolveManual(fixedManual))) addPick(abs, true);
       for (const t of selPicked) addPick(path.join(SRC, t), false);
     } else {
       for (const t of pickByRule(cands, plan.images)) addPick(path.join(SRC, t), false);
       for (const t of fixedThumbs) addPick(path.join(SRC, t), false);
-      for (const abs of resolveManual(fixedManual)) addPick(abs, true);
+      for (const abs of (fixedManualAbs ?? resolveManual(fixedManual))) addPick(abs, true);
     }
   }
   // 4) 收敛到预算：权重预算与「每篇至少 MIN_IMAGES 张」取大者（手工/额外清单不截；归回的固定图不截）
