@@ -1,6 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
-import { profileConfig, contactConfig } from "../config";
+import { profileConfig, contactConfig, visitCounterConfig } from "../config";
 
 let introPage : string;
 
@@ -15,6 +15,17 @@ if (profileConfig.indexPage) {
 <footer class="flex flex-col md:flex-row md:justify-between items-start md:items-center py-10 text-[var(--text-color-70)] max-w-[var(--header-width)] mx-auto w-full">
     <div class="mb-1 md:mb-0">
         © {profileConfig.startYear} - {new Date().getFullYear()} <a class="link-line" target="_self" href={introPage}>{profileConfig.name}</a>. 
+        <!-- 访问量：数字由下面的脚本填。服务不可用时整段保持 hidden（不显示「-」）。 -->
+        {visitCounterConfig.enable && (
+            <span
+                id="visit-counter"
+                class="visit-counter hidden"
+                data-api={visitCounterConfig.apiUrl}
+                data-domains={visitCounterConfig.domains.join(",")}
+            >
+                <span class="sep">·</span><span id="visit-counter-value"></span>
+            </span>
+        )}
     </div>
     <div class="right">
         <p>
@@ -33,10 +44,78 @@ if (profileConfig.indexPage) {
     </div>
 </footer>
 
+<!-- 访问量计数器（第三方服务，配置在 src/config.ts 的 visitCounterConfig）。
+     data-swup-ignore-script：页脚在 swup 容器之外、换页不会重建，但 swup 会把文档里的
+     内联脚本重放一遍，重放会重复绑定监听 → 用属性 + window 守卫双重保险。
+     计数时机：首次加载跑一次，之后每次换页（astro:page-load）再跑一次；
+     同一个网址连续重复触发只算一次（last 去重），避免重复计数。 -->
+<script is:inline data-swup-ignore-script>
+    (() => {
+        const box = document.getElementById('visit-counter');
+        if (!box || window.__visitCounterWired) return;
+        const valueEl = document.getElementById('visit-counter-value');
+        const api = box.dataset.api;
+        if (!api || !valueEl) return;
+
+        // 只在白名单域名显示：镜像域名（pages.dev / github.io）各算一份账，显示出来容易误解
+        const domains = (box.dataset.domains || '').split(',').map((s) => s.trim()).filter(Boolean);
+        if (domains.length && !domains.includes(location.hostname)) return;
+
+        window.__visitCounterWired = true;
+
+        // UV 去重用的 cookie 名与服务商保持一致，换服务时记得同步改
+        const uvKey = 'vercount_uv_' + (location.host || 'unknown-host').replace(/[^a-zA-Z0-9_-]/g, '_');
+        const fmt = (n) => Number(n || 0).toLocaleString('en-US');
+        let last = '';
+
+        const count = async (url) => {
+            try {
+                const isNewUv = document.cookie.split('; ').indexOf(uvKey + '=1') === -1;
+                if (isNewUv) {
+                    document.cookie = uvKey + '=1; path=/; max-age=31536000; samesite=lax';
+                }
+                const res = await fetch(api, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url, isNewUv }),
+                });
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                const json = await res.json();
+                const d = (json && (json.data || json)) || {};
+                valueEl.textContent =
+                    '本页 ' + fmt(d.page_pv) + ' 次 · 本站 ' + fmt(d.site_pv) + ' 次 · 访客 ' + fmt(d.site_uv) + ' 人';
+                box.classList.remove('hidden');
+            } catch (err) {
+                // 统计服务不可用（被墙 / 离线 / 限流）：静默隐藏，不影响页面
+            }
+        };
+
+        const run = () => {
+            const url = location.href;
+            if (url === last) return;
+            last = url;
+            count(url);
+        };
+
+        run();
+        document.addEventListener('astro:page-load', run);
+    })();
+</script>
+
 
 <style>
     footer {
         font-family:  "EB Garamond", cursive !important; 
+    }
+
+    /* 访问量：没拿到数字前整块隐藏（不显示「-」或 0） */
+    .visit-counter.hidden {
+        display: none;
+    }
+
+    .visit-counter .sep {
+        margin: 0 0.35em;
+        opacity: 0.6;
     }
    .right a {
         color: inherit;

@@ -83,6 +83,19 @@ export const contactConfig = {
     wechat: "m17791554332",
 };
 
+// 访问量计数器（第三方服务，页脚显示「本页 N 次 · 本站 N 次 · 访客 N 人」）。
+// 用的是 Vercount（busuanzi 不蒜子的兼容替代，服务端在 Vercel，国内可直连）。
+//   · 原理：每次浏览向下面的 apiUrl 发一个 POST，换回累计数字渲染到页脚；
+//   · 隐私：只发当前网址 + 「本机是否首次来访」，不发 IP、不读任何本地信息；
+//   · 服务挂了 / 被墙 / 离线：自动隐藏整块，不影响页面任何功能；
+//   · domains：只在这些域名下显示。镜像地址（ntfox.pages.dev、nitianfox.github.io）
+//     各算一份互不相通的账，显示出来容易误解，所以默认只在正式域名 + 本地预览显示。
+export const visitCounterConfig = {
+    enable: true,
+    apiUrl: "https://events.vercount.one/api/v2/log",
+    domains: ["204041.xyz", "www.204041.xyz", "localhost", "127.0.0.1"],
+};
+
 export const i18nConfig: I18nConfig = {
     defaultLanguage: "zh-cn", // Default language of the site
     supportedLanguages: ["zh-cn", "en"], // List of supported languages
