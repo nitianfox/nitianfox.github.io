@@ -85,15 +85,20 @@ export const contactConfig = {
 
 // 访问量计数器（第三方服务，页脚显示「本页 N 次 · 本站 N 次 · 访客 N 人」）。
 // 用的是 Vercount（busuanzi 不蒜子的兼容替代，服务端在 Vercel，国内可直连）。
-//   · 原理：每次浏览向下面的 apiUrl 发一个 POST，换回累计数字渲染到页脚；
-//   · 隐私：只发当前网址 + 「本机是否首次来访」，不发 IP、不读任何本地信息；
+//   · 三个地址共用一份计数：不管从哪个域名进来，一律按 reportAs（= 正式域名）上报，
+//     服务端是按「上报网址的 host」记账的（实测：同一个 url 换 Origin 计数连续累加，
+//     换 host 才各算一份），所以 204041.xyz / ntfox.pages.dev / nitianfox.github.io
+//     页脚显示的是同一个数字。
+//   · 隐私：只发当前路径 + 「本机是否首次来访」，不发 IP、不读任何本地信息；
 //   · 服务挂了 / 被墙 / 离线：自动隐藏整块，不影响页面任何功能；
-//   · domains：只在这些域名下显示。镜像地址（ntfox.pages.dev、nitianfox.github.io）
-//     各算一份互不相通的账，显示出来容易误解，所以默认只在正式域名 + 本地预览显示。
+//   · domains：在哪些域名下显示这个合并数字。不在名单里的域名（例如别人 fork 出来的
+//     镜像）既不显示、也不上报，避免污染统计。
+//   · 换正式域名：只改 siteConfig.rootSiteUrl 一处（历史计数会留在旧域名的账下）。
 export const visitCounterConfig = {
     enable: true,
     apiUrl: "https://events.vercount.one/api/v2/log",
-    domains: ["204041.xyz", "www.204041.xyz", "localhost", "127.0.0.1"],
+    reportAs: siteConfig.rootSiteUrl,
+    domains: ["204041.xyz", "www.204041.xyz", "ntfox.pages.dev", "nitianfox.github.io", "localhost", "127.0.0.1"],
 };
 
 export const i18nConfig: I18nConfig = {

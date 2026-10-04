@@ -3,6 +3,7 @@ import MainPageLayout from '@layouts/MainPageLayout.astro';
 import Cover from '@components/Cover.astro';
 import PostPage from '@components/PostPage.astro';
 import Navi from '@components/control/Navi.astro';
+import AutoPaginate from '@components/control/AutoPaginate.astro';
 import FabMenu from '@components/control/FabMenu.astro';
 
 import { getBlogEntrySort } from '@utils/contentUtils'
@@ -76,11 +77,22 @@ const shareImage = usePhotoCover && (coverImage.startsWith('/') || /^https?:\/\/
     ? coverImage
     : undefined;
 
+// 自动翻页：把下一页的地址一起渲染进哨兵（构建时算好），客户端滚到底时按它去取。
+// 地址规则与 Navi 里的 getPageUrl 保持一致（第 1 页是 /）。
+const nextPage = page.currentPage + 1;
+const nextPageUrl = nextPage <= page.lastPage
+    ? getRelativeLocaleUrl(currentLang, nextPage === 1 ? '/' : `/${nextPage}/`)
+    : undefined;
+
 ---
 
 <MainPageLayout title={pageTitle} lang={currentLang} image={shareImage} photoCover={usePhotoCover}>
     <Cover title={t("cover.title.home")} subTitle={t("cover.subTitle.home")} photo={usePhotoCover} />
-    <PostPage page={page} />
+    <!-- id="post-feed"：自动翻页要往里追加新卡片；卡片本身样式不变，只是多了一层普通容器 -->
+    <div id="post-feed">
+        <PostPage page={page} />
+    </div>
+    <AutoPaginate nextUrl={nextPageUrl} />
     <Navi page={page} />
     <!-- fixed 浮层：留在 swup 容器内，但在淡入淡出元素之外（见 MainPageLayout 的说明） -->
     <div slot="overlay">

@@ -21,6 +21,7 @@ if (profileConfig.indexPage) {
                 id="visit-counter"
                 class="visit-counter hidden"
                 data-api={visitCounterConfig.apiUrl}
+                data-site={visitCounterConfig.reportAs}
                 data-domains={visitCounterConfig.domains.join(",")}
             >
                 <span class="sep">·</span><span id="visit-counter-value"></span>
@@ -45,6 +46,7 @@ if (profileConfig.indexPage) {
 </footer>
 
 <!-- 访问量计数器（第三方服务，配置在 src/config.ts 的 visitCounterConfig）。
+     只显示访客总数（UV）；三个地址（正式域名 / pages.dev / github.io）共用一份计数。
      data-swup-ignore-script：页脚在 swup 容器之外、换页不会重建，但 swup 会把文档里的
      内联脚本重放一遍，重放会重复绑定监听 → 用属性 + window 守卫双重保险。
      计数时机：首次加载跑一次，之后每次换页（astro:page-load）再跑一次；
@@ -57,14 +59,23 @@ if (profileConfig.indexPage) {
         const api = box.dataset.api;
         if (!api || !valueEl) return;
 
-        // 只在白名单域名显示：镜像域名（pages.dev / github.io）各算一份账，显示出来容易误解
+        // 只在白名单域名显示（不在名单里的镜像既不显示也不上报，避免污染统计）
         const domains = (box.dataset.domains || '').split(',').map((s) => s.trim()).filter(Boolean);
         if (domains.length && !domains.includes(location.hostname)) return;
 
         window.__visitCounterWired = true;
 
-        // UV 去重用的 cookie 名与服务商保持一致，换服务时记得同步改
-        const uvKey = 'vercount_uv_' + (location.host || 'unknown-host').replace(/[^a-zA-Z0-9_-]/g, '_');
+        // 三个地址共用一份计数：不管从哪个域名进来，都按正式域名（data-site）上报。
+        // 服务端按上报网址的 host 记账，所以镜像站与正式域名看到的是同一个数字。
+        const site = (box.dataset.site || '').replace(/\/+$/, '');
+        const target = () => (site ? site + location.pathname + location.search : location.href);
+
+        // UV 去重用的 cookie 名按**正式域名的 host** 命名（与服务商同名同规则）。
+        // ⚠️ cookie 跨不了域名：同一个人分别从 204041.xyz 和 pages.dev 进来会被算两次 UV，
+        //    这是浏览器 cookie 的固有限制，除非以后自己有后端。PV 不受影响，是合在一起的。
+        let uvHost = location.host || 'unknown-host';
+        try { if (site) uvHost = new URL(site).host; } catch (err) {}
+        const uvKey = 'vercount_uv_' + uvHost.replace(/[^a-zA-Z0-9_-]/g, '_');
         const fmt = (n) => Number(n || 0).toLocaleString('en-US');
         let last = '';
 
@@ -82,8 +93,9 @@ if (profileConfig.indexPage) {
                 if (!res.ok) throw new Error('HTTP ' + res.status);
                 const json = await res.json();
                 const d = (json && (json.data || json)) || {};
-                valueEl.textContent =
-                    '本页 ' + fmt(d.page_pv) + ' 次 · 本站 ' + fmt(d.site_pv) + ' 次 · 访客 ' + fmt(d.site_uv) + ' 人';
+                // 只显示访客总数（UV）：三个地址合一份账，同一个人只算一次
+                valueEl.textContent = '访客 ' + fmt(d.site_uv) + ' 人';
+                box.title = '本站累计访客数（同一浏览器只算一次）';
                 box.classList.remove('hidden');
             } catch (err) {
                 // 统计服务不可用（被墙 / 离线 / 限流）：静默隐藏，不影响页面
@@ -91,8 +103,8 @@ if (profileConfig.indexPage) {
         };
 
         const run = () => {
-            const url = location.href;
-            if (url === last) return;
+            const url = target();
+            if (url === last) return; // 同一页连续重复触发（首屏 + 换页兜底）只算一次
             last = url;
             count(url);
         };

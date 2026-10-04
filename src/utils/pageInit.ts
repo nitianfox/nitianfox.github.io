@@ -23,6 +23,16 @@ export function registerPageInit(fn: PageInit): void {
   if (started) fn();
 }
 
+/**
+ * 手动跑一遍全部初始化。
+ * 给「没有换页、但 DOM 变了」的场景用：自动翻页把新卡片插进列表后，
+ * 需要让 AOS / 灯箱 / 目录等重新收集元素（等价于一次换页后的那一轮）。
+ * 注册的回调都要求幂等，所以重复调用是安全的。
+ */
+export function runPageInit(): void {
+  runAll();
+}
+
 function boot() {
   if (started) return;
   started = true;
