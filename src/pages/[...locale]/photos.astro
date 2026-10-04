@@ -31,11 +31,11 @@ const pageDescription = label + " · " + total + " 张";
                     <h2 class="text-lg font-semibold">{g.title}</h2>
                     <span class="text-xs opacity-60">{g.date} · {g.images.length} 张</span>
                 </div>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {g.images.map((im) => (
                         <a href={`/blog/${g.slug}/`} class="group block overflow-hidden rounded-lg border border-[var(--button-border-color)] bg-[var(--button-hover-color)]">
                             <img src={im.src} alt={im.caption} loading="lazy"
-                                class="w-full h-48 md:h-56 object-cover transition duration-300 group-hover:scale-[1.03]" />
+                                class="w-full h-[46vh] md:h-[54vh] object-cover transition duration-300 group-hover:scale-[1.02]" />
                         </a>
                     ))}
                 </div>

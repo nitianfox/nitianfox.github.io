@@ -1,6 +1,97 @@
 {
-  "generated": "2026-10-03 16:24:07",
+  "generated": "2026-10-04 10:44:34",
   "groups": [
+    {
+      "slug": "photo-261004",
+      "title": "雨",
+      "date": "2026-10-04",
+      "images": [
+        {
+          "src": "/photos/photo-261004/01.jpg",
+          "caption": "车窗上的雨"
+        },
+        {
+          "src": "/photos/photo-261004/02.jpg",
+          "caption": "阴雨天的广场"
+        }
+      ]
+    },
+    {
+      "slug": "photo-260901",
+      "title": "黄昏",
+      "date": "2026-09-01",
+      "images": [
+        {
+          "src": "/photos/photo-260901/01.jpg",
+          "caption": "落日与树影"
+        }
+      ]
+    },
+    {
+      "slug": "photo-260823",
+      "title": "鸟",
+      "date": "2026-08-23",
+      "images": [
+        {
+          "src": "/photos/photo-260823/01.jpg",
+          "caption": "绿色虎皮鹦鹉"
+        },
+        {
+          "src": "/photos/photo-260823/02.jpg",
+          "caption": "蓝色虎皮鹦鹉"
+        }
+      ]
+    },
+    {
+      "slug": "photo-260302",
+      "title": "城墙",
+      "date": "2026-03-02",
+      "images": [
+        {
+          "src": "/photos/photo-260302/01.jpg",
+          "caption": "城墙与喷泉"
+        },
+        {
+          "src": "/photos/photo-260302/02.jpg",
+          "caption": "角楼"
+        },
+        {
+          "src": "/photos/photo-260302/03.jpg",
+          "caption": "城楼与灯笼"
+        },
+        {
+          "src": "/photos/photo-260302/04.jpg",
+          "caption": "小南亭"
+        },
+        {
+          "src": "/photos/photo-260302/05.jpg",
+          "caption": "双楼与喷泉"
+        },
+        {
+          "src": "/photos/photo-260302/06.jpg",
+          "caption": "枝影望城楼"
+        },
+        {
+          "src": "/photos/photo-260302/07.jpg",
+          "caption": "枯枝与城墙"
+        },
+        {
+          "src": "/photos/photo-260302/08.jpg",
+          "caption": "城墙上望街"
+        }
+      ]
+    },
+    {
+      "slug": "photo-241222",
+      "title": "雪",
+      "date": "2024-12-22",
+      "images": [
+        {
+          "src": "/photos/photo-241222/01.jpg",
+          "caption": "窗外的雪"
+        }
+      ]
+    },
     {
       "slug": "photo-241221",
       "title": "雪",
@@ -21,6 +112,21 @@
         {
           "src": "/photos/photo-241221/04.jpg",
           "caption": "雪后小区"
+        }
+      ]
+    },
+    {
+      "slug": "photo-241105",
+      "title": "花叶",
+      "date": "2024-11-05",
+      "images": [
+        {
+          "src": "/photos/photo-241105/01.jpg",
+          "caption": "银杏"
+        },
+        {
+          "src": "/photos/photo-241105/02.jpg",
+          "caption": "月季"
         }
       ]
     },
