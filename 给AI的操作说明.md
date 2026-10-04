@@ -79,6 +79,7 @@ node script/portfolio/gen-boards.mjs           # 展板总览页
 | 网站头像 | `public/avatar.jpg` |
 | 页脚联系方式 | `src/config.ts` 的 `contactConfig` + 关于页正文（两处都要改） |
 | 缓存与安全头 | `public/_headers` |
+| 页脚访问量计数器 | `src/config.ts` 的 `visitCounterConfig`（实现见 `src/components/Footer.astro` 末尾） |
 
 ---
 
@@ -105,3 +106,32 @@ node script/portfolio/gen-posts.mjs --images # 作品集配图重做
 ```
 
 更细的改造清单见 `自定义指南.md`；常见问题的排查步骤见它的第 13、14 节。
+
+---
+
+## 八、页脚访问量计数器（2026-10-04 加的）
+
+页脚那行「本页 N 次 · 本站 N 次 · 访客 N 人」走的是第三方 **Vercount**
+（busuanzi 不蒜子的兼容替代，服务端在 Vercel）。当时实测**不蒜子官方接口已经 502**，所以选了它。
+
+| 项 | 说明 |
+| --- | --- |
+| 配置 | `src/config.ts` 的 `visitCounterConfig`（`enable` / `apiUrl` / `domains`） |
+| 实现 | `src/components/Footer.astro` 末尾那段内联脚本（`data-swup-ignore-script`） |
+| 接口 | `POST https://events.vercount.one/api/v2/log`，body `{url, isNewUv}` → `{status,data:{site_pv,page_pv,site_uv}}` |
+| 计数时机 | 首次加载一次 + 每次 swup 换页一次（`astro:page-load`）；同一网址连续重复触发会去重 |
+| UV 去重 | cookie `vercount_uv_<hostname>`（服务商同名同规则），一年有效 |
+| 失败表现 | 接口不可用（被墙/离线/限流）时整块隐藏，不显示 0 或「-」，不影响页面其它功能 |
+| 自测 | `node D:\agent\test-counter.mjs`（取 dist 里的真实脚本打真实接口，校验渲染与显隐） |
+
+**注意：**
+
+1. **只在 `domains` 列出的域名下显示**：`204041.xyz`、`www.204041.xyz`、`localhost`、`127.0.0.1`。
+   镜像地址 `ntfox.pages.dev`、`nitianfox.github.io` 上**不显示**——Vercount 按域名各记一份账，
+   镜像上只会显示 1、2 这种无意义的数字。想让镜像也显示，把它们加进 `domains`。
+2. **数据在别人服务器上**：只有累计数字（本站 PV/UV、本页 PV），没有明细、来源、地区。
+   要看真实流量明细用 Cloudflare 后台的 **Web Analytics**（免费、无 cookie）。
+3. **隐私**：脚本只把当前网址和「本机是否首次来访」发给 vercount，不发 IP、不读本地信息。
+4. **关掉**：`visitCounterConfig.enable = false` → 构建产物里连那段脚本都不会输出。
+5. **换服务**（例如以后自建 Cloudflare Worker）：新接口只要接受 `{url, isNewUv}` 并返回
+   `{data:{site_pv,page_pv,site_uv}}`，改 `apiUrl` 一行即可；格式不同就改 `Footer.astro` 里那段脚本。
