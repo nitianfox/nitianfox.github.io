@@ -80,6 +80,7 @@ node script/portfolio/gen-boards.mjs           # 展板总览页
 | 页脚联系方式 | `src/config.ts` 的 `contactConfig` + 关于页正文（两处都要改） |
 | 缓存与安全头 | `public/_headers` |
 | 页脚访问量计数器 | `src/config.ts` 的 `visitCounterConfig`（实现见 `src/components/Footer.astro` 末尾） |
+| 首页滚到底自动翻页 | `src/components/control/AutoPaginate.astro` + `src/pages/[...locale]/[...page].astro` |
 
 ---
 
@@ -111,27 +112,62 @@ node script/portfolio/gen-posts.mjs --images # 作品集配图重做
 
 ## 八、页脚访问量计数器（2026-10-04 加的）
 
-页脚那行「本页 N 次 · 本站 N 次 · 访客 N 人」走的是第三方 **Vercount**
-（busuanzi 不蒜子的兼容替代，服务端在 Vercel）。当时实测**不蒜子官方接口已经 502**，所以选了它。
+页脚那行「访客 N 人」走的是第三方 **Vercount**（busuanzi 不蒜子的兼容替代，服务端在 Vercel）。
+当时实测**不蒜子官方接口已经 502**，所以选了它。页脚**只显示访客总数（UV）**，不显示本页/本站次数。
+
+**三个地址共用一份计数**：不管从哪个域名进来，都按 `reportAs`（= `siteConfig.rootSiteUrl`，正式域名）上报；
+服务端是按「上报网址的 host」记账的（实测：同一个 url 换 Origin 计数连续累加，换 host 才各算一份），
+所以 204041.xyz / ntfox.pages.dev / nitianfox.github.io 页脚看到的是同一个数字。
 
 | 项 | 说明 |
 | --- | --- |
-| 配置 | `src/config.ts` 的 `visitCounterConfig`（`enable` / `apiUrl` / `domains`） |
+| 配置 | `src/config.ts` 的 `visitCounterConfig`（`enable` / `apiUrl` / `reportAs` / `domains`） |
 | 实现 | `src/components/Footer.astro` 末尾那段内联脚本（`data-swup-ignore-script`） |
 | 接口 | `POST https://events.vercount.one/api/v2/log`，body `{url, isNewUv}` → `{status,data:{site_pv,page_pv,site_uv}}` |
+| 显示 | 只取 `data.site_uv`（访客总数） |
 | 计数时机 | 首次加载一次 + 每次 swup 换页一次（`astro:page-load`）；同一网址连续重复触发会去重 |
-| UV 去重 | cookie `vercount_uv_<hostname>`（服务商同名同规则），一年有效 |
+| UV 去重 | cookie `vercount_uv_<正式域名的host>`，一年有效 |
 | 失败表现 | 接口不可用（被墙/离线/限流）时整块隐藏，不显示 0 或「-」，不影响页面其它功能 |
-| 自测 | `node D:\agent\test-counter.mjs`（取 dist 里的真实脚本打真实接口，校验渲染与显隐） |
+| 自测 | `node D:\agent\test-counter.mjs`（取 dist 里的真实脚本打真实接口，校验上报地址与渲染） |
 
 **注意：**
 
-1. **只在 `domains` 列出的域名下显示**：`204041.xyz`、`www.204041.xyz`、`localhost`、`127.0.0.1`。
-   镜像地址 `ntfox.pages.dev`、`nitianfox.github.io` 上**不显示**——Vercount 按域名各记一份账，
-   镜像上只会显示 1、2 这种无意义的数字。想让镜像也显示，把它们加进 `domains`。
-2. **数据在别人服务器上**：只有累计数字（本站 PV/UV、本页 PV），没有明细、来源、地区。
+1. **`domains` 是"允不允许计"的白名单**：`204041.xyz`、`www.204041.xyz`、`ntfox.pages.dev`、
+   `nitianfox.github.io`、`localhost`、`127.0.0.1` 都在里面，且显示的是**同一份数字**；
+   不在此列的域名（例如别人 fork 出来的镜像）既不显示也不上报，避免污染统计。
+2. **UV 有一个改不掉的瑕疵**：cookie 跨不了域名，同一个人分别从正式域名和 pages.dev 进来会被算**两次** UV。
+   要彻底修得自己有后端。数字不会因此离谱，但它是"偏多"的。
+3. **换正式域名**：只需改 `siteConfig.rootSiteUrl` 一处。注意**历史计数留在旧域名账下**，
+   新域名会从 0 开始（想让新域名继承旧数字，现在没有接口可迁）。
+4. **数据在别人服务器上**：只有累计数字，没有明细、来源、地区。
    要看真实流量明细用 Cloudflare 后台的 **Web Analytics**（免费、无 cookie）。
-3. **隐私**：脚本只把当前网址和「本机是否首次来访」发给 vercount，不发 IP、不读本地信息。
-4. **关掉**：`visitCounterConfig.enable = false` → 构建产物里连那段脚本都不会输出。
-5. **换服务**（例如以后自建 Cloudflare Worker）：新接口只要接受 `{url, isNewUv}` 并返回
+5. **隐私**：脚本只把当前网址和「本机是否首次来访」发给 vercount，不发 IP、不读本地信息。
+6. **关掉**：`visitCounterConfig.enable = false` → 构建产物里连那段脚本都不会输出。
+7. **换服务**（例如以后自建 Cloudflare Worker）：新接口只要接受 `{url, isNewUv}` 并返回
    `{data:{site_pv,page_pv,site_uv}}`，改 `apiUrl` 一行即可；格式不同就改 `Footer.astro` 里那段脚本。
+
+---
+
+## 九、首页「滚到底自动翻页」（2026-10-04 加的）
+
+首页文章流滑到底会自动接上下一页（现在 12 页 67 篇会一路接完），**分页器仍然保留**，想看某一页照样能点。
+
+| 项 | 说明 |
+| --- | --- |
+| 组件 | `src/components/control/AutoPaginate.astro`（哨兵 + 逻辑），挂在 `[...page].astro` |
+| 追加目标 | `[...page].astro` 里 `<div id="post-feed">` 包住 `<PostPage>`；新卡片直接 append 进去 |
+| 下一页地址 | 构建时算好写进哨兵 `data-next`（规则与 `Navi.astro` 的 `getPageUrl` 一致），下一页地址从抓回来的文档里取 |
+| 触发 | IntersectionObserver，`rootMargin: 600px`（提前一屏多开始取） |
+| 追加后 | 手动跑一次 `runPageInit()`（`src/utils/pageInit.ts` 新导出的）——AOS / 灯箱等要重新收集元素 |
+| 兜底 | 同一批卡片按链接去重；最多追加 30 页；失败保留下一页地址并显示"点击重试" |
+| 自测 | `node D:\agent\test-autopaginate.mjs`（静态：标记与 data-next 串联）；真浏览器验 `node D:\agent\browser-check.mjs <预览地址>` |
+
+**注意：**
+
+1. 哨兵元素**不能用 `hidden`/`display:none`**——那样 IntersectionObserver 永远不触发。
+   它常驻但默认 `opacity:0`，只在加载/失败时显形。
+2. **别用 web-access 的 CDP 代理验滚动加载**：它开的是**后台标签页**，后台标签页不派发
+   IntersectionObserver 回调（实测 `visibilityState=hidden`，滚到底也不会加载）。
+   用 `browser-check.mjs`（自己起无头 Chrome）或让用户自己看。
+3. 自动翻页只做了**首页文章流**；`/works/`、`/photos/`、`/archives/` 不受影响。
+4. 新增 / 删除文章的页数变化不用管，`data-next` 是构建时按 `paginate` 结果算的。
