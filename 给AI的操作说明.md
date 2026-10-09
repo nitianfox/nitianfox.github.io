@@ -53,9 +53,9 @@ pinTop: 0
 
 ---
 
-## 四、作品集（`/works/` 和 `works/` 下的文章）——有生成器，别手改
+## 四、作品集（`/works/` 和 `works/` 下的文章）
 
-作品集 40+ 篇是由 `D:\工业设计作品集`（素材库）自动生成的：
+作品集 44 篇原本由 `D:\工业设计作品集`（素材库）的生成器维护：
 
 ```powershell
 node script/portfolio/gen-posts.mjs            # 结构/数据/新条目（不动已有正文）
@@ -63,9 +63,27 @@ node script/portfolio/gen-posts.mjs --images   # 只按配置重做配图（正�
 node script/portfolio/gen-boards.mjs           # 展板总览页
 ```
 
-**注意**：`--images` 会给所有条目重挑配图，图片可能变化；只想给某篇补图，就手动往文章文件夹里加图并改 `## 预览` 节（参考 `works/02-25` 的写法）。
+> ### ⚠️ 2026-10-09 起：**别再跑 `gen-posts.mjs`**
+>
+> 它依赖的两个输入在 2026-10-04 的清理里被删了，现在跑会**改坏已经上线的数据**：
+> `D:\作品集配图\*`（删）→ 6 个条目的 `cover` 会被清空
+> （`04-35` `04-36` `02-22` `02-23` `02-24` `01-09`，作品集网格卡片直接没图）；
+> `D:\agent\image-selection.json`（删）→ 一堆条目 `imgSource` 从「挑选台」变「自动」；
+> 更麻烦的是**它会用源图重刷所有 `public/works/*.jpg` 与 `thumb/*.webp`**，
+> 而 `03-27` / `03-30` 那两张封面是**手工打过隐私码的**，被刷掉就等于把码洗了。
+>
+> **正确做法（2026-10-09 加「车顶架与车尾架」时就是这么做的）**：
+> ① 图片放 `D:\工业设计作品集\<项目>\`；② 手写 `src/content/blog/works/<id>/zh-cn.md`
+> + `cover.jpg` + `NN.jpg`（1200px、q80），照 `works/roof-rack/` 抄；
+> ③ 手工生成 `public/works/thumb/<id>.webp`（400px，列在作品集网格卡片上用）和 `public/works/<id>.jpg`；
+> ④ 手工把条目块并进 `src/data/portfolio.json` 对应分区的 `works` 数组，并把该分区 `count` 和顶层 `total` 各 +1。
+> 真要用生成器，跑之前先 `git status` 存档 + 备份 `public/works`，跑完把不想要的改动 `git checkout --` 掉。
+>
+> 配置仍在 `script/portfolio/`：`weights.json`（权重=图片数量档位）、`merges.json`（合并/改名/改日期）、
+> `sections.json`（分类归属与排序）、`manual-images.json` / `extra-images.json`（指定某篇用哪些图）、
+> `extra-entries.json`（额外条目，`roof-rack` 就登记在这里）。
 
-配置都在 `script/portfolio/`：`weights.json`（权重=图片数量档位）、`merges.json`（合并条目/改名/改日期）、`sections.json`（分类归属与排序）、`manual-images.json` / `extra-images.json`（指定某篇用哪些图）、`extra-entries.json`（额外条目）。
+**只想给某篇补图**：把图放进那篇文章目录、改 `## 预览` 节即可（参考 `works/02-25` 的写法），不用碰生成器。
 
 ---
 

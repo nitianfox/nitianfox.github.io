@@ -1,7 +1,7 @@
 {
-  "generated": "2026-10-03 15:57:21",
+  "generated": "2026-10-09 02:14:39",
   "source": "D:\\工业设计作品集",
-  "total": 43,
+  "total": 44,
   "sectionOrder": [
     "展板",
     "动画",
@@ -217,8 +217,36 @@
     },
     {
       "name": "建模渲染",
-      "count": 30,
+      "count": 31,
       "works": [
+        {
+          "id": "roof-rack",
+          "slug": "works/roof-rack",
+          "title": "车顶架与车尾架",
+          "subtitle": "露营装备 · 白底产品渲染与场景包装",
+          "year": "2026",
+          "doneDate": "2026-10-09",
+          "span": "2026-10-07 ～ 2026-10-09",
+          "tools": [
+            "SolidWorks",
+            "Blender",
+            "GPT Image"
+          ],
+          "tags": [
+            "露营装备",
+            "产品渲染",
+            "视觉包装"
+          ],
+          "cover": "/works/thumb/roof-rack.webp",
+          "weight": 3,
+          "files": 2,
+          "sizeMB": 20.1,
+          "images": 2,
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "imgSource": "条目自带（手工并入）"
+        },
         {
           "id": "02-22",
           "slug": "works/02-22",
