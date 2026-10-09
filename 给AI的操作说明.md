@@ -53,37 +53,34 @@ pinTop: 0
 
 ---
 
-## 四、作品集（`/works/` 和 `works/` 下的文章）
+## 四、作品集（`/works/` 和 `works/` 下的文章）——**手维护，没有生成器**
 
-作品集 44 篇原本由 `D:\工业设计作品集`（素材库）的生成器维护：
-
-```powershell
-node script/portfolio/gen-posts.mjs            # 结构/数据/新条目（不动已有正文）
-node script/portfolio/gen-posts.mjs --images   # 只按配置重做配图（正文一个字不动）
-node script/portfolio/gen-boards.mjs           # 展板总览页
-```
-
-> ### ⚠️ 2026-10-09 起：**别再跑 `gen-posts.mjs`**
+> ### ✅ 2026-10-09：作品集生成器已**整体移除**
 >
-> 它依赖的两个输入在 2026-10-04 的清理里被删了，现在跑会**改坏已经上线的数据**：
-> `D:\作品集配图\*`（删）→ 6 个条目的 `cover` 会被清空
-> （`04-35` `04-36` `02-22` `02-23` `02-24` `01-09`，作品集网格卡片直接没图）；
-> `D:\agent\image-selection.json`（删）→ 一堆条目 `imgSource` 从「挑选台」变「自动」；
-> 更麻烦的是**它会用源图重刷所有 `public/works/*.jpg` 与 `thumb/*.webp`**，
-> 而 `03-27` / `03-30` 那两张封面是**手工打过隐私码的**，被刷掉就等于把码洗了。
+> `gen-posts.mjs` / `gen-boards.mjs` / `make-render-split.mjs` 连同它们的配置
+> （`merges.json`、`manual-images.json`、`extra-images.json`、`extra-entries.json`）都删了。
+> `script/portfolio/` 现在只剩 `weights.json` 与 `sections.json` 两份**历史存档**，没有任何代码读它们。
 >
-> **正确做法（2026-10-09 加「车顶架与车尾架」时就是这么做的）**：
-> ① 图片放 `D:\工业设计作品集\<项目>\`；② 手写 `src/content/blog/works/<id>/zh-cn.md`
-> + `cover.jpg` + `NN.jpg`（1200px、q80），照 `works/roof-rack/` 抄；
-> ③ 手工生成 `public/works/thumb/<id>.webp`（400px，列在作品集网格卡片上用）和 `public/works/<id>.jpg`；
-> ④ 手工把条目块并进 `src/data/portfolio.json` 对应分区的 `works` 数组，并把该分区 `count` 和顶层 `total` 各 +1。
-> 真要用生成器，跑之前先 `git status` 存档 + 备份 `public/works`，跑完把不想要的改动 `git checkout --` 掉。
->
-> 配置仍在 `script/portfolio/`：`weights.json`（权重=图片数量档位）、`merges.json`（合并/改名/改日期）、
-> `sections.json`（分类归属与排序）、`manual-images.json` / `extra-images.json`（指定某篇用哪些图）、
-> `extra-entries.json`（额外条目，`roof-rack` 就登记在这里）。
+> 删它的原因（也是踩过的坑）：它的两个输入在 2026-10-04 的清理里没了 ——
+> `D:\作品集配图\*` 与 `D:\agent\image-selection.json` —— 再跑就会**改坏已经上线的数据**：
+> 6 个条目的 `cover` 被清空（`04-35` `04-36` `02-22` `02-23` `02-24` `01-09`，网格卡片直接没图）、
+> 一批条目 `imgSource` 变化，而且它会用源图**重刷所有 `public/works/*.jpg` 与 `thumb/*.webp`**，
+> `03-27` / `03-30` 那两张封面是**手工打过隐私码的**，被刷掉就等于把码洗了。
+> （实测：重刷会改掉 13 个旧封面，`01-08` 有 79% 像素变化、`03-30` 连宽高比都变了。）
 
-**只想给某篇补图**：把图放进那篇文章目录、改 `## 预览` 节即可（参考 `works/02-25` 的写法），不用碰生成器。
+**加一件新作品（标准流程，2026-10-09 的「车顶架与车尾架」就是这么做的）：**
+
+1. 图片放素材库 `D:\工业设计作品集\<项目>\`，再拷进 `src/content/blog/works/<新编号>/`：
+   `cover.jpg` + `01.jpg`…（最长边 1200px、JPEG q80）
+2. 手写 `src/content/blog/works/<新编号>/zh-cn.md`（frontmatter 照 `works/roof-rack/` 抄：
+   `title` / `pubDate` / `description` / `category` / `image` / `draft` / `slugId` / `pinTop`）
+3. 手工出列表封面：`public/works/thumb/<新编号>.webp`（400px，页面用这张）＋ `public/works/<新编号>.jpg`（800px）
+4. 把条目块并进 `src/data/portfolio.json` 对应分区的 `works` 数组，并把该分区 `count` 与顶层 `total` 各 +1
+5. `pnpm build`（应为 **169 页**）→ `node D:\agent\audit-links.mjs`（应为 0 坏链）
+
+**只想给某篇补图 / 换图**：把图丢进那篇文章目录、改 `## 预览` 节即可（参考 `works/02-25` 的写法）。
+
+**权重、标题、时间、工具、标签**都在 `src/data/portfolio.json` 里，直接改字段 —— 站主说这些以后由他自己定，不要自作主张调整别人的权重。
 
 ---
 
@@ -121,7 +118,7 @@ pnpm dev                                     # 本地预览 http://localhost:432
 pnpm build                                   # 构建 dist/（含搜索索引）
 pnpm cms                                     # 可视化后台 http://localhost:5188
 .\publish.ps1 "说明"                          # 提交并发布（两个平台自动上线）
-node script/portfolio/gen-posts.mjs --images # 作品集配图重做
+node D:\agent\audit-links.mjs                # 构建后自查坏链（应为 0）
 ```
 
 更细的改造清单见 `自定义指南.md`；常见问题的排查步骤见它的第 13、14 节。

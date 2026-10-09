@@ -39,7 +39,7 @@ pnpm cms      # 可视化后台 http://localhost:5188
 | --- | --- |
 | 站名、域名、头像、联系方式、主题开关 | `src/config.ts` |
 | 文章 | `src/content/blog/<文章名>/zh-cn.md` |
-| 作品文章与作品集数据 | `node script/portfolio/gen-posts.mjs --images`（素材在 `D:\工业设计作品集`） |
+| 作品文章与作品集数据 | `src/content/blog/works/<编号>/` 与 `src/data/portfolio.json`（**手改**；生成器 2026-10-09 已移除） |
 | 「关于」页 | `src/content/spec/about/zh-cn.md` |
 | 站内文字（导航、页脚等） | `src/i18n/translation/` |
 
