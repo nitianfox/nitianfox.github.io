@@ -1,0 +1,182 @@
+---
+/**
+ * 自动翻页（滚动到底自动加载下一页）。
+ *
+ * 用法：首页文章流 `[...page].astro` 里，把 PostPage 的输出放进 `#post-feed`，
+ * 紧跟一个 <AutoPaginate nextUrl={...} /> 即可。没有 nextUrl（已是最后一页）时什么都不做。
+ *
+ * 设计取舍：
+ *   · 哨兵元素**不能**用 hidden/display:none —— 那样 IntersectionObserver 永远不会触发，
+ *     所以它常驻但默认 opacity:0，只在加载/失败时显形（占位高度很小，不影响观感）；
+ *   · 分页器（Navi）保留：自动翻页只是"顺便多取几页"，想看某一页仍然可以直接点；
+ *   · 追加的卡片与原卡片完全同构，所以 LQIP 的 onload、loading="lazy" 都能正常工作，
+ *     真正需要补的是 AOS / 灯箱这类"要重新收集元素"的钩子 → 追加后手动跑一次 runPageInit()；
+ *   · 失败不打断阅读：保留下一页地址，标一个"点击重试"，滚动回来也会再试。
+ */
+import { i18n } from "astro:config/client";
+
+interface Props {
+    /** 下一页地址；不传 / 传空表示已经是最后一页 */
+    nextUrl?: string;
+}
+
+const { nextUrl } = Astro.props;
+const currentLang = Astro.currentLocale || i18n!.defaultLocale;
+// 文案跟顶栏导航一样直接写死在组件里（不新增 i18n key，避免动 i18n/types）
+const labels = currentLang === 'en'
+    ? { loading: 'Loading more…', error: 'Failed to load — click to retry' }
+    : { loading: '正在加载…', error: '加载失败，点击重试' };
+---
+
+<div
+    id="feed-sentinel"
+    class="feed-sentinel"
+    data-next={nextUrl || ''}
+    data-label-loading={labels.loading}
+    data-label-error={labels.error}
+    role="status"
+    aria-live="polite"
+>
+    <span class="feed-sentinel-spinner" aria-hidden="true"></span>
+    <span class="feed-sentinel-text"></span>
+</div>
+
+<style>
+    .feed-sentinel {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        min-height: 2.5rem;
+        margin: 1rem auto 0;
+        max-width: var(--page-width);
+        font-size: 0.875rem;
+        color: var(--text-color-70);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    .feed-sentinel.is-loading,
+    .feed-sentinel.is-error {
+        opacity: 1;
+    }
+    .feed-sentinel.is-error {
+        cursor: pointer;
+        text-decoration: underline;
+    }
+    /* 已到最后一页 / 被脚本停用时彻底收起来（此时不再需要观察，display:none 没关系） */
+    .feed-sentinel.is-done {
+        display: none;
+    }
+    .feed-sentinel:not(.is-loading) .feed-sentinel-spinner {
+        display: none;
+    }
+    .feed-sentinel-spinner {
+        width: 1rem;
+        height: 1rem;
+        border-radius: 9999px;
+        border: 2px solid var(--button-border-color);
+        border-top-color: var(--text-color-70);
+        animation: feed-sentinel-spin 0.7s linear infinite;
+    }
+    @keyframes feed-sentinel-spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+
+<script>
+    import { registerPageInit, runPageInit } from '@utils/pageInit';
+
+    // 一页最多追加多少页，防止配置异常时无限拉取
+    const MAX_PAGES = 30;
+
+    let observer: IntersectionObserver | null = null;
+    let loading = false;
+    let loadedPages = 0;
+
+    async function loadMore(feed: HTMLElement, sentinel: HTMLElement) {
+        const next = sentinel.dataset.next;
+        if (!next || loading || loadedPages >= MAX_PAGES) return;
+
+        loading = true;
+        sentinel.classList.remove('is-error');
+        sentinel.classList.add('is-loading');
+        const textEl = sentinel.querySelector('.feed-sentinel-text');
+        if (textEl) textEl.textContent = sentinel.dataset.labelLoading || '';
+
+        try {
+            const res = await fetch(next);
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            const html = await res.text();
+            const doc = new DOMParser().parseFromString(html, 'text/html');
+            const remoteFeed = doc.getElementById('post-feed');
+            const remoteSentinel = doc.getElementById('feed-sentinel');
+            if (!remoteFeed) throw new Error('no #post-feed in fetched page');
+
+            // 去重：只追加列表里还没有的文章卡片（按卡片里的第一个链接判断）
+            const seen = new Set<string>();
+            feed.querySelectorAll('a[href]').forEach((a) => seen.add(a.getAttribute('href') || ''));
+            const frag = document.createDocumentFragment();
+            let added = 0;
+            Array.from(remoteFeed.children).forEach((card) => {
+                const href = card.querySelector('a[href]')?.getAttribute('href') || '';
+                if (href && seen.has(href)) return;
+                if (href) seen.add(href);
+                frag.appendChild(document.importNode(card, true));
+                added++;
+            });
+            feed.appendChild(frag);
+            loadedPages++;
+
+            // 下一页地址取下一次抓到的文档里的哨兵（它是构建时算好的）
+            sentinel.dataset.next = remoteSentinel?.dataset.next || '';
+            if (!sentinel.dataset.next) {
+                observer?.disconnect();
+                observer = null;
+                sentinel.classList.add('is-done');
+            }
+
+            // 新卡片要让 AOS / 灯箱等重新收集一遍（等价于一次换页后的那轮初始化）
+            if (added > 0) runPageInit();
+        } catch (err) {
+            console.error('[auto-paginate]', err);
+            sentinel.classList.add('is-error');
+            if (textEl) textEl.textContent = sentinel.dataset.labelError || '';
+        } finally {
+            loading = false;
+            sentinel.classList.remove('is-loading');
+        }
+    }
+
+    function setup() {
+        // 换页后是新的 DOM：先拆掉上一次的观察
+        observer?.disconnect();
+        observer = null;
+
+        const feed = document.getElementById('post-feed');
+        const sentinel = document.getElementById('feed-sentinel');
+        if (!feed || !sentinel) return;
+        if (sentinel.classList.contains('is-done')) return; // 已经翻到底
+
+        sentinel.addEventListener('click', () => loadMore(feed, sentinel));
+
+        if (!sentinel.dataset.next) {
+            // 第一页就是最后一页：没有下一页，直接收起来
+            sentinel.classList.add('is-done');
+            return;
+        }
+
+        observer = new IntersectionObserver(
+            (entries) => {
+                if (entries.some((entry) => entry.isIntersecting)) loadMore(feed, sentinel);
+            },
+            // 提前 600px 就开始取，滚到底时基本已经接上了
+            { rootMargin: '600px 0px', threshold: 0 },
+        );
+        observer.observe(sentinel);
+    }
+
+    // 首屏 + 每次换页（swup 下首屏不会有 astro:page-load，见 @utils/pageInit）
+    registerPageInit(setup);
+</script>

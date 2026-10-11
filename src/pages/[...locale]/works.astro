@@ -1,0 +1,196 @@
+---
+import MainPageLayout from '@layouts/MainPageLayout.astro'
+import Cover from '@components/Cover.astro'
+import FabMenu from '@components/control/FabMenu.astro'
+import ImageModule from '@components/misc/ImageModule.astro'
+import WorkGrid from '@components/misc/WorkGrid.astro'
+import BoardGrid from '@components/misc/BoardGrid.astro'
+
+import { siteConfig } from '@/config'
+import i18nit from '@i18n/translation'
+import { i18n } from "astro:config/client";
+import { getRelativeLocaleUrl } from '@utils/urlUtils'
+import portfolio from '@/data/portfolio.json'
+import boards from '@/data/boards.json'
+
+export async function getStaticPaths() {
+	return i18n?.locales.map(locale => ({ params: { locale: locale == i18n?.defaultLocale ? undefined : (locale as string) } }));
+}
+
+const currentLang = Astro.currentLocale || i18n!.defaultLocale;
+const t = i18nit(currentLang);
+
+const pageTitle = t("header.works") + " - " + siteConfig.title;
+const pageDescription = `${t("cover.title.works")} - ${t("cover.subTitle.works")}`;
+const total = portfolio.total;
+const defaultSort = portfolio.defaultSort ?? 'weight';
+
+// 精选每类取前几件（用户 2026-10-03：展板 4 / 动画 2 / 渲染 4 / 平面 4）
+const FEATURED: [string, number][] = [['展板', 4], ['动画', 2], ['建模渲染', 4], ['平面', 4]];
+// 下方「全部作品」的分区顺序
+const ALL_ORDER = ['展板', '建模渲染', '动画', '平面'];
+
+// 作品集页默认按权重排（由 script/portfolio/sections.json 的 defaultSort 决定），
+// 服务端就按这个顺序渲染，避免首屏先按时间排再被脚本重排造成的跳动。
+const categories = portfolio.categories.map((cat) => ({
+    ...cat,
+    works: [...cat.works].sort((a, b) => {
+        if (defaultSort === 'weight') {
+            const dw = (b.weight ?? 0) - (a.weight ?? 0);
+            if (dw) return dw;
+        }
+        return String(b.doneDate ?? '').localeCompare(String(a.doneDate ?? ''));
+    }),
+}));
+---
+
+<MainPageLayout title={pageTitle} lang={currentLang} description={pageDescription}>
+    <div class="mx-auto w-full max-w-[var(--page-width)]" data-default-sort={defaultSort}>
+        <Cover title={t("cover.title.works")} subTitle={t("cover.subTitle.works")} />
+
+        <!-- 分类锚点 + 排序切换 -->
+        <div class="flex flex-wrap items-center justify-center gap-2 mb-10 -mt-4">
+            {categories.map((cat) => (
+                <a
+                    href={`#cat-${cat.name}`}
+                    class="inline-flex items-center gap-2 px-3 py-1.5 text-sm rounded-md border border-[var(--button-border-color)] text-[var(--text-color)] transition duration-200 hover:border-[var(--link-color)] hover:bg-[var(--button-hover-color)]"
+                >
+                    {cat.name}
+                    <span class="text-[var(--text-color-70)]">{cat.count}</span>
+                </a>
+            ))}
+            <span class="hidden sm:block w-px h-5 bg-[var(--button-border-color)] mx-1"></span>
+            <button type="button" data-sort-btn="time" class="sort-btn">按时间</button>
+            <button type="button" data-sort-btn="weight" class="sort-btn">按权重</button>
+        </div>
+
+        <!-- ① 精选：每类按权重取前几件（展板 4 / 动画 2 / 渲染 4 / 平面 4） -->
+        {FEATURED.map(([name, n]) => {
+            const cat = categories.find((c) => c.name === name);
+            if (!cat) return null;
+            const list = cat.works.slice(0, n);
+            return (
+                <section class="mb-14">
+                    <h2 id={`cat-${cat.name}`} class="text-2xl font-bold text-[var(--text-color)] border-b border-[var(--button-border-color)] pb-2 mb-6 scroll-mt-24">
+                        {cat.name}
+                        <span class="ml-2 text-base font-normal text-[var(--text-color-70)]">精选 {list.length} / {cat.count}</span>
+                    </h2>
+                    <WorkGrid works={list} lang={currentLang} />
+                </section>
+            );
+        })}
+
+        <!-- ② 全部：展板（总览）/ 动画 / 平面 / 渲染 的完整列表 -->
+        <h2 class="text-2xl font-bold text-[var(--text-color)] border-b-2 border-[var(--link-color)] pb-2 mb-10 mt-20 scroll-mt-24" id="all">
+            全部作品
+            <span class="ml-2 text-base font-normal text-[var(--text-color-70)]">{total}</span>
+        </h2>
+
+        {ALL_ORDER.map((name) => {
+            const cat = categories.find((c) => c.name === name);
+            if (!cat) return null;
+            return (
+                <section class="mb-14">
+                    <h3 id={`all-${cat.name}`} class="text-xl font-semibold text-[var(--text-color)] border-b border-[var(--button-border-color)] pb-2 mb-6 scroll-mt-24">
+                        所有{cat.name}
+                        <span class="ml-2 text-sm font-normal text-[var(--text-color-70)]">{cat.count}</span>
+                    </h3>
+                    {cat.name === '展板' && <BoardGrid lang={currentLang} />}
+                    <WorkGrid works={cat.works} lang={currentLang} sortable />
+                </section>
+            );
+        })}
+
+        <p class="text-center text-sm text-[var(--text-color-70)] mb-10">
+            共 {total} 件作品 · 点卡片看详情
+        </p>
+    </div>
+
+    <!-- fixed 浮层：留在 swup 容器内，但在淡入淡出元素之外（见 MainPageLayout 的说明） -->
+    <div slot="overlay">
+        <FabMenu showBackBottom={true} />
+    </div>
+</MainPageLayout>
+
+<style>
+    .sort-btn {
+        font-size: 13px;
+        padding: 6px 14px;
+        border-radius: 8px;
+        border: 1px solid var(--button-border-color);
+        background: transparent;
+        color: var(--text-color);
+        cursor: pointer;
+        transition: 0.2s;
+    }
+    .sort-btn:hover {
+        border-color: var(--link-color);
+        color: var(--link-color);
+    }
+    .sort-btn.sort-on {
+        background: var(--link-color);
+        border-color: var(--link-color);
+        color: #fff;
+    }
+    .pick-badge {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        /* ⚠️ 必须高于 1：LQIP 会给卡片图片加 position:relative + z-index:1，
+           不抬高层级的话这个角标会被图片整个盖住（实测命中测试里 IMG 在 SPAN 之上） */
+        z-index: 2;
+        font-size: 11px;
+        line-height: 1;
+        padding: 5px 9px;
+        border-radius: 999px;
+        background: var(--link-color);
+        color: #fff;
+        letter-spacing: 0.5px;
+    }
+</style>
+
+<script is:inline data-swup-ignore-script>
+    // 作品集排序：按完成时间倒序 / 按权重（代表作在前），选择记在 localStorage。
+    // 顶栏不在 swup 容器里，但这段脚本在容器内、会被换页替换掉，所以：
+    //   · 点击用 document 上的事件委托（只注册一次，永久有效）
+    //   · 每次换页由 astro:page-load 重新对新 DOM 排序
+    (function () {
+        var KEY = 'ntfox-works-sort';
+
+        function readMode() {
+            try {
+                var el = document.querySelector('[data-default-sort]');
+                return localStorage.getItem(KEY) || (el && el.dataset.defaultSort) || 'time';
+            } catch (e) { return 'time'; }
+        }
+
+        function applySort(mode) {
+            document.querySelectorAll('[data-sort-grid]').forEach(function (grid) {
+                var cards = Array.prototype.slice.call(grid.children);
+                cards.sort(function (a, b) {
+                    if (mode === 'weight') {
+                        var dw = (+(b.dataset.w || 0)) - (+(a.dataset.w || 0));
+                        if (dw) return dw;
+                    }
+                    return (b.dataset.d || '').localeCompare(a.dataset.d || '');
+                });
+                cards.forEach(function (card) { grid.appendChild(card); });
+            });
+            document.querySelectorAll('[data-sort-btn]').forEach(function (btn) {
+                btn.classList.toggle('sort-on', btn.dataset.sortBtn === mode);
+            });
+        }
+
+        document.addEventListener('click', function (e) {
+            var btn = e.target && e.target.closest ? e.target.closest('[data-sort-btn]') : null;
+            if (!btn) return;
+            e.preventDefault();
+            var mode = btn.dataset.sortBtn;
+            try { localStorage.setItem(KEY, mode); } catch (err) {}
+            applySort(mode);
+        });
+
+        document.addEventListener('astro:page-load', function () { applySort(readMode()); });
+        applySort(readMode());
+    })();
+</script>
