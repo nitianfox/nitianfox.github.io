@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-09 02:14:39",
   "source": "D:\\工业设计作品集",
-  "total": 45,
+  "total": 46,
   "sectionOrder": [
     "展板",
     "动画",
@@ -217,8 +217,35 @@
     },
     {
       "name": "建模渲染",
-      "count": 32,
+      "count": 33,
       "works": [
+        {
+          "id": "cushion",
+          "slug": "works/cushion",
+          "title": "试稿 · 坐垫",
+          "subtitle": "按尺寸图还原建模与渲染",
+          "year": "2026",
+          "doneDate": "2026-10-17",
+          "span": "2026-10-15 ～ 2026-10-17",
+          "tools": [
+            "Rhino",
+            "Blender"
+          ],
+          "tags": [
+            "产品",
+            "曲面建模",
+            "渲染"
+          ],
+          "cover": "/works/thumb/cushion.webp",
+          "weight": 2,
+          "files": 9,
+          "sizeMB": 40.5,
+          "images": 9,
+          "videos": 0,
+          "client": "",
+          "parts": [],
+          "imgSource": "条目自带（手工并入）"
+        },
         {
           "id": "power-wallet",
           "slug": "works/power-wallet",
