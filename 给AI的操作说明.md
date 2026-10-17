@@ -46,9 +46,9 @@ pinTop: 0
 | `public/works/thumb/<id>.webp` | 作品集卡片封面（400px；页面**只**用这一张） |
 | `src/data/portfolio.json` | 该条目的标题 / 时间 / 工具 / 标签 / 封面路径 / `weight` |
 
-**加一件新作品**：图片放素材库 `D:\工业设计作品集\<项目>\` → 拷进文章目录并压到 1200px →
+**加一件新作品**：从工作目录（例如 `D:\手机壳\输出`、`D:\1产线动画\车顶架\ai生图`）把图拷进文章目录并压到 1200px →
 出一张 400px webp 当卡片封面 → 把条目块并进 `portfolio.json` 对应分区的 `works`
-（该分区 `count` 与顶层 `total` 各 +1）→ `pnpm build`（当前 **171** 页）→ `node D:\agent\audit-links.mjs`（应为 0 坏链）。
+（该分区 `count` 与顶层 `total` 各 +1）→ `pnpm build`（当前 **173** 页）→ `node D:\agent\audit-links.mjs`（应为 0 坏链）。
 
 **权重**（`portfolio.json` 的 `weight`）只影响排序与「代表作」角标：
 
